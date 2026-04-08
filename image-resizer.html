@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Image Resizer - OnlyJobs | Resize Photo for Govt Exam Forms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;--rl:#FEF2F2;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 50px;}
+.page-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--dk);margin-bottom:4px;}
+.page-sub{font-size:14px;color:var(--mu);margin-bottom:24px;}
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:20px;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dk);margin-bottom:16px;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--tx);margin-bottom:6px;}
+input[type=number],input[type=text],select{width:100%;padding:10px 14px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;}
+input:focus,select:focus{border-color:var(--ac);}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:500px){.row2,.row3{grid-template-columns:1fr;}}
+.field{margin-bottom:14px;}
+
+/* PRESETS */
+.presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+.preset-btn{padding:7px 14px;border:1.5px solid var(--bd);border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;background:#fff;color:var(--tx);font-family:'Figtree',sans-serif;transition:all .15s;}
+.preset-btn:hover{border-color:var(--ac);color:var(--ac);}
+.preset-btn.on{background:var(--ac);border-color:var(--ac);color:#fff;}
+
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed var(--bd);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--b2);}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--ac);background:var(--al);}
+.upload-zone input{display:none;}
+.upload-icon{font-size:40px;margin-bottom:10px;}
+.upload-txt{font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px;}
+.upload-sub{font-size:12px;color:var(--mu);}
+
+/* PREVIEW */
+.preview-area{display:none;gap:20px;}
+.preview-area.show{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:600px){.preview-area.show{grid-template-columns:1fr;}}
+.preview-box{text-align:center;}
+.preview-label{font-size:12px;font-weight:700;color:var(--mu);margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px;}
+canvas{max-width:100%;border:1.5px solid var(--bd);border-radius:8px;}
+.info-box{background:var(--b2);border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--mu);margin-top:8px;text-align:left;}
+.info-row{display:flex;justify-content:space-between;padding:3px 0;}
+.info-row strong{color:var(--dk);}
+
+.btn-row{display:flex;gap:10px;margin-top:16px;}
+.btn-main{flex:1;padding:13px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-sec{padding:13px 20px;background:#fff;border:1.5px solid var(--bd);color:var(--tx);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-dl{flex:1;padding:13px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="page-title">📐 Image Resizer</div>
+  <div class="page-sub">Resize photo to exact dimensions & KB size for exam form uploads. 100% free, works in browser.</div>
+
+  <div class="card">
+    <div class="card-title">⚡ Quick Presets (Common Exam Requirements)</div>
+    <div class="presets">
+      <button class="preset-btn on" onclick="setPreset(200,230,20,'jpg',this)">SSC Photo<br><small>200×230, 20KB</small></button>
+      <button class="preset-btn" onclick="setPreset(100,120,15,'jpg',this)">SSC Sign<br><small>100×120, 15KB</small></button>
+      <button class="preset-btn" onclick="setPreset(200,230,50,'jpg',this)">UPSC Photo<br><small>200×230, 50KB</small></button>
+      <button class="preset-btn" onclick="setPreset(140,60,30,'jpg',this)">UPSC Sign<br><small>140×60, 30KB</small></button>
+      <button class="preset-btn" onclick="setPreset(200,200,50,'jpg',this)">Railway Photo<br><small>200×200, 50KB</small></button>
+      <button class="preset-btn" onclick="setPreset(350,450,50,'jpg',this)">Passport Size<br><small>35mm×45mm</small></button>
+      <button class="preset-btn" onclick="setPreset(200,230,100,'jpg',this)">SBI/IBPS<br><small>200×230, 100KB</small></button>
+      <button class="preset-btn" onclick="setPreset(0,0,0,'jpg',this)">Custom</button>
+    </div>
+
+    <div class="row3">
+      <div class="field"><label>Width (px)</label><input type="number" id="width" value="200" min="1"/></div>
+      <div class="field"><label>Height (px)</label><input type="number" id="height" value="230" min="1"/></div>
+      <div class="field"><label>Max Size (KB)</label><input type="number" id="maxKb" value="20" min="1"/></div>
+    </div>
+    <div class="row2">
+      <div class="field">
+        <label>Output Format</label>
+        <select id="format">
+          <option value="jpg">JPG (smaller size)</option>
+          <option value="png">PNG (transparent support)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Background Color (if PNG→JPG)</label>
+        <input type="color" id="bgcolor" value="#ffffff" style="height:43px;padding:4px;"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📁 Upload Image</div>
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="handleDrop(event)">
+      <input type="file" id="fileInput" accept="image/*" onchange="loadImage(this)"/>
+      <div class="upload-icon">🖼️</div>
+      <div class="upload-txt">Click to upload or drag & drop</div>
+      <div class="upload-sub">Supports JPG, PNG, WEBP, GIF · Any size</div>
+    </div>
+
+    <div class="preview-area" id="previewArea">
+      <div class="preview-box">
+        <div class="preview-label">Original Image</div>
+        <canvas id="origCanvas"></canvas>
+        <div class="info-box" id="origInfo"></div>
+      </div>
+      <div class="preview-box">
+        <div class="preview-label">Resized Image</div>
+        <canvas id="resCanvas"></canvas>
+        <div class="info-box" id="resInfo"></div>
+      </div>
+    </div>
+
+    <div class="btn-row" id="btnRow" style="display:none;">
+      <button class="btn-main" onclick="doResize()">🔄 Resize Image</button>
+      <button class="btn-dl" id="dlBtn" style="display:none;" onclick="downloadImage()">⬇️ Download</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var origImg = null;
+var resizedDataUrl = null;
+
+function setPreset(w,h,kb,fmt,btn){
+  document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  if(w>0){document.getElementById('width').value=w;}
+  if(h>0){document.getElementById('height').value=h;}
+  if(kb>0){document.getElementById('maxKb').value=kb;}
+  document.getElementById('format').value=fmt;
+}
+
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('uploadZone').classList.remove('drag');
+  var file = e.dataTransfer.files[0];
+  if(file && file.type.startsWith('image/')){processFile(file);}
+}
+
+function loadImage(input){
+  if(input.files && input.files[0]){processFile(input.files[0]);}
+}
+
+function processFile(file){
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = new Image();
+    img.onload = function(){
+      origImg = img;
+      var oc = document.getElementById('origCanvas');
+      var scale = Math.min(300/img.width, 300/img.height, 1);
+      oc.width = Math.round(img.width*scale);
+      oc.height = Math.round(img.height*scale);
+      oc.getContext('2d').drawImage(img,0,0,oc.width,oc.height);
+      var origKb = Math.round(file.size/1024);
+      document.getElementById('origInfo').innerHTML =
+        '<div class="info-row"><span>Size</span><strong>'+img.width+' × '+img.height+' px</strong></div>'+
+        '<div class="info-row"><span>File Size</span><strong>'+origKb+' KB</strong></div>'+
+        '<div class="info-row"><span>Type</span><strong>'+file.type+'</strong></div>';
+      document.getElementById('previewArea').classList.add('show');
+      document.getElementById('btnRow').style.display='flex';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function doResize(){
+  if(!origImg){alert('Please upload an image first!');return;}
+  var w = parseInt(document.getElementById('width').value);
+  var h = parseInt(document.getElementById('height').value);
+  var maxKb = parseInt(document.getElementById('maxKb').value);
+  var fmt = document.getElementById('format').value;
+  var bg = document.getElementById('bgcolor').value;
+
+  var rc = document.getElementById('resCanvas');
+  rc.width = w; rc.height = h;
+  var ctx = rc.getContext('2d');
+  if(fmt==='jpg'){ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);}
+  ctx.drawImage(origImg,0,0,w,h);
+
+  var mimeType = fmt==='png'?'image/png':'image/jpeg';
+  var quality = 0.95;
+  var dataUrl = rc.toDataURL(mimeType, quality);
+  var kb = Math.round((dataUrl.length * 3/4)/1024);
+
+  // Auto compress to meet KB limit
+  if(fmt==='jpg' && kb > maxKb){
+    var lo=0.1, hi=0.95, best=dataUrl;
+    for(var i=0;i<20;i++){
+      quality=(lo+hi)/2;
+      var d=rc.toDataURL('image/jpeg',quality);
+      var k=Math.round((d.length*3/4)/1024);
+      if(k<=maxKb){lo=quality;best=d;}
+      else{hi=quality;}
+      if(hi-lo<0.01)break;
+    }
+    dataUrl=best;
+    kb=Math.round((dataUrl.length*3/4)/1024);
+  }
+
+  resizedDataUrl = dataUrl;
+  document.getElementById('resInfo').innerHTML =
+    '<div class="info-row"><span>Size</span><strong>'+w+' × '+h+' px</strong></div>'+
+    '<div class="info-row"><span>File Size</span><strong>'+kb+' KB</strong></div>'+
+    '<div class="info-row"><span>Format</span><strong>'+fmt.toUpperCase()+'</strong></div>';
+  document.getElementById('dlBtn').style.display='block';
+  document.getElementById('dlBtn').scrollIntoView({behavior:'smooth'});
+}
+
+function downloadImage(){
+  if(!resizedDataUrl)return;
+  var fmt = document.getElementById('format').value;
+  var w = document.getElementById('width').value;
+  var h = document.getElementById('height').value;
+  var a = document.createElement('a');
+  a.download = 'resized_'+w+'x'+h+'.'+fmt;
+  a.href = resizedDataUrl;
+  a.click();
+}
+</script>
+</body>
+</html>

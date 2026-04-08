@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Name & Date on Photo - OnlyJobs | Free Photo Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;--rl:#FEF2F2;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px 50px;display:grid;grid-template-columns:340px 1fr;gap:20px;}
+@media(max-width:800px){.wrap{grid-template-columns:1fr;}}
+.page-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--dk);margin-bottom:4px;}
+.page-sub{font-size:13px;color:var(--mu);margin-bottom:18px;}
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:18px;margin-bottom:14px;}
+.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--dk);margin-bottom:12px;}
+label{display:block;font-size:12px;font-weight:700;color:var(--tx);margin-bottom:5px;}
+input[type=text],input[type=number],select{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:7px;font-size:13px;font-family:'Figtree',sans-serif;outline:none;margin-bottom:10px;}
+input:focus,select:focus{border-color:var(--ac);}
+input[type=color]{width:100%;height:38px;padding:3px;border:1.5px solid var(--bd);border-radius:7px;cursor:pointer;margin-bottom:10px;}
+input[type=range]{width:100%;accent-color:var(--ac);margin-bottom:6px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.upload-zone{border:2px dashed var(--bd);border-radius:10px;padding:24px 16px;text-align:center;cursor:pointer;background:var(--b2);}
+.upload-zone:hover{border-color:var(--ac);background:var(--al);}
+.upload-zone input{display:none;}
+.upload-icon{font-size:30px;margin-bottom:6px;}
+.upload-txt{font-size:13px;font-weight:600;color:var(--dk);}
+.upload-sub{font-size:11px;color:var(--mu);}
+.btn-main{width:100%;padding:12px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-top:4px;}
+.btn-dl{width:100%;padding:12px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-top:8px;display:none;}
+/* CANVAS */
+.canvas-wrap{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:18px;text-align:center;position:sticky;top:80px;}
+#mainCanvas{max-width:100%;border:1px solid var(--bd);border-radius:8px;}
+.no-img{padding:80px 20px;color:var(--mu);font-size:14px;}
+/* TEXT LAYERS */
+.layer-item{background:var(--b2);border:1.5px solid var(--bd);border-radius:8px;padding:10px 12px;margin-bottom:8px;cursor:pointer;}
+.layer-item.on{border-color:var(--ac);background:var(--al);}
+.layer-header{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;}
+.layer-remove{background:none;border:none;color:var(--rd);cursor:pointer;font-size:14px;}
+.add-layer-btn{width:100%;padding:9px;background:var(--b2);border:1.5px dashed var(--bd);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--mu);font-family:'Figtree',sans-serif;}
+.add-layer-btn:hover{border-color:var(--ac);color:var(--ac);}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div style="max-width:1100px;margin:0 auto;padding:20px 20px 0;">
+  <div class="page-title">🖼️ Name & Date on Photo</div>
+  <div class="page-sub">Add name, date, signature text or any text on photos for exam application forms</div>
+</div>
+
+<div class="wrap">
+  <!-- LEFT PANEL -->
+  <div>
+    <!-- Upload -->
+    <div class="card">
+      <div class="card-title">📁 Upload Photo</div>
+      <div class="upload-zone" onclick="document.getElementById('photoInput').click()">
+        <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(this)"/>
+        <div class="upload-icon">🖼️</div>
+        <div class="upload-txt">Click to upload photo</div>
+        <div class="upload-sub">JPG · PNG · Any size</div>
+      </div>
+    </div>
+
+    <!-- Quick Add -->
+    <div class="card">
+      <div class="card-title">⚡ Quick Add</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">
+        <button onclick="quickAdd('Name')" style="padding:6px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;">+ Name</button>
+        <button onclick="quickAdd('Date: '+new Date().toLocaleDateString('en-IN'))" style="padding:6px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;">+ Today Date</button>
+        <button onclick="quickAdd('Signature')" style="padding:6px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;">+ Signature</button>
+        <button onclick="quickAdd('Roll No: ')" style="padding:6px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;">+ Roll No</button>
+        <button onclick="quickAdd('Father: ')" style="padding:6px 12px;border:1.5px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;font-family:'Figtree',sans-serif;">+ Father</button>
+      </div>
+
+      <!-- Text Layers -->
+      <div id="layerList"></div>
+      <button class="add-layer-btn" onclick="addLayer('Custom Text')">+ Add Custom Text</button>
+    </div>
+
+    <!-- Active Layer Edit -->
+    <div class="card" id="editPanel" style="display:none;">
+      <div class="card-title">✏️ Edit Selected Text</div>
+      <label>Text Content</label>
+      <input type="text" id="editText" oninput="updateActiveLayer()"/>
+      <div class="row2">
+        <div><label>Font Size</label><input type="number" id="editSize" value="24" min="8" max="120" oninput="updateActiveLayer()"/></div>
+        <div><label>Text Color</label><input type="color" id="editColor" value="#000000" oninput="updateActiveLayer()"/></div>
+      </div>
+      <div class="row2">
+        <div><label>Position X (%)</label><input type="range" id="editX" min="0" max="100" value="10" oninput="updateActiveLayer()"/><span id="xVal" style="font-size:12px;color:var(--mu);">10%</span></div>
+        <div><label>Position Y (%)</label><input type="range" id="editY" min="0" max="100" value="90" oninput="updateActiveLayer()"/><span id="yVal" style="font-size:12px;color:var(--mu);">90%</span></div>
+      </div>
+      <div class="row2">
+        <div>
+          <label>Font Style</label>
+          <select id="editFont" onchange="updateActiveLayer()">
+            <option value="Arial">Arial</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Verdana">Verdana</option>
+          </select>
+        </div>
+        <div>
+          <label>Bold / Italic</label>
+          <select id="editStyle" onchange="updateActiveLayer()">
+            <option value="normal">Normal</option>
+            <option value="bold">Bold</option>
+            <option value="italic">Italic</option>
+            <option value="bold italic">Bold Italic</option>
+          </select>
+        </div>
+      </div>
+      <label>Background</label>
+      <select id="editBg" onchange="updateActiveLayer()">
+        <option value="none">None (transparent)</option>
+        <option value="white">White box</option>
+        <option value="black">Black box</option>
+        <option value="yellow">Yellow highlight</option>
+      </select>
+    </div>
+
+    <button class="btn-main" onclick="renderFinal()">🎨 Apply & Preview</button>
+    <button class="btn-dl" id="dlBtn" onclick="downloadPhoto()">⬇️ Download Photo</button>
+  </div>
+
+  <!-- RIGHT: CANVAS -->
+  <div class="canvas-wrap">
+    <div id="noImgMsg" class="no-img">📤 Upload a photo to start editing</div>
+    <canvas id="mainCanvas" style="display:none;"></canvas>
+    <div style="font-size:12px;color:var(--mu);margin-top:10px;" id="canvasInfo"></div>
+  </div>
+</div>
+
+<script>
+var photoImg = null;
+var layers = [];
+var activeLayer = -1;
+var layerCounter = 0;
+
+function loadPhoto(input){
+  if(!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var img = new Image();
+    img.onload = function(){
+      photoImg = img;
+      document.getElementById('mainCanvas').style.display='block';
+      document.getElementById('noImgMsg').style.display='none';
+      document.getElementById('canvasInfo').textContent = img.width+'×'+img.height+' px';
+      if(!layers.length) addLayer('Your Name Here');
+      renderFinal();
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function addLayer(txt){
+  var id = ++layerCounter;
+  layers.push({id:id, text:txt, size:22, color:'#000000', x:10, y:90, font:'Arial', style:'bold', bg:'none'});
+  setActive(layers.length-1);
+  renderLayers();
+  if(photoImg) renderFinal();
+}
+
+function quickAdd(txt){ addLayer(txt); }
+
+function removeLayer(i){
+  layers.splice(i,1);
+  if(activeLayer>=layers.length) activeLayer=layers.length-1;
+  renderLayers();
+  if(photoImg) renderFinal();
+}
+
+function setActive(i){
+  activeLayer = i;
+  renderLayers();
+  if(i>=0 && i<layers.length){
+    var l = layers[i];
+    document.getElementById('editPanel').style.display='block';
+    document.getElementById('editText').value = l.text;
+    document.getElementById('editSize').value = l.size;
+    document.getElementById('editColor').value = l.color;
+    document.getElementById('editX').value = l.x;
+    document.getElementById('editY').value = l.y;
+    document.getElementById('editFont').value = l.font;
+    document.getElementById('editStyle').value = l.style;
+    document.getElementById('editBg').value = l.bg;
+    document.getElementById('xVal').textContent = l.x+'%';
+    document.getElementById('yVal').textContent = l.y+'%';
+  }
+}
+
+function updateActiveLayer(){
+  if(activeLayer<0 || activeLayer>=layers.length) return;
+  var l = layers[activeLayer];
+  l.text = document.getElementById('editText').value;
+  l.size = parseInt(document.getElementById('editSize').value);
+  l.color = document.getElementById('editColor').value;
+  l.x = parseInt(document.getElementById('editX').value);
+  l.y = parseInt(document.getElementById('editY').value);
+  l.font = document.getElementById('editFont').value;
+  l.style = document.getElementById('editStyle').value;
+  l.bg = document.getElementById('editBg').value;
+  document.getElementById('xVal').textContent = l.x+'%';
+  document.getElementById('yVal').textContent = l.y+'%';
+  renderLayers();
+  if(photoImg) renderFinal();
+}
+
+function renderLayers(){
+  var html = '';
+  layers.forEach(function(l,i){
+    html += '<div class="layer-item'+(i===activeLayer?' on':'')+'" onclick="setActive('+i+')">'
+          + '<div class="layer-header">'
+          + '<span>'+l.text.substring(0,22)+(l.text.length>22?'...':'')+'</span>'
+          + '<button class="layer-remove" onclick="event.stopPropagation();removeLayer('+i+')">✕</button>'
+          + '</div></div>';
+  });
+  document.getElementById('layerList').innerHTML = html;
+}
+
+function renderFinal(){
+  if(!photoImg) return;
+  var canvas = document.getElementById('mainCanvas');
+  var maxW = canvas.parentElement.clientWidth - 36;
+  var scale = Math.min(maxW/photoImg.width, 600/photoImg.height, 1);
+  canvas.width = Math.round(photoImg.width*scale);
+  canvas.height = Math.round(photoImg.height*scale);
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(photoImg, 0, 0, canvas.width, canvas.height);
+
+  layers.forEach(function(l){
+    if(!l.text.trim()) return;
+    var fs = Math.round(l.size * scale);
+    var fontStr = l.style+' '+fs+'px '+l.font;
+    ctx.font = fontStr;
+    var tx = (l.x/100)*canvas.width;
+    var ty = (l.y/100)*canvas.height;
+    var tw = ctx.measureText(l.text).width;
+    var th = fs * 1.3;
+    // background
+    if(l.bg==='white'){ctx.fillStyle='rgba(255,255,255,0.85)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    else if(l.bg==='black'){ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    else if(l.bg==='yellow'){ctx.fillStyle='rgba(255,255,0,0.8)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    // text shadow
+    ctx.fillStyle='rgba(0,0,0,0.3)';
+    ctx.font=fontStr;
+    ctx.fillText(l.text,tx+1,ty+1);
+    // text
+    ctx.fillStyle=l.color;
+    ctx.fillText(l.text,tx,ty);
+  });
+  document.getElementById('dlBtn').style.display='block';
+}
+
+function downloadPhoto(){
+  if(!photoImg) return;
+  // Render at full resolution
+  var canvas = document.createElement('canvas');
+  canvas.width = photoImg.width;
+  canvas.height = photoImg.height;
+  var ctx = canvas.getContext('2d');
+  ctx.drawImage(photoImg,0,0);
+  layers.forEach(function(l){
+    if(!l.text.trim()) return;
+    var fontStr = l.style+' '+l.size+'px '+l.font;
+    ctx.font = fontStr;
+    var tx = (l.x/100)*canvas.width;
+    var ty = (l.y/100)*canvas.height;
+    var tw = ctx.measureText(l.text).width;
+    var th = l.size*1.3;
+    if(l.bg==='white'){ctx.fillStyle='rgba(255,255,255,0.85)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    else if(l.bg==='black'){ctx.fillStyle='rgba(0,0,0,0.7)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    else if(l.bg==='yellow'){ctx.fillStyle='rgba(255,255,0,0.8)';ctx.fillRect(tx-4,ty-th+4,tw+8,th+4);}
+    ctx.fillStyle='rgba(0,0,0,0.3)';ctx.fillText(l.text,tx+1,ty+1);
+    ctx.fillStyle=l.color;ctx.fillText(l.text,tx,ty);
+  });
+  var a = document.createElement('a');
+  a.download = 'photo_with_text.jpg';
+  a.href = canvas.toDataURL('image/jpeg',0.95);
+  a.click();
+}
+</script>
+</body>
+</html>

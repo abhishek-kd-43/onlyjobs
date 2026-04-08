@@ -1,0 +1,398 @@
+<!-- 
+================================================================
+DOCUMENT LOCKER — Add this entire section inside auth.html
+STEP 1: Find the dashboard div and ADD this tab system
+================================================================
+-->
+
+<!-- REPLACE the existing dashboard div with this entire block -->
+
+<!-- DASHBOARD TABS (replace existing auth-tabs when logged in) -->
+<div class="dash-tabs" id="dash-tabs" style="display:none;">
+  <button class="dash-tab act" onclick="showDashTab('overview',this)">📊 Overview</button>
+  <button class="dash-tab" onclick="showDashTab('documents',this)">📁 Documents</button>
+  <button class="dash-tab" onclick="showDashTab('settings',this)">⚙️ Settings</button>
+</div>
+
+<!-- ── OVERVIEW TAB ── -->
+<div class="dashboard" id="dashboard" style="display:none;">
+  <div class="dash-welcome">
+    <div class="dash-av" id="dash-av">U</div>
+    <div>
+      <div class="dash-name" id="dash-name">Welcome!</div>
+      <div class="dash-sub" id="dash-sub">OnlyJobs Member</div>
+    </div>
+    <button class="logout-btn" onclick="doLogout()">Log Out</button>
+  </div>
+  <div class="dash-stats">
+    <div class="ds-card"><div class="ds-n" id="ds-tests">0</div><div class="ds-l">Tests Taken</div></div>
+    <div class="ds-card"><div class="ds-n" id="ds-avg">—</div><div class="ds-l">Avg Score %</div></div>
+    <div class="ds-card"><div class="ds-n" id="ds-docs">0</div><div class="ds-l">Documents</div></div>
+  </div>
+  <div class="dash-section-title">📋 Recent Test History</div>
+  <div class="score-list" id="score-list"></div>
+  <div class="dash-cta">
+    <a href="mocktest.html" class="cta-test">📝 Take Mock Test</a>
+    <a href="#" onclick="showDashTab('documents',null)" class="cta-home" style="background:var(--purple-light);color:var(--purple);border:1.5px solid #DDD6FE;">📁 My Documents</a>
+  </div>
+</div>
+
+<!-- ── DOCUMENTS TAB ── -->
+<div id="tab-documents" style="display:none;">
+  <!-- Upload area -->
+  <div style="margin-bottom:16px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--dark);margin-bottom:4px;">📁 My Document Locker</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">Securely store your certificates, marksheets & important documents</div>
+
+    <!-- Upload Box -->
+    <div id="docUploadZone" style="border:2px dashed var(--border);border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;background:var(--bg2);transition:all .2s;margin-bottom:14px;"
+      onclick="document.getElementById('docFileInput').click()"
+      ondragover="event.preventDefault();this.style.borderColor='var(--accent)';this.style.background='var(--accent-light)'"
+      ondragleave="this.style.borderColor='var(--border)';this.style.background='var(--bg2)'"
+      ondrop="handleDocDrop(event)">
+      <input type="file" id="docFileInput" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="display:none" onchange="uploadDocs(this.files)"/>
+      <div style="font-size:32px;margin-bottom:8px;">📤</div>
+      <div style="font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px;">Click to upload or drag & drop</div>
+      <div style="font-size:12px;color:var(--muted);">PDF · JPG · PNG · DOC · Max 5MB each · Up to 20 files</div>
+    </div>
+
+    <!-- Category Filter -->
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;" id="docCatFilter">
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:var(--accent);border-color:var(--accent);color:#fff;font-family:'Figtree',sans-serif;" onclick="filterDocs('all',this)">All</button>
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);font-family:'Figtree',sans-serif;" onclick="filterDocs('certificate',this)">Certificates</button>
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);font-family:'Figtree',sans-serif;" onclick="filterDocs('marksheet',this)">Marksheets</button>
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);font-family:'Figtree',sans-serif;" onclick="filterDocs('id',this)">ID Proof</button>
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);font-family:'Figtree',sans-serif;" onclick="filterDocs('photo',this)">Photos</button>
+      <button style="padding:5px 12px;border:1.5px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:var(--muted);font-family:'Figtree',sans-serif;" onclick="filterDocs('other',this)">Other</button>
+    </div>
+
+    <!-- Doc List -->
+    <div id="docList"></div>
+    <div id="docEmpty" style="text-align:center;padding:30px;color:var(--muted);font-size:13px;display:none;">
+      📭 No documents yet. Upload your first document above!
+    </div>
+  </div>
+
+  <!-- Quick Upload Templates -->
+  <div style="background:var(--bg2);border-radius:10px;padding:14px;">
+    <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px;">📋 Common Documents Checklist</div>
+    <div id="checklistItems"></div>
+  </div>
+</div>
+
+<!-- ── SETTINGS TAB ── -->
+<div id="tab-settings" style="display:none;">
+  <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--dark);margin-bottom:16px;">⚙️ Account Settings</div>
+  <div style="background:var(--bg2);border-radius:10px;padding:16px;margin-bottom:14px;">
+    <div style="font-size:13px;font-weight:700;color:var(--dark);margin-bottom:12px;">Profile Information</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+      <div><label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:5px;">First Name</label>
+      <input id="set_fname" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Figtree',sans-serif;outline:none;"/></div>
+      <div><label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:5px;">Last Name</label>
+      <input id="set_lname" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Figtree',sans-serif;outline:none;"/></div>
+    </div>
+    <div style="margin-bottom:10px;"><label style="font-size:12px;font-weight:700;color:var(--text);display:block;margin-bottom:5px;">Target Exam</label>
+    <select id="set_exam" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:'Figtree',sans-serif;outline:none;">
+      <option>SSC CGL</option><option>SSC CHSL</option><option>RRB NTPC</option><option>SBI PO</option>
+      <option>UPSC CSE</option><option>State PSC</option><option>Multiple Exams</option>
+    </select></div>
+    <button onclick="saveSettings()" style="padding:10px 20px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;">Save Changes</button>
+  </div>
+
+  <div style="background:var(--red-light);border:1.5px solid #FECACA;border-radius:10px;padding:16px;">
+    <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px;">⚠️ Danger Zone</div>
+    <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;">Permanently delete all your data including scores and documents.</div>
+    <button onclick="deleteAccount()" style="padding:8px 16px;background:var(--red);color:#fff;border:none;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;">Delete Account</button>
+  </div>
+</div>
+
+<!--
+================================================================
+STEP 2: Add these CSS rules inside your existing <style> tag
+================================================================
+-->
+<style>
+/* DASH TABS */
+.dash-tabs{display:flex;background:var(--bg2);border-radius:10px;padding:4px;margin-bottom:20px;}
+.dash-tab{flex:1;padding:9px 6px;text-align:center;border:none;background:transparent;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;border-radius:7px;transition:all .2s;font-family:'Figtree',sans-serif;}
+.dash-tab.act{background:#fff;color:var(--dark);box-shadow:0 1px 4px rgba(0,0,0,0.1);}
+.dash-tab:hover:not(.act){color:var(--dark);}
+
+/* DOC ITEMS */
+.doc-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1.5px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .15s;}
+.doc-item:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(232,93,4,.08);}
+.doc-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.doc-info{flex:1;min-width:0;}
+.doc-name{font-size:13px;font-weight:700;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.doc-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+.doc-cat-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;display:inline-block;}
+.doc-actions{display:flex;gap:6px;flex-shrink:0;}
+.doc-btn{padding:5px 10px;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer;border:none;font-family:'Figtree',sans-serif;}
+.doc-btn-dl{background:var(--green-light);color:var(--green);}
+.doc-btn-del{background:var(--red-light);color:var(--red);}
+.doc-btn-view{background:var(--blue-light);color:var(--blue);}
+
+/* CHECKLIST */
+.chk-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;margin-bottom:4px;font-size:13px;}
+.chk-item.done{color:var(--green);}
+.chk-item.pending{color:var(--muted);}
+</style>
+
+<!--
+================================================================
+STEP 3: Add this JavaScript block BEFORE the closing </script> tag
+================================================================
+-->
+<script>
+/* ── DASHBOARD TABS ── */
+function showDashTab(tab, btn) {
+  document.getElementById('dashboard').style.display = tab==='overview' ? 'block' : 'none';
+  document.getElementById('tab-documents').style.display = tab==='documents' ? 'block' : 'none';
+  document.getElementById('tab-settings').style.display = tab==='settings' ? 'block' : 'none';
+
+  if (btn) {
+    document.querySelectorAll('.dash-tab').forEach(function(b){b.classList.remove('act');});
+    btn.classList.add('act');
+  } else {
+    document.querySelectorAll('.dash-tab').forEach(function(b,i){
+      b.classList.toggle('act', (i===0&&tab==='overview')||(i===1&&tab==='documents')||(i===2&&tab==='settings'));
+    });
+  }
+
+  if (tab === 'documents') renderDocuments();
+  if (tab === 'settings') loadSettings();
+}
+
+/* ── DOCUMENT LOCKER ── */
+var DOC_CATEGORIES = {
+  certificate: {label:'Certificate', color:'#059669', bg:'#ECFDF5', icon:'🏆'},
+  marksheet:   {label:'Marksheet',   color:'#1D4ED8', bg:'#EFF6FF', icon:'📋'},
+  id:          {label:'ID Proof',    color:'#7C3AED', bg:'#F5F3FF', icon:'🪪'},
+  photo:       {label:'Photo',       color:'#E85D04', bg:'#FFF3EB', icon:'📸'},
+  other:       {label:'Other',       color:'#6B7280', bg:'#F7F8FC', icon:'📄'},
+};
+
+var CHECKLIST_DOCS = [
+  '10th Marksheet','12th Marksheet','Graduation Certificate','Aadhar Card',
+  'PAN Card','Passport Photo','Caste Certificate','Income Certificate',
+  'Domicile Certificate','NCC / NSS Certificate','Character Certificate',
+];
+
+var docFilter = 'all';
+
+function getDocs() {
+  var user = getCurrentUser();
+  if (!user) return [];
+  return JSON.parse(localStorage.getItem('oj_docs_'+user.email) || '[]');
+}
+
+function saveDocs(docs) {
+  var user = getCurrentUser();
+  if (!user) return;
+  localStorage.setItem('oj_docs_'+user.email, JSON.stringify(docs));
+  document.getElementById('ds-docs').textContent = docs.length;
+}
+
+function handleDocDrop(e) {
+  e.preventDefault();
+  document.getElementById('docUploadZone').style.borderColor = 'var(--border)';
+  document.getElementById('docUploadZone').style.background = 'var(--bg2)';
+  uploadDocs(e.dataTransfer.files);
+}
+
+function uploadDocs(files) {
+  var docs = getDocs();
+  var processed = 0;
+  Array.from(files).forEach(function(file) {
+    if (docs.length >= 20) { showToast('Maximum 20 documents allowed!', false); return; }
+    if (file.size > 5 * 1024 * 1024) { showToast(file.name + ' is too large (max 5MB)', false); return; }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var ext = file.name.split('.').pop().toLowerCase();
+      var cat = ext==='pdf'?'other':['jpg','jpeg','png'].includes(ext)?'photo':'other';
+      docs.push({
+        id: Date.now() + Math.random(),
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        ext: ext,
+        category: cat,
+        dataUrl: e.target.result,
+        uploadedAt: new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})
+      });
+      saveDocs(docs);
+      processed++;
+      if (processed === files.length) {
+        showToast(files.length + ' document(s) uploaded!');
+        renderDocuments();
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderDocuments() {
+  var docs = getDocs();
+  var filtered = docFilter==='all' ? docs : docs.filter(function(d){return d.category===docFilter;});
+  var list = document.getElementById('docList');
+  var empty = document.getElementById('docEmpty');
+
+  if (!filtered.length) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+  } else {
+    empty.style.display = 'none';
+    var html = '';
+    filtered.forEach(function(doc) {
+      var cat = DOC_CATEGORIES[doc.category] || DOC_CATEGORIES.other;
+      var sz = doc.size > 1024*1024 ? (doc.size/1024/1024).toFixed(1)+' MB' : Math.round(doc.size/1024)+' KB';
+      var isImg = ['jpg','jpeg','png'].includes(doc.ext);
+      html += '<div class="doc-item">'
+        + '<div class="doc-icon" style="background:'+cat.bg+';">'+cat.icon+'</div>'
+        + '<div class="doc-info">'
+        + '<div class="doc-name">'+doc.name+'</div>'
+        + '<div class="doc-meta">'+sz+' · Uploaded '+doc.uploadedAt+'</div>'
+        + '<span class="doc-cat-badge" style="background:'+cat.bg+';color:'+cat.color+';">'+cat.label+'</span>'
+        + '</div>'
+        + '<div style="display:flex;align-items:center;gap:5px;">'
+        + '<select onchange="changeDocCat(\''+doc.id+'\',this.value)" style="padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;font-size:11px;font-family:Figtree,sans-serif;outline:none;">'
+        + Object.keys(DOC_CATEGORIES).map(function(k){ return '<option value="'+k+'"'+(doc.category===k?' selected':'')+'>'+DOC_CATEGORIES[k].label+'</option>'; }).join('')
+        + '</select>'
+        + (isImg?'<button class="doc-btn doc-btn-view" onclick="viewDoc(\''+doc.id+'\')">👁</button>':'')
+        + '<button class="doc-btn doc-btn-dl" onclick="downloadDoc(\''+doc.id+'\')">⬇</button>'
+        + '<button class="doc-btn doc-btn-del" onclick="deleteDoc(\''+doc.id+'\')">🗑</button>'
+        + '</div></div>';
+    });
+    list.innerHTML = html;
+  }
+
+  // Render checklist
+  var docs2 = getDocs();
+  var docNames = docs2.map(function(d){return d.name.toLowerCase();});
+  var chkHtml = CHECKLIST_DOCS.map(function(item){
+    var found = docNames.some(function(n){return n.includes(item.toLowerCase().split(' ')[0]);});
+    return '<div class="chk-item '+(found?'done':'pending')+'">'
+      + '<span style="font-size:14px;">'+(found?'✅':'⬜')+'</span>'
+      + '<span>'+item+'</span>'
+      + (found?'':' <button onclick="document.getElementById(\'docFileInput\').click()" style="margin-left:auto;padding:3px 9px;background:var(--accent-light);color:var(--accent-dark);border:none;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;font-family:Figtree,sans-serif;">Upload</button>')
+      + '</div>';
+  }).join('');
+  document.getElementById('checklistItems').innerHTML = chkHtml;
+}
+
+function changeDocCat(docId, newCat) {
+  var docs = getDocs();
+  var doc = docs.find(function(d){return String(d.id)===String(docId)||d.id===parseFloat(docId);});
+  if (doc) { doc.category = newCat; saveDocs(docs); renderDocuments(); }
+}
+
+function viewDoc(docId) {
+  var docs = getDocs();
+  var doc = docs.find(function(d){return String(d.id)===String(docId)||d.id===parseFloat(docId);});
+  if (!doc) return;
+  var win = window.open('', '_blank');
+  win.document.write('<html><head><title>'+doc.name+'</title><style>body{margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;}img{max-width:100vw;max-height:100vh;object-fit:contain;}</style></head><body><img src="'+doc.dataUrl+'"/></body></html>');
+}
+
+function downloadDoc(docId) {
+  var docs = getDocs();
+  var doc = docs.find(function(d){return String(d.id)===String(docId)||d.id===parseFloat(docId);});
+  if (!doc) return;
+  var a = document.createElement('a');
+  a.href = doc.dataUrl;
+  a.download = doc.name;
+  a.click();
+  showToast('Downloading: ' + doc.name);
+}
+
+function deleteDoc(docId) {
+  if (!confirm('Delete this document?')) return;
+  var docs = getDocs();
+  docs = docs.filter(function(d){return String(d.id)!==String(docId)&&d.id!==parseFloat(docId);});
+  saveDocs(docs);
+  renderDocuments();
+  showToast('Document deleted.');
+}
+
+function filterDocs(cat, btn) {
+  docFilter = cat;
+  if (btn) {
+    document.querySelectorAll('#docCatFilter button').forEach(function(b){
+      b.style.background='#fff'; b.style.color='var(--muted)'; b.style.borderColor='var(--border)';
+    });
+    btn.style.background='var(--accent)'; btn.style.color='#fff'; btn.style.borderColor='var(--accent)';
+  }
+  renderDocuments();
+}
+
+/* ── SETTINGS ── */
+function loadSettings() {
+  var user = getCurrentUser();
+  if (!user) return;
+  document.getElementById('set_fname').value = user.fname || '';
+  document.getElementById('set_lname').value = user.lname || '';
+  document.getElementById('set_exam').value = user.exam || 'Multiple Exams';
+}
+
+function saveSettings() {
+  var user = getCurrentUser();
+  if (!user) return;
+  user.fname = document.getElementById('set_fname').value;
+  user.lname = document.getElementById('set_lname').value;
+  user.exam = document.getElementById('set_exam').value;
+  var users = getUsers();
+  var idx = users.findIndex(function(u){return u.email===user.email;});
+  if (idx>=0) { users[idx]=user; saveUsers(users); }
+  setCurrentUser(user);
+  showToast('Settings saved!');
+  document.getElementById('dash-name').textContent = user.fname+(user.lname?' '+user.lname:'');
+}
+
+function deleteAccount() {
+  if (!confirm('DELETE account? This cannot be undone!')) return;
+  var user = getCurrentUser();
+  if (!user) return;
+  var users = getUsers().filter(function(u){return u.email!==user.email;});
+  saveUsers(users);
+  localStorage.removeItem('oj_current_user');
+  localStorage.removeItem('oj_docs_'+user.email);
+  localStorage.removeItem('oj_scores_'+user.email);
+  location.reload();
+}
+
+/* ── OVERRIDE showDashboard to use tabs ── */
+var _origShowDash = showDashboard;
+showDashboard = function(user) {
+  document.getElementById('auth-tabs').style.display='none';
+  document.getElementById('form-login').className='auth-form';
+  document.getElementById('form-signup').className='auth-form';
+  document.getElementById('dash-tabs').style.display='flex';
+  showDashTab('overview', null);
+  document.getElementById('dashboard').style.display='block';
+
+  var initials=(user.fname[0]+(user.lname?user.lname[0]:'')).toUpperCase();
+  if(user.picture){
+    document.getElementById('dash-av').innerHTML='<img src="'+user.picture+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;"/>';
+    document.getElementById('dash-av').style.background='none';
+  } else {
+    document.getElementById('dash-av').textContent=initials;
+  }
+  document.getElementById('dash-name').textContent=user.fname+(user.lname?' '+user.lname:'');
+  document.getElementById('dash-sub').textContent=(user.exam||'Aspirant')+' · '+(user.state||'India')+' · Joined '+user.joined;
+  var docs = JSON.parse(localStorage.getItem('oj_docs_'+user.email)||'[]');
+  document.getElementById('ds-docs').textContent = docs.length;
+  loadScores();
+};
+
+var _origLogout = doLogout;
+doLogout = function() {
+  localStorage.removeItem('oj_current_user');
+  document.getElementById('auth-tabs').style.display='flex';
+  document.getElementById('dash-tabs').style.display='none';
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('tab-documents').style.display='none';
+  document.getElementById('tab-settings').style.display='none';
+  switchTab('login');
+  showToast('Logged out successfully.');
+};
+</script>

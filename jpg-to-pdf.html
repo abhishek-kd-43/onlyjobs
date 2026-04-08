@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JPG to PDF Converter - OnlyJobs | Free Image to PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;--rl:#FEF2F2;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px 50px;}
+.page-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--dk);margin-bottom:4px;}
+.page-sub{font-size:14px;color:var(--mu);margin-bottom:24px;}
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:20px;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dk);margin-bottom:16px;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--tx);margin-bottom:6px;}
+select,input{width:100%;padding:10px 14px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;}
+input:focus,select:focus{border-color:var(--ac);}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+
+.upload-zone{border:2px dashed var(--bd);border-radius:12px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--b2);}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--ac);background:var(--al);}
+.upload-zone input{display:none;}
+.upload-icon{font-size:40px;margin-bottom:10px;}
+.upload-txt{font-size:14px;font-weight:600;color:var(--dk);margin-bottom:4px;}
+.upload-sub{font-size:12px;color:var(--mu);}
+
+/* IMAGE LIST */
+.img-list{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.img-item{display:flex;align-items:center;gap:12px;background:var(--b2);border:1.5px solid var(--bd);border-radius:8px;padding:10px 14px;}
+.img-thumb{width:50px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--bd);}
+.img-info{flex:1;min-width:0;}
+.img-name{font-size:13px;font-weight:600;color:var(--dk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.img-size{font-size:11px;color:var(--mu);}
+.img-remove{background:var(--rl);color:var(--rd);border:none;border-radius:6px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;}
+.img-move{background:var(--b3);border:1.5px solid var(--bd);border-radius:6px;padding:4px 8px;font-size:12px;cursor:pointer;color:var(--mu);}
+
+.btn-main{width:100%;padding:14px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-main:hover{opacity:.9;}
+.btn-main:disabled{opacity:.5;cursor:not-allowed;}
+.progress{display:none;background:var(--b3);border-radius:20px;height:8px;margin-top:14px;overflow:hidden;}
+.progress.show{display:block;}
+.progress-bar{height:100%;background:linear-gradient(90deg,#E85D04,#7C3AED);border-radius:20px;transition:width .3s;width:0%;}
+.progress-txt{font-size:13px;color:var(--mu);margin-top:6px;text-align:center;}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="page-title">📑 JPG / PNG to PDF Converter</div>
+  <div class="page-sub">Convert multiple images to a single PDF. Perfect for submitting documents online. 100% free & offline.</div>
+
+  <div class="card">
+    <div class="card-title">⚙️ PDF Settings</div>
+    <div class="row2">
+      <div>
+        <label>Page Size</label>
+        <select id="pageSize">
+          <option value="a4">A4 (Most Common)</option>
+          <option value="letter">Letter</option>
+          <option value="a3">A3</option>
+        </select>
+      </div>
+      <div>
+        <label>Page Orientation</label>
+        <select id="orient">
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Landscape</option>
+        </select>
+      </div>
+    </div>
+    <div class="row2">
+      <div>
+        <label>Image Fit</label>
+        <select id="fit">
+          <option value="fill">Fill Page (stretch)</option>
+          <option value="fit">Fit to Page (keep ratio)</option>
+          <option value="original">Original Size</option>
+        </select>
+      </div>
+      <div>
+        <label>PDF Filename</label>
+        <input type="text" id="filename" value="OnlyJobs_Document" placeholder="PDF filename"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📁 Upload Images (JPG, PNG, WEBP)</div>
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="handleDrop(event)">
+      <input type="file" id="fileInput" accept="image/*" multiple onchange="addFiles(this.files)"/>
+      <div class="upload-icon">📸</div>
+      <div class="upload-txt">Click to upload or drag & drop multiple images</div>
+      <div class="upload-sub">Supports JPG · PNG · WEBP · Max 20 images</div>
+    </div>
+
+    <div class="img-list" id="imgList"></div>
+
+    <div class="progress" id="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-txt" id="progressTxt"></div>
+
+    <button class="btn-main" id="convertBtn" onclick="convertToPdf()" disabled>
+      <span>📑 Convert to PDF</span>
+    </button>
+  </div>
+</div>
+
+<script>
+var images = [];
+
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('uploadZone').classList.remove('drag');
+  addFiles(e.dataTransfer.files);
+}
+
+function addFiles(files){
+  Array.from(files).forEach(function(file){
+    if(!file.type.startsWith('image/'))return;
+    if(images.length>=20){alert('Maximum 20 images allowed!');return;}
+    var reader = new FileReader();
+    reader.onload = function(e){
+      images.push({name:file.name, size:file.size, dataUrl:e.target.result});
+      renderList();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderList(){
+  var list = document.getElementById('imgList');
+  if(!images.length){list.innerHTML='';document.getElementById('convertBtn').disabled=true;return;}
+  document.getElementById('convertBtn').disabled=false;
+  var html = '';
+  images.forEach(function(img,i){
+    html += '<div class="img-item" id="imgitem'+i+'">'
+          + '<img class="img-thumb" src="'+img.dataUrl+'"/>'
+          + '<div class="img-info"><div class="img-name">'+(i+1)+'. '+img.name+'</div><div class="img-size">'+Math.round(img.size/1024)+' KB</div></div>'
+          + (i>0?'<button class="img-move" onclick="moveUp('+i+')">▲</button>':'')
+          + (i<images.length-1?'<button class="img-move" onclick="moveDown('+i+')">▼</button>':'')
+          + '<button class="img-remove" onclick="removeImg('+i+')">✕</button>'
+          + '</div>';
+  });
+  list.innerHTML = html;
+}
+
+function removeImg(i){ images.splice(i,1); renderList(); }
+function moveUp(i){ var t=images[i-1];images[i-1]=images[i];images[i]=t; renderList(); }
+function moveDown(i){ var t=images[i+1];images[i+1]=images[i];images[i]=t; renderList(); }
+
+async function convertToPdf(){
+  if(!images.length){alert('Please add at least one image!');return;}
+  var btn = document.getElementById('convertBtn');
+  btn.disabled=true;
+  btn.innerHTML='<span>⏳ Converting...</span>';
+  document.getElementById('progress').classList.add('show');
+
+  var pageSize = document.getElementById('pageSize').value;
+  var orient = document.getElementById('orient').value;
+  var fit = document.getElementById('fit').value;
+  var filename = document.getElementById('filename').value || 'document';
+
+  var pageSizes = {a4:[210,297], letter:[216,279], a3:[297,420]};
+  var ps = pageSizes[pageSize];
+  var pw = orient==='landscape'?ps[1]:ps[0];
+  var ph = orient==='landscape'?ps[0]:ps[1];
+
+  var doc = new window.jspdf.jsPDF({orientation:orient, unit:'mm', format:pageSize});
+
+  for(var i=0;i<images.length;i++){
+    var pct = Math.round(((i+1)/images.length)*100);
+    document.getElementById('progressBar').style.width=pct+'%';
+    document.getElementById('progressTxt').textContent='Processing image '+(i+1)+' of '+images.length+'...';
+
+    if(i>0) doc.addPage();
+
+    var imgEl = new Image();
+    await new Promise(function(res){
+      imgEl.onload=res;
+      imgEl.src=images[i].dataUrl;
+    });
+
+    var fmt = images[i].dataUrl.startsWith('data:image/png')?'PNG':'JPEG';
+    if(fit==='fill'){
+      doc.addImage(images[i].dataUrl, fmt, 0, 0, pw, ph);
+    } else if(fit==='fit'){
+      var ratio = Math.min(pw/imgEl.width, ph/imgEl.height);
+      var rw = imgEl.width*ratio*0.264583;
+      var rh = imgEl.height*ratio*0.264583;
+      var x=(pw-rw)/2, y=(ph-rh)/2;
+      doc.addImage(images[i].dataUrl, fmt, x, y, rw, rh);
+    } else {
+      var mw=imgEl.width*0.264583, mh=imgEl.height*0.264583;
+      var sx=Math.min(0,(pw-mw)/2), sy=Math.min(0,(ph-mh)/2);
+      doc.addImage(images[i].dataUrl, fmt, sx, sy, Math.min(mw,pw), Math.min(mh,ph));
+    }
+    await new Promise(function(r){setTimeout(r,50);});
+  }
+
+  doc.save(filename+'.pdf');
+  document.getElementById('progressTxt').textContent='✅ PDF downloaded successfully! ('+images.length+' pages)';
+  btn.disabled=false;
+  btn.innerHTML='<span>📑 Convert to PDF</span>';
+}
+</script>
+</body>
+</html>

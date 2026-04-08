@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CV / Resume Maker - OnlyJobs | Free Resume Builder PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+
+/* LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:24px 20px 50px;display:grid;grid-template-columns:1fr 440px;gap:20px;}
+@media(max-width:900px){.main{grid-template-columns:1fr;}}
+
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:14px;}
+.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--dk);margin-bottom:14px;border-bottom:1.5px solid var(--b3);padding-bottom:10px;display:flex;align-items:center;gap:7px;}
+.field{margin-bottom:12px;}
+label{display:block;font-size:12px;font-weight:700;color:var(--tx);margin-bottom:5px;}
+input,select,textarea{width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:7px;font-size:13.5px;font-family:'Figtree',sans-serif;color:var(--dk);outline:none;transition:border-color .15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--ac);}
+textarea{resize:vertical;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:500px){.row2{grid-template-columns:1fr;}}
+
+/* TEMPLATES */
+.tmpl-row{display:flex;gap:8px;margin-bottom:8px;overflow-x:auto;padding-bottom:4px;}
+.tmpl-card{border:2.5px solid var(--bd);border-radius:10px;padding:8px 14px;cursor:pointer;transition:all .15s;flex-shrink:0;text-align:center;min-width:80px;}
+.tmpl-card:hover,.tmpl-card.on{border-color:var(--ac);background:var(--al);}
+.tmpl-icon{font-size:20px;margin-bottom:4px;}
+.tmpl-nm{font-size:11px;font-weight:700;color:var(--dk);}
+
+/* DYNAMIC SECTIONS */
+.exp-item,.edu-item,.skill-item{background:var(--b2);border:1.5px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:8px;position:relative;}
+.item-remove{position:absolute;top:10px;right:10px;background:var(--rd);color:#fff;border:none;border-radius:5px;width:22px;height:22px;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;}
+.add-btn{width:100%;padding:9px;background:var(--b2);border:1.5px dashed var(--bd);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--mu);font-family:'Figtree',sans-serif;}
+.add-btn:hover{border-color:var(--ac);color:var(--ac);}
+
+/* PREVIEW */
+.preview-panel{position:sticky;top:80px;}
+.preview-box{background:#fff;border:1.5px solid var(--bd);border-radius:12px;overflow:hidden;}
+.preview-header{background:var(--b3);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;}
+.preview-lbl{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;}
+#cvFrame{width:100%;height:620px;border:none;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;margin-top:8px;}
+.btn-dl{flex:1;padding:13px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-sec{padding:13px 16px;background:#fff;border:1.5px solid var(--bd);color:var(--tx);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-sec:hover{border-color:var(--ac);color:var(--ac);}
+
+/* PHOTO UPLOAD */
+.photo-upload{border:2px dashed var(--bd);border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:var(--b2);margin-bottom:12px;}
+.photo-upload:hover{border-color:var(--ac);background:var(--al);}
+#cvPhotoPreview{width:80px;height:90px;object-fit:cover;border-radius:6px;border:2px solid var(--bd);margin:6px auto;display:none;}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div class="main">
+<!-- FORM -->
+<div>
+  <!-- Template -->
+  <div class="card">
+    <div class="card-title">🎨 Choose Template</div>
+    <div class="tmpl-row">
+      <div class="tmpl-card on" onclick="setTmpl('classic',this)"><div class="tmpl-icon">📋</div><div class="tmpl-nm">Classic</div></div>
+      <div class="tmpl-card" onclick="setTmpl('modern',this)"><div class="tmpl-icon">💼</div><div class="tmpl-nm">Modern</div></div>
+      <div class="tmpl-card" onclick="setTmpl('sidebar',this)"><div class="tmpl-icon">🗂️</div><div class="tmpl-nm">Sidebar</div></div>
+      <div class="tmpl-card" onclick="setTmpl('minimal',this)"><div class="tmpl-icon">✨</div><div class="tmpl-nm">Minimal</div></div>
+      <div class="tmpl-card" onclick="setTmpl('govt',this)"><div class="tmpl-icon">🏛️</div><div class="tmpl-nm">Govt</div></div>
+    </div>
+  </div>
+
+  <!-- Photo & Contact -->
+  <div class="card">
+    <div class="card-title">👤 Personal Details</div>
+    <div class="photo-upload" onclick="document.getElementById('cvPhoto').click()">
+      <input type="file" id="cvPhoto" accept="image/*" style="display:none" onchange="loadCvPhoto(this)"/>
+      <img id="cvPhotoPreview" alt="Photo"/>
+      <div style="font-size:12px;font-weight:600;color:var(--dk);" id="cvPhotoTxt">📸 Upload Photo (Optional)</div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Full Name *</label><input id="cv_name" placeholder="Rahul Kumar Sharma" oninput="liveCV()"/></div>
+      <div class="field"><label>Job Title / Objective</label><input id="cv_title" placeholder="SSC CGL Aspirant / Software Engineer" oninput="liveCV()"/></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Email</label><input id="cv_email" placeholder="rahul@gmail.com" oninput="liveCV()"/></div>
+      <div class="field"><label>Mobile</label><input id="cv_phone" placeholder="+91 98765 43210" oninput="liveCV()"/></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Location</label><input id="cv_location" placeholder="Lucknow, Uttar Pradesh" oninput="liveCV()"/></div>
+      <div class="field"><label>Date of Birth</label><input type="date" id="cv_dob" oninput="liveCV()"/></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>LinkedIn / Portfolio URL</label><input id="cv_linkedin" placeholder="linkedin.com/in/rahul" oninput="liveCV()"/></div>
+      <div class="field"><label>Aadhaar / PAN (Optional)</label><input id="cv_id" placeholder="For Govt applications" oninput="liveCV()"/></div>
+    </div>
+    <div class="field"><label>Career Objective / Summary</label><textarea id="cv_summary" rows="3" placeholder="A dedicated and motivated graduate seeking a position in government services. Strong analytical and problem-solving skills..." oninput="liveCV()"></textarea></div>
+  </div>
+
+  <!-- Education -->
+  <div class="card">
+    <div class="card-title">🎓 Education</div>
+    <div id="eduList"></div>
+    <button class="add-btn" onclick="addEdu()">+ Add Education</button>
+  </div>
+
+  <!-- Experience -->
+  <div class="card">
+    <div class="card-title">💼 Work Experience</div>
+    <div id="expList"></div>
+    <button class="add-btn" onclick="addExp()">+ Add Experience</button>
+  </div>
+
+  <!-- Skills -->
+  <div class="card">
+    <div class="card-title">⚡ Skills</div>
+    <div class="field"><label>Technical Skills (comma separated)</label><input id="cv_techskills" placeholder="MS Office, Tally, DTP, Typing, Computer Basics" oninput="liveCV()"/></div>
+    <div class="field"><label>Languages Known</label><input id="cv_langs" placeholder="Hindi, English, Sanskrit" oninput="liveCV()"/></div>
+    <div class="field"><label>Hobbies / Interests</label><input id="cv_hobbies" placeholder="Reading, Cricket, Volunteering" oninput="liveCV()"/></div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="card">
+    <div class="card-title">🏆 Achievements & Certificates</div>
+    <div id="achList"></div>
+    <button class="add-btn" onclick="addAch()">+ Add Achievement</button>
+  </div>
+
+  <!-- Declaration -->
+  <div class="card">
+    <div class="card-title">✅ Declaration</div>
+    <div class="field"><label>Declaration Text</label>
+      <textarea id="cv_declaration" rows="3" oninput="liveCV()">I hereby declare that all the information provided above is true and correct to the best of my knowledge and belief.</textarea>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Place</label><input id="cv_place" placeholder="Lucknow" oninput="liveCV()"/></div>
+      <div class="field"><label>Date</label><input type="date" id="cv_date" oninput="liveCV()"/></div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-dl" onclick="downloadCV()">⬇️ Download / Print CV</button>
+    <button class="btn-sec" onclick="liveCV()">🔄 Refresh</button>
+  </div>
+</div>
+
+<!-- PREVIEW -->
+<div class="preview-panel">
+  <div class="preview-box">
+    <div class="preview-header">
+      <span class="preview-lbl">Live CV Preview</span>
+      <span style="font-size:11px;color:var(--mu);">Auto-updates</span>
+    </div>
+    <iframe id="cvFrame" title="CV Preview"></iframe>
+  </div>
+</div>
+</div>
+
+<script>
+var cvTemplate = 'classic';
+var cvPhotoUrl = null;
+var eduItems = [], expItems = [], achItems = [];
+var eduCount = 0, expCount = 0, achCount = 0;
+
+function setTmpl(t, btn) {
+  cvTemplate = t;
+  document.querySelectorAll('.tmpl-card').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  liveCV();
+}
+
+function loadCvPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    cvPhotoUrl = e.target.result;
+    document.getElementById('cvPhotoPreview').src = cvPhotoUrl;
+    document.getElementById('cvPhotoPreview').style.display = 'block';
+    document.getElementById('cvPhotoTxt').textContent = '✓ Photo uploaded';
+    liveCV();
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function addEdu() {
+  var id = ++eduCount;
+  eduItems.push({id:id});
+  var div = document.createElement('div');
+  div.className = 'edu-item'; div.id = 'edu'+id;
+  div.innerHTML = '<button class="item-remove" onclick="removeItem(\'edu\','+id+')">✕</button>'
+    + '<div class="row2"><div class="field"><label>Degree / Course</label><input id="edu_deg'+id+'" placeholder="B.A. / B.Sc / B.Tech / 12th" oninput="liveCV()"/></div>'
+    + '<div class="field"><label>Subject / Stream</label><input id="edu_sub'+id+'" placeholder="History / PCM / CS" oninput="liveCV()"/></div></div>'
+    + '<div class="row2"><div class="field"><label>College / School / Board</label><input id="edu_col'+id+'" placeholder="Lucknow University / UP Board" oninput="liveCV()"/></div>'
+    + '<div class="field"><label>Year of Passing</label><input id="edu_yr'+id+'" placeholder="2022" oninput="liveCV()"/></div></div>'
+    + '<div class="field"><label>Percentage / Grade</label><input id="edu_pct'+id+'" placeholder="75% / 8.2 CGPA" oninput="liveCV()"/></div>';
+  document.getElementById('eduList').appendChild(div);
+}
+
+function addExp() {
+  var id = ++expCount;
+  expItems.push({id:id});
+  var div = document.createElement('div');
+  div.className = 'exp-item'; div.id = 'exp'+id;
+  div.innerHTML = '<button class="item-remove" onclick="removeItem(\'exp\','+id+')">✕</button>'
+    + '<div class="row2"><div class="field"><label>Job Title</label><input id="exp_title'+id+'" placeholder="Data Entry Operator" oninput="liveCV()"/></div>'
+    + '<div class="field"><label>Organization</label><input id="exp_org'+id+'" placeholder="District Court, Lucknow" oninput="liveCV()"/></div></div>'
+    + '<div class="row2"><div class="field"><label>Duration</label><input id="exp_dur'+id+'" placeholder="Jun 2022 – Present" oninput="liveCV()"/></div>'
+    + '<div class="field"><label>Location</label><input id="exp_loc'+id+'" placeholder="Lucknow, UP" oninput="liveCV()"/></div></div>'
+    + '<div class="field"><label>Key Responsibilities</label><textarea id="exp_desc'+id+'" rows="2" placeholder="Handled data entry, maintained records..." oninput="liveCV()"></textarea></div>';
+  document.getElementById('expList').appendChild(div);
+}
+
+function addAch() {
+  var id = ++achCount;
+  achItems.push({id:id});
+  var div = document.createElement('div');
+  div.className = 'skill-item'; div.id = 'ach'+id;
+  div.innerHTML = '<button class="item-remove" onclick="removeItem(\'ach\','+id+')">✕</button>'
+    + '<div class="row2"><div class="field"><label>Achievement / Certificate</label><input id="ach_title'+id+'" placeholder="NCC \'B\' Certificate / NSS Certificate" oninput="liveCV()"/></div>'
+    + '<div class="field"><label>Year</label><input id="ach_yr'+id+'" placeholder="2021" oninput="liveCV()"/></div></div>';
+  document.getElementById('achList').appendChild(div);
+}
+
+function removeItem(type, id) {
+  var el = document.getElementById(type+id);
+  if (el) el.remove();
+  liveCV();
+}
+
+function gv(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+function buildCV() {
+  var name = gv('cv_name') || 'Your Name';
+  var title = gv('cv_title');
+  var email = gv('cv_email');
+  var phone = gv('cv_phone');
+  var location = gv('cv_location');
+  var dob = gv('cv_dob');
+  var linkedin = gv('cv_linkedin');
+  var idNum = gv('cv_id');
+  var summary = gv('cv_summary');
+  var techSkills = gv('cv_techskills');
+  var langs = gv('cv_langs');
+  var hobbies = gv('cv_hobbies');
+  var declaration = gv('cv_declaration');
+  var place = gv('cv_place');
+  var date = gv('cv_date');
+  var photoHtml = cvPhotoUrl ? '<img src="'+cvPhotoUrl+'" style="width:90px;height:100px;object-fit:cover;border-radius:6px;border:2px solid rgba(255,255,255,0.4);"/>' : '';
+
+  var colors = {
+    classic:{h:'#1A1A2E',a:'#E85D04',l:'#E85D04',sb:'#FFF3EB'},
+    modern:{h:'#1D4ED8',a:'#1D4ED8',l:'#1D4ED8',sb:'#EFF6FF'},
+    sidebar:{h:'#7C3AED',a:'#7C3AED',l:'#7C3AED',sb:'#F5F3FF'},
+    minimal:{h:'#2D2D3A',a:'#2D2D3A',l:'#2D2D3A',sb:'#F7F8FC'},
+    govt:{h:'#059669',a:'#059669',l:'#059669',sb:'#ECFDF5'}
+  };
+  var c = colors[cvTemplate] || colors.classic;
+
+  var contactInfo = [phone,email,location,linkedin,idNum?'ID: '+idNum:''].filter(Boolean).join(' &nbsp;|&nbsp; ');
+
+  // Education section
+  var eduHTML = '';
+  document.querySelectorAll('.edu-item').forEach(function(el) {
+    var id = el.id.replace('edu','');
+    var deg=gv('edu_deg'+id), sub=gv('edu_sub'+id), col=gv('edu_col'+id), yr=gv('edu_yr'+id), pct=gv('edu_pct'+id);
+    if(deg||col) eduHTML += '<tr style="border-bottom:1px solid #F0F2F8;">'
+      + '<td style="padding:7px 10px;font-weight:700;color:#2D2D3A;font-size:12.5px;">'+(deg||'')+(sub?' - '+sub:'')+'</td>'
+      + '<td style="padding:7px 10px;font-size:12.5px;color:#6B7280;">'+(col||'')+'</td>'
+      + '<td style="padding:7px 10px;font-size:12.5px;color:#6B7280;">'+(yr||'')+'</td>'
+      + '<td style="padding:7px 10px;font-size:12.5px;font-weight:700;color:'+c.a+';">'+(pct||'')+'</td>'
+      + '</tr>';
+  });
+
+  // Experience section
+  var expHTML = '';
+  document.querySelectorAll('.exp-item').forEach(function(el) {
+    var id = el.id.replace('exp','');
+    var t=gv('exp_title'+id), o=gv('exp_org'+id), d=gv('exp_dur'+id), l=gv('exp_loc'+id), desc=gv('exp_desc'+id);
+    if(t||o) expHTML += '<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #F0F2F8;">'
+      + '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
+      + '<div><div style="font-weight:700;color:#2D2D3A;font-size:13px;">'+(t||'')+'</div>'
+      + '<div style="font-size:12px;color:'+c.a+';font-weight:600;">'+(o||'')+(l?' · '+l:'')+'</div></div>'
+      + '<div style="font-size:11.5px;color:#6B7280;white-space:nowrap;">'+(d||'')+'</div></div>'
+      + (desc?'<div style="font-size:12px;color:#6B7280;margin-top:5px;line-height:1.6;">'+desc.replace(/\n/g,'<br/>')+'</div>':'')
+      + '</div>';
+  });
+
+  // Achievements
+  var achHTML = '';
+  document.querySelectorAll('.skill-item').forEach(function(el) {
+    var id = el.id.replace('ach','');
+    var t=gv('ach_title'+id), y=gv('ach_yr'+id);
+    if(t) achHTML += '<tr><td style="padding:5px 10px;font-size:12.5px;">▸ '+t+'</td><td style="padding:5px 10px;font-size:12.5px;color:#6B7280;text-align:right;">'+(y||'')+'</td></tr>';
+  });
+
+  function secTitle(t) {
+    return '<div style="background:'+c.sb+';border-left:4px solid '+c.a+';padding:7px 12px;font-size:12px;font-weight:800;color:'+c.l+';letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;">'+t+'</div>';
+  }
+
+  var dobFmt = dob ? new Date(dob).toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}) : '';
+
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"/>'
+    + '<style>body{margin:0;padding:0;font-family:Arial,sans-serif;background:#fff;font-size:13px;}table{width:100%;border-collapse:collapse;}'
+    + '@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;} @page{margin:12mm;}}</style></head><body>'
+    + '<div style="max-width:720px;margin:0 auto;background:#fff;">'
+    // HEADER
+    + '<div style="background:'+c.h+';padding:22px 28px;display:flex;align-items:center;justify-content:space-between;">'
+    + '<div style="flex:1;">'
+    + '<div style="font-size:26px;font-weight:800;color:#fff;font-family:Georgia,serif;margin-bottom:3px;">'+name+'</div>'
+    + (title?'<div style="font-size:14px;color:rgba(255,255,255,0.75);margin-bottom:8px;">'+title+'</div>':'')
+    + '<div style="font-size:11px;color:rgba(255,255,255,0.55);">'+contactInfo+'</div>'
+    + '</div>'
+    + (photoHtml?'<div>'+photoHtml+'</div>':'')
+    + '</div>'
+    // BODY
+    + '<div style="padding:18px 28px;">'
+    + (summary?secTitle('Career Objective / Summary')+'<p style="font-size:12.5px;color:#2D2D3A;line-height:1.7;margin-bottom:14px;">'+summary+'</p>':'')
+    + (eduHTML?secTitle('Education')+'<table style="margin-bottom:14px;"><thead><tr style="background:#F7F8FC;"><th style="padding:7px 10px;font-size:11px;text-align:left;color:#6B7280;font-weight:700;">DEGREE</th><th style="padding:7px 10px;font-size:11px;text-align:left;color:#6B7280;font-weight:700;">INSTITUTION</th><th style="padding:7px 10px;font-size:11px;text-align:left;color:#6B7280;font-weight:700;">YEAR</th><th style="padding:7px 10px;font-size:11px;text-align:left;color:#6B7280;font-weight:700;">MARKS</th></tr></thead><tbody>'+eduHTML+'</tbody></table>':'')
+    + (expHTML?secTitle('Work Experience')+'<div style="margin-bottom:14px;">'+expHTML+'</div>':'')
+    + (techSkills?secTitle('Skills')+'<div style="margin-bottom:14px;"><div style="font-size:12px;color:#2D2D3A;"><strong style="color:'+c.l+';">Technical:</strong> '+techSkills+'</div>'+(langs?'<div style="font-size:12px;color:#2D2D3A;margin-top:4px;"><strong style="color:'+c.l+';">Languages:</strong> '+langs+'</div>':'')+(hobbies?'<div style="font-size:12px;color:#2D2D3A;margin-top:4px;"><strong style="color:'+c.l+';">Hobbies:</strong> '+hobbies+'</div>':'')+'</div>':'')
+    + (achHTML?secTitle('Achievements & Certificates')+'<table style="margin-bottom:14px;"><tbody>'+achHTML+'</tbody></table>':'')
+    + (dobFmt||idNum?secTitle('Personal Information')+'<div style="margin-bottom:14px;display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;">'+(dobFmt?'<div><strong style="color:'+c.l+';">DOB:</strong> '+dobFmt+'</div>':'')+(idNum?'<div><strong style="color:'+c.l+';">ID:</strong> '+idNum+'</div>':'')+'</div>':'')
+    + (declaration?secTitle('Declaration')+'<div style="margin-bottom:12px;font-size:12px;color:#6B7280;line-height:1.7;">'+declaration+'</div><div style="display:flex;justify-content:space-between;font-size:12px;color:#6B7280;margin-top:16px;"><div>'+(place?'Place: '+place:'')+'</div><div>'+(date?'Date: '+new Date(date).toLocaleDateString('en-IN'):'')+'</div><div><strong style="color:#2D2D3A;">('+name+')</strong></div></div>':'')
+    + '</div></div></body></html>';
+}
+
+function liveCV() {
+  var frame = document.getElementById('cvFrame');
+  var html = buildCV();
+  var blob = new Blob([html], {type:'text/html'});
+  frame.src = URL.createObjectURL(blob);
+}
+
+function downloadCV() {
+  var html = buildCV();
+  var win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 800);
+}
+
+window.addEventListener('DOMContentLoaded', function(){
+  addEdu(); addExp();
+  document.getElementById('cv_date').value = new Date().toISOString().split('T')[0];
+  liveCV();
+});
+</script>
+</body>
+</html>

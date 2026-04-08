@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mock Test – OnlyJobs | SSC CGL, RRB NTPC, SBI PO, UPSC CSE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#E85D04;--accent-light:#FFF3EB;--accent-dark:#C44D00;
+  --dark:#1A1A2E;--text:#2D2D3A;--muted:#6B7280;
+  --border:#E8EAF0;--bg:#fff;--bg2:#F7F8FC;--bg3:#F0F2F8;
+  --green:#059669;--green-light:#ECFDF5;
+  --blue:#1D4ED8;--blue-light:#EFF6FF;
+  --purple:#7C3AED;--purple-light:#F5F3FF;
+  --red:#DC2626;--red-light:#FEF2F2;
+  --radius:12px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Figtree',sans-serif;color:var(--text);background:var(--bg3);font-size:15px;line-height:1.6;min-height:100vh;}
+
+/* NAV */
+header{background:#fff;border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:200;}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:14px;height:62px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.logo-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-icon svg{width:20px;height:20px;fill:#fff;}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--dark);}
+.logo-text span{color:var(--accent);}
+nav{display:flex;gap:4px;margin-left:12px;}
+nav a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 11px;border-radius:6px;white-space:nowrap;transition:all .15s;}
+nav a:hover{background:var(--accent-light);color:var(--accent-dark);}
+nav a.act{background:var(--accent);color:#fff;}
+@media(max-width:860px){nav{display:none;}}
+
+/* SCREENS */
+.screen{display:none;}.screen.active{display:block;}
+.page{max-width:1280px;margin:0 auto;padding:24px;}
+
+/* ── SELECTOR ── */
+.hero-band{background:linear-gradient(135deg,#1A1A2E 0%,#2D2D5E 100%);border-radius:18px;padding:36px 40px;margin-bottom:24px;position:relative;overflow:hidden;}
+.hero-band::after{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;background:rgba(255,255,255,0.03);border-radius:50%;}
+.hb-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(253,186,116,.15);border:1px solid rgba(253,186,116,.3);color:#FDBA74;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hb-h1{font-family:'Syne',sans-serif;font-size:clamp(22px,4vw,36px);font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.5px;}
+.hb-h1 span{color:#FDBA74;}
+.hb-p{color:#94A3B8;font-size:14px;max-width:520px;margin-bottom:20px;}
+.hb-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.hb-stat-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#FDBA74;}
+.hb-stat-l{font-size:11px;color:#64748B;}
+
+.exam-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;}
+@media(max-width:640px){.exam-grid{grid-template-columns:1fr;}}
+
+.ecard{background:#fff;border:2px solid var(--border);border-radius:14px;padding:22px;cursor:pointer;transition:all .2s;text-align:left;position:relative;overflow:hidden;}
+.ecard:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,93,4,.1);}
+.ecard.sel{border-color:var(--accent);box-shadow:0 0 0 4px rgba(232,93,4,.1);}
+.ecard-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;}
+.ecard-icon{font-size:36px;}
+.ecard-badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
+.badge{font-size:10px;font-weight:800;padding:2px 9px;border-radius:20px;}
+.badge-free{background:var(--green-light);color:var(--green);}
+.badge-pro{background:var(--purple-light);color:var(--purple);}
+.badge-hot{background:var(--accent-light);color:var(--accent-dark);}
+.ecard-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--dark);margin-bottom:3px;}
+.ecard-full{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.ecard-meta{display:flex;gap:12px;flex-wrap:wrap;}
+.emeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+.emeta-dot{width:6px;height:6px;border-radius:50%;}
+.ecard-subjects{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap;}
+.esub{background:var(--bg2);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;}
+
+.start-wrap{max-width:480px;margin:0 auto 40px;}
+.start-btn{width:100%;padding:16px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;transition:opacity .15s;}
+.start-btn:hover{opacity:.9;}
+.start-btn:disabled{opacity:.45;cursor:not-allowed;}
+.start-hint{text-align:center;font-size:12.5px;color:var(--muted);margin-top:10px;}
+
+/* PLANS */
+.plans-wrap{background:#fff;border-radius:18px;border:1.5px solid var(--border);padding:36px;margin-bottom:24px;}
+.plans-wrap h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--dark);text-align:center;margin-bottom:4px;}
+.plans-wrap>p{text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px;}
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:0 auto;}
+@media(max-width:520px){.plans-grid{grid-template-columns:1fr;}}
+.plan{border:2px solid var(--border);border-radius:14px;padding:24px;position:relative;}
+.plan.featured{border-color:var(--accent);}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#E85D04,#7C3AED);color:#fff;font-size:11px;font-weight:800;padding:3px 16px;border-radius:20px;white-space:nowrap;}
+.plan-n{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--dark);margin-bottom:4px;}
+.plan-p{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--accent);}
+.plan-p span{font-size:14px;font-weight:500;color:var(--muted);}
+.plan-ul{list-style:none;margin:14px 0 18px;display:flex;flex-direction:column;gap:7px;}
+.plan-ul li{font-size:13.5px;display:flex;align-items:center;gap:7px;}
+.plan-ul li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;}
+.plan-ul li.no::before{content:'✕';color:#D1D5DB;}
+.plan-ul li.no{color:#9CA3AF;}
+.plan-cta{width:100%;padding:12px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;border:none;}
+.plan-cta-free{background:var(--bg2);color:var(--dark);}
+.plan-cta-pro{background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;}
+
+/* ── TEST SCREEN ── */
+.test-wrap{display:grid;grid-template-columns:1fr 256px;gap:20px;align-items:start;}
+@media(max-width:900px){.test-wrap{grid-template-columns:1fr;}}
+
+.test-main{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.test-hdr{background:linear-gradient(135deg,#1A1A2E,#2D2D5E);padding:14px 20px;display:flex;align-items:center;gap:14px;}
+.test-exam-lbl{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;flex:1;}
+.test-subj-lbl{font-size:11px;color:#FDBA74;font-weight:700;padding:2px 10px;background:rgba(253,186,116,.15);border-radius:20px;white-space:nowrap;}
+.timer{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:8px;font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#fff;min-width:76px;text-align:center;}
+.timer.warn{background:rgba(220,38,38,.35);border-color:rgba(220,38,38,.5);color:#FCA5A5;animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.55}}
+
+.prog-bar{height:5px;background:var(--bg3);}
+.prog-fill{height:100%;background:linear-gradient(90deg,#E85D04,#7C3AED);transition:width .4s;}
+
+.test-body{padding:26px;}
+.q-info{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.q-num{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.5px;}
+.q-subj-tag{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;}
+.q-text{font-size:16.5px;font-weight:600;color:var(--dark);line-height:1.6;margin-bottom:22px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{display:flex;align-items:center;gap:13px;padding:13px 16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;}
+.opt:hover:not(.done){border-color:var(--accent);background:var(--accent-light);}
+.opt.picked{border-color:var(--accent);background:var(--accent-light);}
+.opt.correct{border-color:var(--green)!important;background:var(--green-light)!important;}
+.opt.wrong{border-color:var(--red)!important;background:var(--red-light)!important;}
+.opt.done{cursor:default;}
+.opt-ltr{width:30px;height:30px;border-radius:7px;background:var(--bg3);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;}
+.opt.picked .opt-ltr{background:var(--accent);color:#fff;}
+.opt.correct .opt-ltr{background:var(--green);color:#fff;}
+.opt.wrong .opt-ltr{background:var(--red);color:#fff;}
+.opt-txt{font-size:14px;color:var(--dark);line-height:1.4;}
+.expl{background:var(--blue-light);border:1px solid #BFDBFE;border-radius:8px;padding:11px 15px;margin-top:14px;font-size:13px;color:#1E40AF;line-height:1.6;display:none;}
+.expl.show{display:block;}
+
+.test-foot{padding:14px 20px;border-top:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.tf-stat{font-size:13px;color:var(--muted);}
+.tf-stat strong{color:var(--dark);}
+.tf-btns{display:flex;gap:8px;}
+.btn-skip{background:#fff;border:1.5px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-skip:hover{border-color:var(--muted);}
+.btn-next{background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;padding:8px 22px;border-radius:8px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;}
+
+/* SIDEBAR */
+.test-side{display:flex;flex-direction:column;gap:14px;}
+.side-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.side-hdr{padding:11px 14px;border-bottom:1px solid var(--border);font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--dark);}
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:12px;}
+.pnum{height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);transition:all .1s;}
+.pnum.ans{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.pnum.skip{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.pnum.cur{background:var(--accent);border-color:var(--accent);color:#fff;}
+.legend{padding:0 12px 12px;display:flex;flex-direction:column;gap:5px;}
+.leg{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--muted);}
+.leg-sq{width:11px;height:11px;border-radius:3px;flex-shrink:0;}
+.side-info{padding:14px;}
+.si-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:5px 0;border-bottom:1px solid var(--bg3);}
+.si-row:last-child{border-bottom:none;}
+.si-lbl{color:var(--muted);}
+.si-val{font-weight:700;color:var(--dark);}
+.btn-submit{width:100%;margin-top:12px;padding:10px;background:var(--red-light);color:var(--red);border:1.5px solid #FECACA;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+
+/* ── RESULT SCREEN ── */
+.result-outer{max-width:780px;margin:0 auto;}
+.result-top{background:linear-gradient(135deg,#1A1A2E,#2D2D5E);border-radius:18px 18px 0 0;padding:32px;text-align:center;}
+.score-ring{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;position:relative;}
+.score-ring-svg{position:absolute;inset:0;transform:rotate(-90deg);}
+.score-ring-num{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#FDBA74;position:relative;z-index:1;}
+.result-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;}
+.result-sub{color:#94A3B8;font-size:13.5px;}
+
+.result-stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);gap:1px;border-radius:0;}
+.rstat{background:#fff;padding:16px 10px;text-align:center;}
+.rstat-n{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;}
+.rstat-l{font-size:11px;color:var(--muted);margin-top:2px;}
+
+.result-body{background:#fff;border:1.5px solid var(--border);border-top:none;border-radius:0 0 18px 18px;padding:24px;}
+
+.subj-analysis{margin-bottom:22px;}
+.sa-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:12px;}
+.sa-rows{display:flex;flex-direction:column;gap:8px;}
+.sa-row{display:grid;grid-template-columns:160px 1fr 80px;align-items:center;gap:12px;font-size:13px;}
+.sa-name{color:var(--dark);font-weight:500;}
+.sa-bar-bg{background:var(--bg3);border-radius:20px;height:8px;overflow:hidden;}
+.sa-bar-fill{height:100%;border-radius:20px;transition:width .6s ease;}
+.sa-pct{font-weight:700;text-align:right;}
+
+.rank-box{background:linear-gradient(135deg,var(--purple-light),var(--accent-light));border:1.5px solid #DDD6FE;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+.rank-n{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;color:var(--purple);}
+
+.lb-section{margin-bottom:20px;}
+.lb-section h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:12px;}
+.lb-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;margin-bottom:6px;background:var(--bg2);font-size:13.5px;}
+.lb-row.me{background:var(--accent-light);border:1.5px solid #FED7AA;}
+.lb-rnk{font-weight:800;width:22px;color:var(--muted);}
+.lb-nm{flex:1;font-weight:500;}
+.lb-sc{font-weight:700;color:var(--green);}
+.lb-tm{font-size:12px;color:var(--muted);margin-left:6px;}
+
+.res-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
+.rb-p{flex:1;padding:13px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+.rb-s{flex:1;padding:13px;background:var(--purple-light);color:var(--purple);border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+
+.upgrade-box{background:linear-gradient(135deg,#1A1A2E,#3730A3);border-radius:14px;padding:22px;text-align:center;}
+.upgrade-box h3{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;}
+.upgrade-box p{font-size:13px;color:#94A3B8;margin-bottom:16px;}
+.upgrade-box a{display:inline-block;background:linear-gradient(135deg,#FDBA74,#F59E0B);color:#1A1A2E;padding:11px 28px;border-radius:8px;font-size:14px;font-weight:800;text-decoration:none;}
+
+/* PAYWALL */
+.pw-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.88);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+.pw-box{background:#fff;border-radius:20px;max-width:420px;width:100%;overflow:hidden;}
+.pw-top{background:linear-gradient(135deg,#1A1A2E,#3730A3);padding:26px;text-align:center;}
+.pw-top h2{font-family:'Syne',sans-serif;font-size:21px;font-weight:800;color:#fff;margin-bottom:6px;}
+.pw-top p{font-size:13px;color:#94A3B8;}
+.pw-body{padding:22px;}
+.pw-price{font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:var(--accent);margin-bottom:4px;}
+.pw-price span{font-size:15px;font-weight:500;color:var(--muted);}
+.pw-feats{list-style:none;margin:14px 0;display:flex;flex-direction:column;gap:7px;}
+.pw-feats li{font-size:13.5px;display:flex;align-items:center;gap:8px;}
+.pw-feats li::before{content:'✓';color:var(--green);font-weight:800;}
+.pw-btn{width:100%;padding:14px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-bottom:10px;}
+.pw-skip{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;font-family:'Figtree',sans-serif;width:100%;padding:6px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-text">Only<span>Jobs</span></span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+<a href="mocktest.html" class="active" style="background:linear-gradient(135deg,#E85D04,#7C3AED);color:#fff;font-weight:700;padding:6px 14px;border-radius:6px;display:flex;align-items:center;gap:5px;">
+  <svg width="13" height="13" fill="#fff" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  Mock Test
+  <span style="background:rgba(255,255,255,0.25);font-size:10px;padding:1px 6px;border-radius:10px;font-weight:800;">FREE</span>
+</a>
+<a href="latestjobs.html">Latest Jobs</a>
+<a href="results.html">Results</a>
+<a href="admitcard.html">Admit Card</a>
+<a href="answerkey.html">Answer Key</a>
+<a href="syllabus.html">Syllabus</a>
+    </nav>
+    <div id="nav-auth" style="margin-left:auto;"></div>
+  </div>
+</header>
+
+<div class="page">
+
+<!-- ══ SCREEN 1: SELECTOR ══ -->
+<div class="screen active" id="s-select">
+  <div class="hero-band">
+    <div class="hb-tag">📝 Complete Syllabus · Real Exam Pattern</div>
+    <div class="hb-h1">100 Questions. <span>Real Exam Feel.</span></div>
+    <p class="hb-p">Full-length mock tests built on the exact syllabus of each exam — with live national rankings and detailed explanations for every question.</p>
+    <div class="hb-stats">
+      <div><div class="hb-stat-n">400+</div><div class="hb-stat-l">Real Questions</div></div>
+      <div><div class="hb-stat-n">4 Exams</div><div class="hb-stat-l">Covered</div></div>
+      <div><div class="hb-stat-n">Live</div><div class="hb-stat-l">National Rank</div></div>
+      <div><div class="hb-stat-n">₹99</div><div class="hb-stat-l">/month full access</div></div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--dark);">Select Your Exam</h2>
+    <span style="font-size:12.5px;color:var(--muted);">SSC CGL &amp; RRB free · SBI PO &amp; UPSC Pro</span>
+  </div>
+
+  <div class="exam-grid">
+    <div class="ecard" data-exam="ssc_cgl" onclick="selectExam(this)">
+      <div class="ecard-top">
+        <div class="ecard-icon">📋</div>
+        <div class="ecard-badges"><span class="badge badge-free">FREE</span><span class="badge badge-hot">POPULAR</span></div>
+      </div>
+      <div class="ecard-name">SSC CGL</div>
+      <div class="ecard-full">Staff Selection Commission – Combined Graduate Level</div>
+      <div class="ecard-meta">
+        <span class="emeta"><span class="emeta-dot" style="background:var(--green);"></span>100 Questions</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--blue);"></span>60 Minutes</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--red);"></span>+2 / −0.5</span>
+      </div>
+      <div class="ecard-subjects">
+        <span class="esub">History</span><span class="esub">Geography</span><span class="esub">Polity</span><span class="esub">Economy</span><span class="esub">Science</span>
+      </div>
+    </div>
+
+    <div class="ecard" data-exam="rrb_ntpc" onclick="selectExam(this)">
+      <div class="ecard-top">
+        <div class="ecard-icon">🚂</div>
+        <div class="ecard-badges"><span class="badge badge-free">FREE</span></div>
+      </div>
+      <div class="ecard-name">RRB NTPC</div>
+      <div class="ecard-full">Railway Recruitment Board – Non-Technical Popular Categories</div>
+      <div class="ecard-meta">
+        <span class="emeta"><span class="emeta-dot" style="background:var(--green);"></span>100 Questions</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--blue);"></span>90 Minutes</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--red);"></span>+1 / −0.33</span>
+      </div>
+      <div class="ecard-subjects">
+        <span class="esub">Railways GK</span><span class="esub">History</span><span class="esub">Science</span><span class="esub">Geography</span>
+      </div>
+    </div>
+
+    <div class="ecard" data-exam="sbi_po" onclick="selectExam(this)">
+      <div class="ecard-top">
+        <div class="ecard-icon">🏦</div>
+        <div class="ecard-badges"><span class="badge badge-pro">PRO</span></div>
+      </div>
+      <div class="ecard-name">SBI PO / IBPS PO</div>
+      <div class="ecard-full">State Bank of India &amp; IBPS – Probationary Officer</div>
+      <div class="ecard-meta">
+        <span class="emeta"><span class="emeta-dot" style="background:var(--green);"></span>100 Questions</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--blue);"></span>60 Minutes</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--red);"></span>+1 / 0</span>
+      </div>
+      <div class="ecard-subjects">
+        <span class="esub">Banking</span><span class="esub">Economy</span><span class="esub">Finance</span><span class="esub">GK</span>
+      </div>
+    </div>
+
+    <div class="ecard" data-exam="upsc_cse" onclick="selectExam(this)">
+      <div class="ecard-top">
+        <div class="ecard-icon">🏛️</div>
+        <div class="ecard-badges"><span class="badge badge-pro">PRO</span><span class="badge" style="background:#FEF2F2;color:#DC2626;">HARD</span></div>
+      </div>
+      <div class="ecard-name">UPSC CSE Prelims</div>
+      <div class="ecard-full">Union Public Service Commission – Civil Services Exam</div>
+      <div class="ecard-meta">
+        <span class="emeta"><span class="emeta-dot" style="background:var(--green);"></span>100 Questions</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--blue);"></span>120 Minutes</span>
+        <span class="emeta"><span class="emeta-dot" style="background:var(--red);"></span>+2 / −0.66</span>
+      </div>
+      <div class="ecard-subjects">
+        <span class="esub">Polity</span><span class="esub">History</span><span class="esub">Geography</span><span class="esub">Environment</span><span class="esub">Economy</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="start-wrap">
+    <button class="start-btn" id="start-btn" onclick="startTest()" disabled>
+      <svg width="18" height="18" fill="#fff" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      Select an Exam First
+    </button>
+    <p class="start-hint">SSC CGL &amp; RRB NTPC are free · SBI PO &amp; UPSC require ₹99/month Pro</p>
+  </div>
+
+  <div class="plans-wrap" id="plans">
+    <h2>Simple Pricing — ₹99/month</h2>
+    <p>Start free with SSC &amp; Railway. Upgrade for Banking &amp; UPSC full access.</p>
+    <div class="plans-grid">
+      <div class="plan">
+        <div class="plan-n">Free</div>
+        <div class="plan-p">₹0 <span>/forever</span></div>
+        <ul class="plan-ul">
+          <li>SSC CGL – 100 Q mock</li>
+          <li>RRB NTPC – 100 Q mock</li>
+          <li>Live national ranking</li>
+          <li>Detailed explanations</li>
+          <li class="no">SBI PO / IBPS PO</li>
+          <li class="no">UPSC CSE Prelims</li>
+          <li class="no">Progress analytics</li>
+        </ul>
+        <button class="plan-cta plan-cta-free" onclick="selectFirstFree()">Start Free</button>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">🔥 Best Value</div>
+        <div class="plan-n">Pro</div>
+        <div class="plan-p">₹99 <span>/month</span></div>
+        <ul class="plan-ul">
+          <li>All 4 exams unlocked</li>
+          <li>100 Qs per mock test</li>
+          <li>Detailed explanations</li>
+          <li>Live national ranking</li>
+          <li>Subject-wise analysis</li>
+          <li>Progress tracking</li>
+          <li>New tests added weekly</li>
+        </ul>
+        <button class="plan-cta plan-cta-pro" onclick="showPaywall()">Get Pro @ ₹99/month</button>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">Cancel anytime · Pay via UPI / Card / NetBanking</p>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: TEST ══ -->
+<div class="screen" id="s-test">
+  <div class="test-wrap">
+    <div>
+      <div class="test-main">
+        <div class="test-hdr">
+          <span class="test-exam-lbl" id="t-exam-lbl">SSC CGL</span>
+          <span class="test-subj-lbl" id="t-subj-lbl">General Awareness</span>
+          <div class="timer" id="timer">60:00</div>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" id="prog" style="width:1%"></div></div>
+        <div class="test-body">
+          <div class="q-info">
+            <span class="q-num" id="q-num">QUESTION 1 OF 100</span>
+            <span class="q-subj-tag" id="q-stag"></span>
+          </div>
+          <div class="q-text" id="q-text">Loading...</div>
+          <div class="opts" id="opts"></div>
+          <div class="expl" id="expl"></div>
+        </div>
+        <div class="test-foot">
+          <div class="tf-stat" id="tf-stat"><strong>0</strong> answered · <strong>0</strong> skipped</div>
+          <div class="tf-btns">
+            <button class="btn-skip" onclick="skip()">Skip →</button>
+            <button class="btn-next" id="btn-next" onclick="next()" disabled>Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-side">
+      <div class="side-card">
+        <div class="side-hdr">Question Palette</div>
+        <div class="palette" id="palette"></div>
+        <div class="legend">
+          <div class="leg"><div class="leg-sq" style="background:var(--green-light);border:1.5px solid var(--green);"></div>Answered</div>
+          <div class="leg"><div class="leg-sq" style="background:var(--red-light);border:1.5px solid var(--red);"></div>Skipped</div>
+          <div class="leg"><div class="leg-sq" style="background:var(--accent);"></div>Current</div>
+        </div>
+      </div>
+      <div class="side-card">
+        <div class="side-hdr">Exam Info</div>
+        <div class="side-info">
+          <div class="si-row"><span class="si-lbl">Total Questions</span><span class="si-val" id="si-total">100</span></div>
+          <div class="si-row"><span class="si-lbl">Marking</span><span class="si-val" id="si-mark">+2 / −0.5</span></div>
+          <div class="si-row"><span class="si-lbl">Max Score</span><span class="si-val" id="si-max">200</span></div>
+          <div class="si-row"><span class="si-lbl">Time Left</span><span class="si-val" id="si-time">60:00</span></div>
+          <button class="btn-submit" onclick="submitTest()">⚑ Submit Test</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: RESULT ══ -->
+<div class="screen" id="s-result">
+  <div class="result-outer">
+    <div class="result-top">
+      <div class="score-ring">
+        <svg class="score-ring-svg" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="48" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/>
+          <circle id="ring-arc" cx="55" cy="55" r="48" fill="none" stroke="#FDBA74" stroke-width="10" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6"/>
+        </svg>
+        <span class="score-ring-num" id="r-pct">0%</span>
+      </div>
+      <div class="result-title" id="r-title">Test Complete!</div>
+      <div class="result-sub" id="r-sub">SSC CGL · General Awareness</div>
+    </div>
+    <div class="result-stats">
+      <div class="rstat"><div class="rstat-n" id="r-cor" style="color:var(--green)">0</div><div class="rstat-l">Correct</div></div>
+      <div class="rstat"><div class="rstat-n" id="r-wrg" style="color:var(--red)">0</div><div class="rstat-l">Wrong</div></div>
+      <div class="rstat"><div class="rstat-n" id="r-skp" style="color:var(--muted)">0</div><div class="rstat-l">Skipped</div></div>
+      <div class="rstat"><div class="rstat-n" id="r-scr" style="color:var(--accent)">0</div><div class="rstat-l">Score</div></div>
+    </div>
+    <div class="result-body">
+      <div class="rank-box">
+        <div style="font-size:36px;">🏆</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--dark);margin-bottom:2px;">Your National Rank</div>
+          <div style="font-size:13px;color:var(--muted);">Among all users who took this test today</div>
+        </div>
+        <div class="rank-n" id="r-rank">#—</div>
+      </div>
+
+      <div class="subj-analysis">
+        <div class="sa-title">Subject-wise Performance</div>
+        <div class="sa-rows" id="sa-rows"></div>
+      </div>
+
+      <div class="lb-section">
+        <h3>Today's Leaderboard</h3>
+        <div class="lb-row"><span class="lb-rnk">🥇</span><span class="lb-nm">Rahul S., Lucknow</span><span class="lb-sc" id="lb1-sc">—</span><span class="lb-tm">48:12</span></div>
+        <div class="lb-row"><span class="lb-rnk">🥈</span><span class="lb-nm">Priya M., Patna</span><span class="lb-sc" id="lb2-sc">—</span><span class="lb-tm">52:04</span></div>
+        <div class="lb-row"><span class="lb-rnk">🥉</span><span class="lb-nm">Amit K., Bhopal</span><span class="lb-sc" id="lb3-sc">—</span><span class="lb-tm">55:30</span></div>
+        <div class="lb-row me"><span class="lb-rnk" id="my-rnk">—</span><span class="lb-nm">You</span><span class="lb-sc" id="my-sc">—</span><span class="lb-tm" id="my-tm">—</span></div>
+      </div>
+
+      <div class="res-btns">
+        <button class="rb-p" onclick="retry()">🔁 Retry This Test</button>
+        <button class="rb-s" onclick="goSelect()">📋 All Exams</button>
+      </div>
+
+      <div class="upgrade-box">
+        <h3>Unlock All 4 Exams — ₹99/month</h3>
+        <p>SBI PO, UPSC CSE, and more. Get full access with detailed progress tracking.</p>
+        <a href="#plans" onclick="goSelect()">Get Pro Access →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<!-- PAYWALL -->
+<div class="pw-overlay" id="pw" onclick="closePW(event)">
+  <div class="pw-box">
+    <div class="pw-top">
+      <div style="font-size:40px;margin-bottom:10px;">🔐</div>
+      <h2>Pro Exam — Unlock Access</h2>
+      <p>This exam is part of the Pro plan. Upgrade to access SBI PO, UPSC &amp; more.</p>
+    </div>
+    <div class="pw-body">
+      <div class="pw-price">₹99 <span>/month</span></div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">≈ ₹3.30/day · Less than a chai ☕</div>
+      <ul class="pw-feats">
+        <li>SBI PO / IBPS PO – 100 Q mock</li>
+        <li>UPSC CSE Prelims – 100 Q mock</li>
+        <li>SSC CGL &amp; RRB NTPC included</li>
+        <li>Live national ranking</li>
+        <li>Detailed subject-wise analysis</li>
+      </ul>
+      <button class="pw-btn">🚀 Subscribe @ ₹99/month</button>
+      <button class="pw-skip" onclick="closePW()">No thanks, I'll continue free</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════
+   EXAM CONFIG
+═══════════════════════════════════════════════════ */
+const EXAMS = {
+  ssc_cgl:  { name:'SSC CGL', label:'General Awareness', time:60, pos:2, neg:0.5, max:200, free:true },
+  rrb_ntpc: { name:'RRB NTPC', label:'General Awareness', time:90, pos:1, neg:0.33, max:100, free:true },
+  sbi_po:   { name:'SBI PO / IBPS PO', label:'General Awareness + Banking', time:60, pos:1, neg:0, max:100, free:false },
+  upsc_cse: { name:'UPSC CSE Prelims', label:'General Studies Paper I', time:120, pos:2, neg:0.66, max:200, free:false }
+};
+
+/* ═══════════════════════════════════════════════════
+   QUESTION BANK  (100 per exam)
+═══════════════════════════════════════════════════ */
+const QB = {};
+
+/* ── SSC CGL ── 100 GK Questions */
+QB.ssc_cgl = [
+  /* HISTORY 1-25 */
+  {s:'History',q:'Who was the first Governor-General of British India?',o:['Lord Dalhousie','Warren Hastings','Lord Cornwallis','Lord William Bentinck'],a:1,e:'Warren Hastings was the first Governor-General of British India (1773–1785). He reformed the administrative and judicial system.'},
+  {s:'History',q:'The Battle of Plassey (1757) was fought between whom?',o:['British vs Marathas','British vs Siraj-ud-Daulah','British vs Hyder Ali','British vs Tipu Sultan'],a:1,e:'The Battle of Plassey (1757) was fought between the British East India Company and Siraj-ud-Daulah, Nawab of Bengal. British victory laid the foundation of British rule in India.'},
+  {s:'History',q:'The Indian National Congress was founded in the year:',o:['1880','1883','1885','1892'],a:2,e:'The Indian National Congress (INC) was founded in 1885 by A.O. Hume, Dadabhai Naoroji, and Dinshaw Wacha. W.C. Bonnerjee was its first president.'},
+  {s:'History',q:'Mahatma Gandhi launched the Non-Cooperation Movement in:',o:['1918','1920','1922','1924'],a:1,e:'The Non-Cooperation Movement was launched by Mahatma Gandhi in September 1920 and was called off in February 1922 after the Chauri Chaura incident.'},
+  {s:'History',q:'The Dandi March was undertaken to protest against:',o:['Land tax','Indigo plantation','Salt tax','Cloth import tax'],a:2,e:'The Dandi March (12 March 1930) was a non-violent civil disobedience movement led by Gandhi against the British salt monopoly and salt tax.'},
+  {s:'History',q:'Who gave the slogan "Jai Hind"?',o:['Mahatma Gandhi','Jawaharlal Nehru','Subhas Chandra Bose','Bhagat Singh'],a:2,e:'"Jai Hind" was the slogan given by Subhas Chandra Bose, who also founded the Azad Hind Fauj (Indian National Army).'},
+  {s:'History',q:'The Jallianwala Bagh massacre took place on:',o:['13 April 1919','13 April 1920','13 March 1919','6 April 1919'],a:0,e:'The Jallianwala Bagh massacre occurred on 13 April 1919 (Baisakhi day) in Amritsar when General Dyer ordered firing on a peaceful gathering.'},
+  {s:'History',q:'Who is known as the "Grand Old Man of India"?',o:['Bal Gangadhar Tilak','Dadabhai Naoroji','Gopal Krishna Gokhale','Bipin Chandra Pal'],a:1,e:'Dadabhai Naoroji (1825–1917) is known as the "Grand Old Man of India." He first presented the Drain of Wealth theory and was the first Indian MP in British Parliament.'},
+  {s:'History',q:'The Quit India Movement was launched in:',o:['1940','1941','1942','1943'],a:2,e:'The Quit India Movement was launched by Mahatma Gandhi on 8 August 1942 at the Bombay session of the All India Congress Committee. The slogan was "Do or Die."'},
+  {s:'History',q:'Akbar\'s land revenue system was called:',o:['Zamindari','Ryotwari','Dahsala/Todar Mal Bandobast','Mahalwari'],a:2,e:'Todar Mal (Akbar\'s finance minister) introduced the Dahsala system (Zabti system), measuring land and fixing revenue based on 10-year average produce.'},
+  {s:'History',q:'Who founded the Brahmo Samaj in 1828?',o:['Swami Vivekananda','Dayananda Saraswati','Raja Ram Mohan Roy','Ishwar Chandra Vidyasagar'],a:2,e:'Raja Ram Mohan Roy founded the Brahmo Samaj in 1828 in Calcutta to reform Hindu society. He campaigned against Sati, caste discrimination, and child marriage.'},
+  {s:'History',q:'The first Indian war of Independence was fought in:',o:['1847','1857','1865','1875'],a:1,e:'The Revolt of 1857 (First War of Indian Independence / Sepoy Mutiny) began at Meerut on 10 May 1857. Mangal Pandey fired the first shot at Barrackpore.'},
+  {s:'History',q:'Simon Commission was boycotted by Indians because:',o:['It recommended partition','It had no Indian member','It abolished Indian Civil Service','It imposed heavy taxes'],a:1,e:'The Simon Commission (1927) was boycotted by the Indian National Congress and other parties because it had no Indian member. Indians greeted it with "Go Back Simon" slogans.'},
+  {s:'History',q:'The author of "Anandmath" which contains Vande Mataram is:',o:['Rabindranath Tagore','Bankim Chandra Chatterjee','Munshi Premchand','Subramaniam Bharati'],a:1,e:'"Anandmath" (1882) was written by Bankim Chandra Chatterjee. It contains the song Vande Mataram, which became a national song of India.'},
+  {s:'History',q:'Who was the Viceroy of India at the time of Independence?',o:['Lord Wavell','Lord Linlithgow','Lord Mountbatten','Lord Irwin'],a:2,e:'Lord Louis Mountbatten was the last Viceroy of India. He oversaw the transfer of power on 14–15 August 1947 and became the first Governor-General of independent India.'},
+  {s:'History',q:'Chandragupta Maurya founded the Maurya Empire with the help of:',o:['Patanjali','Chanakya (Kautilya)','Ashvaghosha','Vishakhadatta'],a:1,e:'Chanakya (also known as Kautilya or Vishnugupta), a Brahmin scholar and strategist, helped Chandragupta Maurya overthrow the Nanda dynasty and establish the Maurya Empire (~321 BCE).'},
+  {s:'History',q:'The partition of Bengal was done by Lord Curzon in:',o:['1903','1905','1907','1911'],a:1,e:'Lord Curzon partitioned Bengal in 1905 on administrative grounds (dividing into East Bengal & Assam and West Bengal), which led to the Swadeshi Movement.'},
+  {s:'History',q:'Champaran Satyagraha (1917) was against:',o:['Salt tax','Indigo plantation system','Land revenue','Cattle tax'],a:1,e:'The Champaran Satyagraha (1917) in Bihar was Gandhi\'s first civil disobedience in India, against the tinkathia system forcing farmers to cultivate indigo on 3/20 of their land.'},
+  {s:'History',q:'The Rowlatt Act was passed in:',o:['1917','1918','1919','1920'],a:2,e:'The Rowlatt Act (1919) allowed the British government to detain anyone suspected of terrorism without trial. It was strongly opposed by Indian leaders.'},
+  {s:'History',q:'The last Mughal Emperor was:',o:['Aurangzeb','Shah Alam II','Akbar II','Bahadur Shah Zafar II'],a:3,e:'Bahadur Shah Zafar II (1775–1862) was the last Mughal Emperor. He was exiled to Rangoon (Myanmar) by the British after the Revolt of 1857.'},
+  {s:'History',q:'Nalanda University was founded by which Gupta ruler?',o:['Chandragupta I','Samudragupta','Kumaragupta I','Skandagupta'],a:2,e:'Nalanda University (Bihar) was established by Kumaragupta I (~415-455 CE) of the Gupta dynasty. It was a major centre of Buddhist learning.'},
+  {s:'History',q:'The Khilafat Movement was launched in support of:',o:['Ottoman Caliph','Indian Muslims in general','Partition of India','Muslim League demands'],a:0,e:'The Khilafat Movement (1919–1922) was launched by Ali brothers (Mohammad Ali and Shaukat Ali) to protest against the Allied treatment of the Ottoman Caliphate after WWI.'},
+  {s:'History',q:'Who wrote "Gitanjali" which earned the Nobel Prize in Literature (1913)?',o:['Bankim Chandra','Sarat Chandra','Rabindranath Tagore','Subramaniam Bharati'],a:2,e:'Rabindranath Tagore won the Nobel Prize in Literature in 1913 for "Gitanjali" (Song Offerings). He was the first Asian to win a Nobel Prize.'},
+  {s:'History',q:'Permanent Settlement was introduced by:',o:['Lord Cornwallis','Lord Wellesley','Lord Dalhousie','Lord Curzon'],a:0,e:'Permanent Settlement of Bengal was introduced by Lord Cornwallis in 1793. It fixed the land revenue permanently and created a class of zamindars (landlords).'},
+  {s:'History',q:'The Indian Independence Act was passed in the British Parliament in:',o:['June 1947','July 1947','August 1947','September 1947'],a:1,e:'The Indian Independence Act was passed by the British Parliament on 18 July 1947, providing for the creation of India and Pakistan as independent dominions from 15 August 1947.'},
+  /* GEOGRAPHY 26-45 */
+  {s:'Geography',q:'Which state has the longest coastline in India?',o:['Tamil Nadu','Maharashtra','Andhra Pradesh','Gujarat'],a:3,e:'Gujarat has the longest coastline in India at approximately 1,600 km (including islands ~1,214 km mainland). It borders the Arabian Sea.'},
+  {s:'Geography',q:'The Brahmaputra river is known as in Tibet:',o:['Padma','Jamuna','Tsangpo','Meghna'],a:2,e:'The Brahmaputra river is called Yarlung Tsangpo (Tsangpo) in Tibet. It enters India through Arunachal Pradesh and is called Brahmaputra in Assam.'},
+  {s:'Geography',q:'Loktak Lake, the largest freshwater lake in Northeast India, is in:',o:['Assam','Meghalaya','Manipur','Mizoram'],a:2,e:'Loktak Lake is located in Manipur and is famous for the phumdis (floating islands), one of which is the Keibul Lamjao National Park.'},
+  {s:'Geography',q:'The Tropic of Cancer passes through how many Indian states?',o:['6','7','8','9'],a:2,e:'The Tropic of Cancer (23.5°N) passes through 8 Indian states: Gujarat, Rajasthan, MP, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram.'},
+  {s:'Geography',q:'Which soil is best suited for cotton cultivation in India?',o:['Alluvial soil','Red soil','Black (Regur) soil','Laterite soil'],a:2,e:'Black cotton soil (Regur) has high moisture retention capacity and is rich in calcium, magnesium, and lime — ideal for cotton cultivation in the Deccan Plateau.'},
+  {s:'Geography',q:'The Sundarbans delta is formed by which rivers?',o:['Ganga and Yamuna','Ganga and Brahmaputra','Brahmaputra and Meghna','Ganga and Godavari'],a:1,e:'The Sundarbans delta is formed by the Ganga and Brahmaputra rivers at the Bay of Bengal. It is the largest delta in the world and is shared between India and Bangladesh.'},
+  {s:'Geography',q:'Chilika Lake (the largest coastal lagoon in India) is in:',o:['Andhra Pradesh','Odisha','West Bengal','Tamil Nadu'],a:1,e:'Chilika Lake is located in Odisha near the Bay of Bengal. It is India\'s largest coastal lagoon and a Ramsar wetland site, famous for Irrawaddy dolphins and migratory birds.'},
+  {s:'Geography',q:'The Nathu La Pass connects India with:',o:['Nepal','Bhutan','China (Tibet)','Myanmar'],a:2,e:'Nathu La Pass (4,310 m) in Sikkim connects India with the Tibet Autonomous Region of China. It was a major trade route on the ancient Silk Road.'},
+  {s:'Geography',q:'Which Indian state receives the highest rainfall?',o:['Assam','Kerala','Meghalaya','Arunachal Pradesh'],a:2,e:'Meghalaya receives the highest rainfall in India. Mawsynram (and previously Cherrapunji) in Meghalaya holds the record for the world\'s highest rainfall.'},
+  {s:'Geography',q:'The Siachen Glacier is located in which mountain range?',o:['Himalayas','Karakoram','Hindukush','Zanskar'],a:1,e:'Siachen Glacier is located in the Karakoram range, controlled by India. It is the world\'s second-longest non-polar glacier and is strategically important.'},
+  {s:'Geography',q:'The Western Ghats are also known as:',o:['Purvanchal','Sahyadri','Aravalli','Vindhya'],a:1,e:'The Western Ghats are known as Sahyadri. They run parallel to the western coast of India for about 1,600 km, covering Maharashtra, Goa, Karnataka, Kerala, and Tamil Nadu.'},
+  {s:'Geography',q:'Which river originates from Amarkantak hills?',o:['Godavari','Son and Narmada','Mahanadi','Tapti'],a:1,e:'Both the Narmada and Son rivers originate from Amarkantak (MP). Narmada flows west into the Arabian Sea, while Son flows north-east to join the Ganga.'},
+  {s:'Geography',q:'Wular Lake, the largest freshwater lake in India, is located in:',o:['Uttarakhand','Himachal Pradesh','Jammu & Kashmir','Ladakh'],a:2,e:'Wular Lake in Jammu & Kashmir (Bandipora district) is the largest freshwater lake in India, formed by tectonic activity and fed by the Jhelum river.'},
+  {s:'Geography',q:'The Palk Strait separates India from:',o:['Myanmar','Sri Lanka','Maldives','Indonesia'],a:1,e:'Palk Strait separates India (Tamil Nadu) from Sri Lanka. It is about 53–80 km wide and connects the Bay of Bengal and the Gulf of Mannar.'},
+  {s:'Geography',q:'Which is the highest peak in India?',o:['Mount Everest','K2','Kangchenjunga','Nanda Devi'],a:2,e:'Kangchenjunga (8,586 m) is the highest peak located in India (Sikkim-Nepal border). K2 (8,611 m) is higher but lies in Pakistan-administered territory.'},
+  {s:'Geography',q:'The Deccan Plateau is bounded by which two mountain ranges?',o:['Aravalli and Vindhya','Eastern and Western Ghats','Himalayas and Satpura','Nilgiri and Cardamom Hills'],a:1,e:'The Deccan Plateau is bounded by the Western Ghats (on the west) and Eastern Ghats (on the east), forming a triangular plateau covering most of peninsular India.'},
+  {s:'Geography',q:'Project Tiger was first launched at which national park?',o:['Kanha','Ranthambore','Jim Corbett','Sariska'],a:2,e:'Project Tiger was launched on 1 April 1973 at Jim Corbett National Park, Uttarakhand. It is India\'s most successful wildlife conservation program.'},
+  {s:'Geography',q:'Which Indian state is the largest producer of tea?',o:['West Bengal','Kerala','Karnataka','Assam'],a:3,e:'Assam is the largest producer of tea in India, accounting for about 52% of total tea production. Assam tea is known for its strong, malty flavor.'},
+  {s:'Geography',q:'The Thar Desert is located mainly in which Indian state?',o:['Gujarat','Rajasthan','Haryana','Punjab'],a:1,e:'The Thar Desert (Great Indian Desert) is mainly in Rajasthan and extends into parts of Gujarat, Punjab, and Haryana. It is the world\'s 9th largest subtropical desert.'},
+  {s:'Geography',q:'Western Disturbances bring rainfall to which region of India?',o:['Southern India in summer','North-Western India in winter','Eastern India in monsoon','Central India in spring'],a:1,e:'Western Disturbances are extra-tropical cyclonic storms that bring winter rainfall to north-western India (Punjab, Himachal Pradesh, J&K) and snowfall to the Himalayas.'},
+  /* POLITY 46-65 */
+  {s:'Polity',q:'The Indian Constitution was adopted on:',o:['15 August 1947','26 January 1950','26 November 1949','15 August 1950'],a:2,e:'The Indian Constitution was adopted by the Constituent Assembly on 26 November 1949 (Constitution Day). It came into effect on 26 January 1950 (Republic Day).'},
+  {s:'Polity',q:'The Preamble of the Indian Constitution was amended by which Amendment?',o:['40th Amendment','42nd Amendment','44th Amendment','52nd Amendment'],a:1,e:'The 42nd Constitutional Amendment (1976) added "Socialist," "Secular," and "Integrity" to the Preamble.'},
+  {s:'Polity',q:'Article 32 of the Indian Constitution deals with:',o:['Right to Equality','Right to Freedom','Right to Constitutional Remedies','Cultural & Educational Rights'],a:2,e:'Article 32 provides the Right to Constitutional Remedies — the right to move the Supreme Court to enforce Fundamental Rights. Dr. Ambedkar called it the "Heart and Soul" of the Constitution.'},
+  {s:'Polity',q:'The Directive Principles of State Policy (DPSP) were borrowed from the Constitution of:',o:['USA','UK','Australia','Ireland'],a:3,e:'The Directive Principles of State Policy were borrowed from the Irish Constitution (1937), which in turn drew from the Spanish Constitution.'},
+  {s:'Polity',q:'Which Schedule of the Constitution contains the anti-defection law?',o:['7th Schedule','8th Schedule','9th Schedule','10th Schedule'],a:3,e:'The 10th Schedule (added by 52nd Amendment, 1985) contains the anti-defection law, which disqualifies legislators who voluntarily give up party membership or vote against party directions.'},
+  {s:'Polity',q:'The concept of Judicial Review was borrowed from:',o:['UK','USA','Canada','Australia'],a:1,e:'Judicial Review — the power of courts to declare any law unconstitutional — was borrowed from the USA. It ensures laws comply with the Constitution.'},
+  {s:'Polity',q:'Right to Education (Article 21A) makes education free and compulsory for children aged:',o:['5-12 years','6-14 years','5-16 years','6-18 years'],a:1,e:'Article 21A (added by 86th Amendment, 2002) makes education a Fundamental Right for children aged 6 to 14 years. The RTE Act was enacted in 2009.'},
+  {s:'Polity',q:'National Emergency under Article 352 can be declared on grounds of:',o:['Financial instability only','Armed rebellion only','War, external aggression, or armed rebellion','State misgovernance'],a:2,e:'National Emergency under Article 352 can be proclaimed on grounds of war, external aggression, or armed rebellion (originally "internal disturbance" — changed by 44th Amendment).'},
+  {s:'Polity',q:'Which article of the Constitution deals with its amendment?',o:['Article 348','Article 356','Article 360','Article 368'],a:3,e:'Article 368 deals with the power of Parliament to amend the Constitution. The Constitution can be amended by simple majority, special majority, or special majority with state ratification.'},
+  {s:'Polity',q:'The Finance Commission is constituted under which Article?',o:['Article 264','Article 275','Article 280','Article 360'],a:2,e:'Article 280 provides for the Finance Commission, constituted every 5 years by the President to recommend distribution of taxes between Centre and States.'},
+  {s:'Polity',q:'The Kesavananda Bharati case (1973) established which doctrine?',o:['Separation of Powers','Basic Structure Doctrine','Doctrine of Pleasure','Doctrine of Repugnancy'],a:1,e:'Kesavananda Bharati vs State of Kerala (1973) — the Supreme Court held that Parliament cannot amend the basic structure of the Constitution. This is the landmark Basic Structure Doctrine.'},
+  {s:'Polity',q:'The Election Commission of India is established under which Article?',o:['Article 315','Article 320','Article 324','Article 330'],a:2,e:'Article 324 establishes the Election Commission of India to superintend, direct, and control elections to Parliament, State Legislatures, and offices of President and Vice-President.'},
+  {s:'Polity',q:'Zero Hour in the Indian Parliament begins at:',o:['10:00 AM','11:00 AM','12:00 Noon','2:00 PM'],a:2,e:'Zero Hour begins at 12 noon in Parliament. It is an Indian parliamentary innovation (not mentioned in rules) where members can raise matters of urgent public importance.'},
+  {s:'Polity',q:'The 8th Schedule of the Indian Constitution contains:',o:['Central-State relations','List of Union Territories','List of scheduled castes','List of recognized languages'],a:3,e:'The 8th Schedule lists 22 officially recognized languages of India. Originally 14 languages, languages have been added by amendments. Sindhi was added by 21st Amendment.'},
+  {s:'Polity',q:'Who appoints the Comptroller and Auditor General (CAG) of India?',o:['Prime Minister','Parliament','President of India','Chief Justice of India'],a:2,e:'The CAG of India is appointed by the President under Article 148. CAG audits the accounts of the Union and State Governments and is a constitutional authority.'},
+  {s:'Polity',q:'The National Human Rights Commission was established in:',o:['1990','1991','1993','1995'],a:2,e:'The National Human Rights Commission (NHRC) was established in 1993 under the Protection of Human Rights Act, 1993. Its first chairman was Justice Ranganath Misra.'},
+  {s:'Polity',q:'Concurrent List contains subjects on which:',o:['Only Centre can legislate','Only States can legislate','Both Centre and States can legislate','None of the above'],a:2,e:'The Concurrent List (List III, 7th Schedule) contains 52 subjects on which both Parliament and State Legislatures can make laws. In case of conflict, central law prevails.'},
+  {s:'Polity',q:'Which article of the Indian Constitution abolishes untouchability?',o:['Article 14','Article 15','Article 16','Article 17'],a:3,e:'Article 17 abolishes untouchability and its practice in any form is forbidden. The Untouchability Offences Act (1955) — later renamed Protection of Civil Rights Act (1976) — was enacted under it.'},
+  {s:'Polity',q:'The concept of Parliamentary system in India was borrowed from:',o:['USA','USSR','UK','Australia'],a:2,e:'India borrowed the Parliamentary system (responsible government, Prime Minister\'s role, collective responsibility) from the UK (Westminster model).'},
+  {s:'Polity',q:'The Public Accounts Committee of Parliament examines:',o:['Budget proposals','Expenditure already incurred','Policy decisions','Appointment of officials'],a:1,e:'The Public Accounts Committee (PAC) examines the audit reports of the CAG, checks that money was spent for the purpose it was sanctioned. Chaired by the Leader of Opposition.'},
+  /* ECONOMY 66-75 */
+  {s:'Economy',q:'NITI Aayog replaced which body in 2015?',o:['Finance Commission','Planning Commission','Economic Advisory Council','National Development Council'],a:1,e:'NITI Aayog (National Institution for Transforming India) replaced the Planning Commission on 1 January 2015. It was established to promote cooperative federalism.'},
+  {s:'Economy',q:'India\'s first Five Year Plan (1951-56) focused on:',o:['Industrialisation','Agriculture and irrigation','Infrastructure','Services sector'],a:1,e:'The First Five Year Plan (1951–56) was based on the Harrod-Domar model and focused on agriculture and irrigation to rehabilitate the economy after Partition.'},
+  {s:'Economy',q:'The Green Revolution in India is primarily associated with which crop?',o:['Rice and Wheat','Pulses','Cotton','Oilseeds'],a:0,e:'The Green Revolution (1960s) introduced High Yielding Variety (HYV) seeds for wheat and rice. M.S. Swaminathan is called the Father of the Green Revolution in India.'},
+  {s:'Economy',q:'SEBI (Securities and Exchange Board of India) was established in:',o:['1988 (statutory powers in 1992)','1991','1992 only','1995'],a:0,e:'SEBI was established in 1988 as a non-statutory body. It was given statutory powers through the SEBI Act, 1992. It regulates and develops the securities market.'},
+  {s:'Economy',q:'The Human Development Report is published by:',o:['World Bank','IMF','UNDP','WTO'],a:2,e:'The Human Development Report is published annually by the United Nations Development Programme (UNDP). The HDI measures life expectancy, education, and per-capita income.'},
+  {s:'Economy',q:'Which bank is called the "Banker\'s Bank" in India?',o:['State Bank of India','Punjab National Bank','Reserve Bank of India','NABARD'],a:2,e:'Reserve Bank of India (RBI) is called the "Banker\'s Bank" as it maintains accounts of all commercial banks, provides emergency loans, and regulates monetary policy.'},
+  {s:'Economy',q:'The term "Stagflation" refers to:',o:['Rapid economic growth with deflation','High inflation with economic stagnation','High growth with high employment','Deflation with high GDP'],a:1,e:'Stagflation is the combination of stagnant economic growth, high unemployment, and high inflation occurring simultaneously — a paradox in traditional economic theory.'},
+  {s:'Economy',q:'India\'s GDP is measured at which prices for official purposes?',o:['Current prices only','Constant (base year) prices','Both are used','Market prices only'],a:2,e:'India\'s GDP is measured at both current prices (nominal GDP) and constant prices (real GDP, with 2011-12 as base year). Real GDP removes the effect of inflation.'},
+  {s:'Economy',q:'The headquarters of the World Trade Organization (WTO) is in:',o:['New York','Washington DC','Geneva','Vienna'],a:2,e:'WTO headquarters is in Geneva, Switzerland. It was established on 1 January 1995 (replacing GATT). India is a founding member.'},
+  {s:'Economy',q:'National income is measured by which of the following methods?',o:['Product method only','Income method only','Expenditure method only','All of the above'],a:3,e:'National income can be measured using three equivalent methods: Product/Output method, Income method, and Expenditure method. In India, CSO (now MoSPI) estimates national income.'},
+  /* SCIENCE 76-90 */
+  {s:'Science',q:'The SI unit of electric current is:',o:['Volt','Ampere','Ohm','Watt'],a:1,e:'Ampere (A) is the SI unit of electric current. It measures the rate of flow of electric charge. Named after André-Marie Ampère.'},
+  {s:'Science',q:'Which vitamin is produced by the human skin on exposure to sunlight?',o:['Vitamin A','Vitamin B12','Vitamin C','Vitamin D'],a:3,e:'Vitamin D (calciferol) is synthesized in human skin when exposed to UV-B radiation from sunlight. Deficiency causes rickets (in children) and osteomalacia (in adults).'},
+  {s:'Science',q:'The chemical formula of common salt is:',o:['NaOH','NaCl','Na2SO4','NaHCO3'],a:1,e:'Common salt is Sodium Chloride (NaCl). It is formed by the reaction of hydrochloric acid (HCl) and sodium hydroxide (NaOH).'},
+  {s:'Science',q:'DNA stands for:',o:['Deoxyribonucleic Acid','Diribonucleic Acid','Deoxyribose Nucleotide Acid','Double Nucleotide Acid'],a:0,e:'DNA (Deoxyribonucleic Acid) is the hereditary material in humans and almost all other organisms. Its double helix structure was discovered by Watson and Crick in 1953.'},
+  {s:'Science',q:'Which gas is known as "Laughing Gas"?',o:['Nitrogen Oxide (NO)','Nitrous Oxide (N2O)','Carbon Dioxide (CO2)','Chlorine (Cl2)'],a:1,e:'Nitrous oxide (N2O) is called laughing gas because inhaling it induces euphoria and laughter. It is also used as an anesthetic in dentistry.'},
+  {s:'Science',q:'The process by which solid directly converts to gas is called:',o:['Evaporation','Condensation','Sublimation','Vaporisation'],a:2,e:'Sublimation is the process of direct conversion from solid to gas without passing through liquid state. Example: dry ice (solid CO2), iodine, camphor, and naphthalene balls.'},
+  {s:'Science',q:'Which organ in the human body produces insulin?',o:['Liver','Kidney','Pancreas','Thyroid'],a:2,e:'Insulin is produced by beta cells of the Islets of Langerhans in the pancreas. Insulin regulates blood glucose levels. Deficiency leads to diabetes mellitus.'},
+  {s:'Science',q:'What is the pH of pure water?',o:['5','6','7','8'],a:2,e:'Pure water has a pH of 7 (neutral). pH below 7 is acidic, above 7 is basic (alkaline). pH is measured on a scale of 0-14.'},
+  {s:'Science',q:'Which blood group is known as Universal Donor?',o:['A negative','B negative','AB positive','O negative'],a:3,e:'O negative (O-) is the universal donor blood group as its red blood cells lack A, B, and Rh antigens, making it compatible with all blood types. O positive is most common in India.'},
+  {s:'Science',q:'Photosynthesis takes place in which cell organelle?',o:['Mitochondria','Nucleus','Chloroplast','Ribosome'],a:2,e:'Photosynthesis occurs in chloroplasts, which contain chlorophyll pigment. Equation: 6CO2 + 6H2O + light energy → C6H12O6 + 6O2. Mitochondria is the powerhouse (ATP synthesis).'},
+  {s:'Science',q:'The mirror used in vehicle rear-view mirrors is:',o:['Plane mirror','Concave mirror','Convex mirror','Plano-convex mirror'],a:2,e:'Convex mirrors are used as rear-view mirrors in vehicles because they give a wider field of view (image is smaller but upright and covers a larger area).'},
+  {s:'Science',q:'Which planet in our Solar System has the most moons?',o:['Jupiter','Saturn','Uranus','Neptune'],a:1,e:'Saturn has the most moons with 146 confirmed moons (as of 2023), overtaking Jupiter\'s 95 moons. Titan is Saturn\'s largest moon with a thick atmosphere.'},
+  {s:'Science',q:'The atomic number of Carbon is:',o:['4','6','8','12'],a:1,e:'Carbon (C) has atomic number 6, meaning 6 protons. Its atomic mass is 12 (most common isotope). Carbon is the basis of all organic life.'},
+  {s:'Science',q:'Newton\'s Third Law of Motion states:',o:['F=ma','Objects at rest stay at rest','Every action has equal and opposite reaction','Energy is conserved'],a:2,e:'Newton\'s Third Law: For every action, there is an equal and opposite reaction. Example: rocket propulsion, swimming, walking.'},
+  {s:'Science',q:'Which is the hardest natural substance?',o:['Iron','Platinum','Diamond','Quartz'],a:2,e:'Diamond is the hardest natural substance, with a Mohs hardness of 10. It is a form of carbon arranged in a tetrahedral crystal structure.'},
+  /* GENERAL 91-100 */
+  {s:'General',q:'Chandrayaan-3 successfully landed on the Moon\'s south pole in:',o:['July 2023','August 2023','September 2023','October 2023'],a:1,e:'Chandrayaan-3\'s Vikram lander successfully landed near the Moon\'s south pole on 23 August 2023, making India the 4th country to land on the Moon and the first to land near the south pole.'},
+  {s:'General',q:'The headquarters of ISRO is located in:',o:['Mumbai','New Delhi','Bengaluru','Hyderabad'],a:2,e:'Indian Space Research Organisation (ISRO) is headquartered in Bengaluru, Karnataka. It was founded in 1969 by Dr. Vikram Sarabhai.'},
+  {s:'General',q:'National Sports Day of India is celebrated on:',o:['29 July','29 August','9 September','15 October'],a:1,e:'National Sports Day is celebrated on 29 August, the birth anniversary of hockey legend Major Dhyan Chand. The Rajiv Gandhi Khel Ratna (now Major Dhyan Chand Khel Ratna) is awarded on this day.'},
+  {s:'General',q:'The first Indian to win a Nobel Prize was:',o:['C.V. Raman','Amartya Sen','Rabindranath Tagore','Mother Teresa'],a:2,e:'Rabindranath Tagore was the first Indian to win a Nobel Prize in 1913 for Literature (Gitanjali). C.V. Raman won it in 1930 for Physics (Raman Effect).'},
+  {s:'General',q:'The Durand Cup is associated with which sport?',o:['Cricket','Hockey','Football','Badminton'],a:2,e:'The Durand Cup is one of the oldest football tournaments in the world, established in 1888 by Sir Mortimer Durand. It is held in India and is the third oldest football tournament globally.'},
+  {s:'General',q:'The Padma Vibhushan is the __ highest civilian award of India.',o:['First','Second','Third','Fourth'],a:1,e:'Padma Vibhushan is the second highest civilian honor in India after Bharat Ratna. The three Padma awards in order are: Padma Vibhushan, Padma Bhushan, Padma Shri.'},
+  {s:'General',q:'India\'s first Chief Election Commissioner was:',o:['T.N. Seshan','S.P. Sen Verma','Sukumar Sen','K.V.K. Sundaram'],a:2,e:'Sukumar Sen was India\'s first Chief Election Commissioner (1950–1958). He successfully conducted the first two general elections (1951-52 and 1957).'},
+  {s:'General',q:'The 2024 Summer Olympics were held in:',o:['Tokyo','London','Los Angeles','Paris'],a:3,e:'The 2024 Summer Olympics were held in Paris, France (26 July – 11 August 2024). India won 6 medals including 1 silver and 5 bronze.'},
+  {s:'General',q:'Which Indian cricketer has the most international centuries?',o:['Virat Kohli','Ricky Ponting','Sachin Tendulkar','Rohit Sharma'],a:2,e:'Sachin Tendulkar holds the record for most international centuries with 100 centuries (51 in Tests, 49 in ODIs) — a record unlikely to be broken soon.'},
+  {s:'General',q:'The G20 Summit 2023 was hosted by:',o:['China','Japan','Brazil','India'],a:3,e:'India hosted the G20 Summit in New Delhi on 9–10 September 2023 under the theme "Vasudhaiva Kutumbakam" (One Earth, One Family, One Future). 83 countries participated.'}
+];
+
+/* ── RRB NTPC ── 100 GK Questions */
+QB.rrb_ntpc = [
+  {s:'Railway GK',q:'Indian Railways was nationalized in which year?',o:['1947','1950','1951','1952'],a:2,e:'Indian Railways was nationalized in 1951. Prior to this, there were multiple private and state-owned railway companies operating separately.'},
+  {s:'Railway GK',q:'The first railway in India ran between:',o:['Delhi–Agra','Bombay (Bori Bunder)–Thane','Calcutta–Howrah','Madras–Arkonam'],a:1,e:'India\'s first railway ran 34 km between Bombay (Bori Bunder, now CSMT) and Thane on 16 April 1853, operated by Great Indian Peninsula Railway.'},
+  {s:'Railway GK',q:'The Vande Bharat Express was indigenously designed and built under which initiative?',o:['Digital India','Make in India','Skill India','Startup India'],a:1,e:'Vande Bharat Express (Train 18) was designed and manufactured by Integral Coach Factory (ICF) Chennai under the Make in India initiative. First run: Feb 2019.'},
+  {s:'Railway GK',q:'The broad gauge used by Indian Railways measures:',o:['1000 mm','1435 mm','1676 mm','762 mm'],a:2,e:'Indian Railways uses Broad Gauge (BG) of 1676 mm (5 ft 6 in), wider than the standard international gauge (1435 mm). About 86% of Indian rail network is broad gauge.'},
+  {s:'Railway GK',q:'IRCTC stands for:',o:['Indian Rail Catering and Tourism Corporation','Indian Railway Central Ticket Corporation','Indian Rail Commerce and Transport Corporation','Indian Railway Catering and Travel Centre'],a:0,e:'IRCTC (Indian Railway Catering and Tourism Corporation) is a subsidiary of Indian Railways that handles online ticketing, catering, and tourism services.'},
+  {s:'Railway GK',q:'The Rajdhani Express first ran between:',o:['Mumbai–Delhi','Delhi–Howrah','Delhi–Chennai','Mumbai–Kolkata'],a:1,e:'The first Rajdhani Express ran between New Delhi and Howrah (Kolkata) on 3 March 1969, covering ~1,450 km at 120 km/h — faster than any train at that time.'},
+  {s:'Railway GK',q:'Railway zone with headquarters in Mumbai (CST) is:',o:['Western Railway','Central Railway','South Central Railway','Konkan Railway'],a:1,e:'Central Railway has its headquarters at Chhatrapati Shivaji Maharaj Terminus (CSMT), Mumbai. Western Railway\'s HQ is at Churchgate, also in Mumbai.'},
+  {s:'Railway GK',q:'The Konkan Railway connects:',o:['Mumbai to Goa','Roha to Thokur (Mangaluru)','Pune to Kochi','Mumbai to Thiruvananthapuram'],a:1,e:'Konkan Railway (741 km) connects Roha (Maharashtra) to Thokur near Mangaluru (Karnataka), passing through Goa. It has numerous tunnels and bridges built along the rugged Western Ghats.'},
+  {s:'Railway GK',q:'Which is the longest railway platform in India?',o:['Gorakhpur','Kharagpur','Hubballi','Srirampur'],a:0,e:'Gorakhpur (Uttar Pradesh) has the world\'s longest railway platform at 1,366.33 metres, surpassing Kharagpur (1,072 m) after extension in 2013.'},
+  {s:'Railway GK',q:'The Dedicated Freight Corridor (Eastern DFC) runs between:',o:['Delhi–Mumbai','Ludhiana/Dankuni–Mumbai','Ludhiana–Dankuni (near Kolkata)','Delhi–Kolkata'],a:2,e:'Eastern DFC runs 1,856 km from Sahnewal (Ludhiana) to Dankuni (near Kolkata). Western DFC runs from Rewari (near Delhi) to Jawaharlal Nehru Port (Mumbai).'},
+  {s:'History',q:'The foundation of the Maurya Empire was laid in:',o:['521 BCE','321 BCE','273 BCE','232 BCE'],a:1,e:'Chandragupta Maurya founded the Maurya Empire around 321 BCE after defeating the last Nanda ruler (Dhana Nanda) with the help of Chanakya.'},
+  {s:'History',q:'Ashoka the Great converted to Buddhism after the:',o:['Battle of Hydaspes','Battle of Kalinga','Battle of Plassey','Battle of Talikota'],a:1,e:'The Kalinga War (261 BCE) devastated Ashoka. Seeing the carnage (100,000 killed, 150,000 deported), he embraced Buddhism and adopted the policy of Dhamma.'},
+  {s:'History',q:'The Harappan/Indus Valley Civilization is classified as:',o:['Paleolithic age','Neolithic age','Bronze Age','Iron Age'],a:2,e:'The Indus Valley Civilization (3300–1300 BCE) is classified as a Bronze Age civilization. Major sites include Mohenjo-daro, Harappa, Dholavira, Lothal, and Kalibangan.'},
+  {s:'History',q:'Tipu Sultan was the ruler of:',o:['Mysore','Hyderabad','Vijayanagara','Maratha'],a:0,e:'Tipu Sultan (1750–1799) was the ruler of Mysore (Tiger of Mysore). He fought four Anglo-Mysore Wars and died at the Battle of Srirangapatna (1799) fighting the British.'},
+  {s:'History',q:'The First Battle of Panipat (1526) was between:',o:['Akbar and Hemu','Babur and Ibrahim Lodi','Humayun and Sher Shah Suri','Akbar and Rana Pratap'],a:1,e:'The First Battle of Panipat (21 April 1526) was fought between Babur and Ibrahim Lodi (last ruler of the Lodi dynasty). Babur\'s victory established the Mughal Empire.'},
+  {s:'Geography',q:'Which is the longest river in India?',o:['Brahmaputra','Godavari','Ganga','Sindhu'],a:2,e:'The Ganga is the longest river entirely in India at ~2,525 km. The Sindhu (Indus) is longer overall (3,180 km) but most of it flows through Pakistan.'},
+  {s:'Geography',q:'The Beas River is a tributary of which river?',o:['Ganga','Brahmaputra','Indus','Narmada'],a:2,e:'The Beas is a tributary of the Sutlej, which itself is a tributary of the Indus. The Beas originates in the Himalayas near Rohtang Pass in Himachal Pradesh.'},
+  {s:'Geography',q:'Which Indian state shares the longest border with China?',o:['Arunachal Pradesh','Sikkim','Himachal Pradesh','Uttarakhand'],a:0,e:'Arunachal Pradesh shares the longest border with China (~1,126 km). China claims most of Arunachal Pradesh as "South Tibet," which India disputes.'},
+  {s:'Geography',q:'The Great Barrier Reef is located in:',o:['Indian Ocean','Pacific Ocean (Australia)','Atlantic Ocean','Caribbean Sea'],a:1,e:'The Great Barrier Reef is in the Coral Sea off the coast of Queensland, Australia. It is the world\'s largest coral reef system and a UNESCO World Heritage Site.'},
+  {s:'Geography',q:'Which ocean is the smallest in the world?',o:['Indian Ocean','Southern Ocean','Arctic Ocean','Atlantic Ocean'],a:2,e:'The Arctic Ocean is the smallest and shallowest of the world\'s five oceans. It is largely covered by sea ice and surrounded by Eurasia and North America.'},
+  {s:'Science',q:'The human body has how many bones in adults?',o:['196','206','216','226'],a:1,e:'An adult human body has 206 bones. A newborn baby has about 270–300 bones, which fuse during development. The femur (thigh bone) is the largest bone.'},
+  {s:'Science',q:'Which element is the most abundant in the Earth\'s crust?',o:['Iron','Silicon','Oxygen','Aluminium'],a:2,e:'Oxygen is the most abundant element in the Earth\'s crust, making up about 46.6% by mass. Silicon is second (~27.7%), followed by Aluminium (~8.1%).'},
+  {s:'Science',q:'Sound travels fastest through:',o:['Air','Water','Steel','Vacuum'],a:2,e:'Sound travels fastest through solids. In steel: ~5,960 m/s, water: ~1,480 m/s, air: ~343 m/s. Sound cannot travel through vacuum as it needs a medium.'},
+  {s:'Science',q:'The lightest gas in the universe is:',o:['Helium','Nitrogen','Hydrogen','Carbon dioxide'],a:2,e:'Hydrogen is the lightest gas and the most abundant element in the universe (~75% of all baryonic mass). Helium is the second lightest.'},
+  {s:'Science',q:'Which vitamin is essential for blood clotting?',o:['Vitamin A','Vitamin C','Vitamin D','Vitamin K'],a:3,e:'Vitamin K is essential for blood clotting (coagulation). It activates proteins (like prothrombin) needed for clot formation. Deficiency causes excessive bleeding.'},
+  {s:'Science',q:'The boiling point of water at sea level is:',o:['90°C','95°C','100°C','110°C'],a:2,e:'Water boils at 100°C (212°F) at standard atmospheric pressure (1 atm/sea level). At higher altitudes (lower pressure), it boils below 100°C.'},
+  {s:'Science',q:'Ozone layer is found in which part of atmosphere?',o:['Troposphere','Stratosphere','Mesosphere','Thermosphere'],a:1,e:'The ozone layer is found in the stratosphere, 15–35 km above Earth\'s surface. It absorbs most of the Sun\'s ultraviolet (UV-B and UV-C) radiation.'},
+  {s:'Science',q:'The SI unit of temperature is:',o:['Celsius','Fahrenheit','Kelvin','Rankine'],a:2,e:'Kelvin (K) is the SI base unit of thermodynamic temperature. Absolute zero is 0 K (= -273.15°C). Water freezes at 273.15 K and boils at 373.15 K.'},
+  {s:'Science',q:'Which planet is known as the "Evening Star"?',o:['Mars','Mercury','Venus','Saturn'],a:2,e:'Venus is called the "Evening Star" (or "Morning Star") as it is often visible just after sunset or before sunrise. It is the brightest natural object in the night sky after the Moon.'},
+  {s:'Science',q:'The powerhouse of the cell is:',o:['Nucleus','Ribosome','Mitochondria','Golgi apparatus'],a:2,e:'Mitochondria are called the powerhouse of the cell as they produce ATP (adenosine triphosphate) through cellular respiration, providing energy for cellular activities.'},
+  {s:'Science',q:'Newton\'s law of gravitation states that gravitational force is:',o:['Directly proportional to distance','Inversely proportional to mass','Directly proportional to product of masses and inversely proportional to square of distance','None of the above'],a:2,e:'F = Gm1m2/r². The gravitational force between two bodies is directly proportional to the product of their masses and inversely proportional to the square of the distance.'},
+  {s:'Science',q:'Which acid is present in vinegar?',o:['Citric acid','Hydrochloric acid','Acetic acid','Tartaric acid'],a:2,e:'Vinegar contains acetic acid (CH3COOH), typically 4–8% concentration. It is produced by fermentation of ethanol by Acetobacter bacteria.'},
+  {s:'General',q:'The ICC Men\'s T20 World Cup 2024 was won by:',o:['Australia','England','India','South Africa'],a:2,e:'India won the ICC Men\'s T20 World Cup 2024, defeating South Africa by 7 runs in the final held in Barbados. Rohit Sharma led the team and Virat Kohli was player of the match.'},
+  {s:'General',q:'The Bharat Ratna is awarded for:',o:['Bravery in war','Excellence in scientific research only','Exceptional service to the nation in any field','Excellence in sports only'],a:2,e:'Bharat Ratna — India\'s highest civilian honor — is awarded for exceptional service of the highest order to the nation in any field (art, literature, science, public service). No formal nominations.'},
+  {s:'General',q:'Headquarters of the United Nations is in:',o:['Geneva','Vienna','London','New York'],a:3,e:'The UN Headquarters is in Manhattan, New York City, USA. It was established in 1945. The UN has six principal organs including the General Assembly and Security Council.'},
+  {s:'General',q:'The Right to Information (RTI) Act was passed in:',o:['2003','2004','2005','2006'],a:2,e:'The RTI Act was enacted in 2005, empowering citizens to seek information from public authorities within 30 days. It promotes transparency and accountability in governance.'},
+  {s:'General',q:'The Akbar\'s Din-i-Ilahi was:',o:['A new religious scripture','A new religion/cult founded by Akbar','A tax system','A military order'],a:1,e:'Din-i-Ilahi was a syncretic religion/cult founded by Akbar in 1582, combining elements of Islam, Hinduism, Zoroastrianism, and Jainism. Birbal was the only Hindu to adopt it.'},
+  {s:'General',q:'Who is known as the Father of the Indian Constitution?',o:['Jawaharlal Nehru','Rajendra Prasad','B.R. Ambedkar','Sardar Patel'],a:2,e:'Dr. B.R. Ambedkar is called the Father of the Indian Constitution. As chairman of the Drafting Committee, he played the most important role in drafting the Constitution.'},
+  {s:'General',q:'Operation Flood was related to:',o:['Flood control','White Revolution (dairy development)','Green Revolution','Blue Revolution (fisheries)'],a:1,e:'Operation Flood (1970–1996) was a rural development program initiated by NDDB (National Dairy Development Board) under Dr. Verghese Kurien — the "Father of the White Revolution."'},
+  {s:'General',q:'The National Emblem of India is taken from:',o:['Ashoka Pillar at Sarnath','Sanchi Stupa','Ajanta Caves','Bodh Gaya pillar'],a:0,e:'India\'s National Emblem is adapted from the Lion Capital of Ashoka at Sarnath (3rd century BCE). It shows four lions (only three visible), an Ashoka Chakra, and animals on the abacus.'},
+  {s:'General',q:'World Environment Day is celebrated on:',o:['5 June','22 April','16 September','21 March'],a:0,e:'World Environment Day is celebrated on 5 June every year since 1974, under UNEP. World Earth Day is on 22 April. World Ozone Day is on 16 September.'},
+  {s:'General',q:'The Kaziranga National Park is famous for:',o:['Bengal Tiger','Indian Elephant','One-horned Rhinoceros','Snow Leopard'],a:2,e:'Kaziranga National Park (Assam) is a UNESCO World Heritage Site famous for the one-horned Indian rhinoceros. It has the world\'s largest population of this species (~3,000).'},
+  {s:'General',q:'The concept of Zero was introduced to the world by:',o:['Arabs','Greeks','Indians (Aryabhata era)','Chinese'],a:2,e:'The concept of zero and the decimal number system were developed in ancient India. Aryabhata and Brahmagupta (5th–7th century CE) were key figures. Arabs transmitted Indian numerals to Europe.'},
+  {s:'General',q:'The Parliament of India consists of:',o:['President + Lok Sabha','Lok Sabha + Rajya Sabha','President + Lok Sabha + Rajya Sabha','PM + Cabinet + Parliament'],a:2,e:'Under Article 79, Parliament consists of the President, Rajya Sabha (Council of States), and Lok Sabha (House of the People).'},
+  {s:'General',q:'The Swachh Bharat Mission was launched on:',o:['2 October 2014','15 August 2014','26 January 2015','1 April 2014'],a:0,e:'Swachh Bharat Mission was launched by PM Narendra Modi on 2 October 2014 (Gandhi Jayanti) to accelerate efforts to achieve universal sanitation coverage and promote hygiene.'},
+  {s:'General',q:'The Battle of Haldighati (1576) was fought between:',o:['Akbar and Rana Pratap','Akbar and Rana Sanga','Babur and Rana Pratap','Jahangir and Rana Pratap'],a:0,e:'The Battle of Haldighati was fought on 18 June 1576 between Maharana Pratap of Mewar and the Mughal forces under Man Singh (representing Akbar). Rana Pratap refused to submit to Akbar.'},
+  {s:'General',q:'India\'s first satellite Aryabhata was launched in:',o:['1972','1975','1980','1983'],a:1,e:'Aryabhata — India\'s first satellite — was launched on 19 April 1975 from Kapustin Yar, Russia. It was named after the famous 5th-century Indian mathematician-astronomer.'},
+  {s:'General',q:'The Pink Revolution is associated with:',o:['Fisheries','Poultry & meat','Horticulture','Cotton'],a:1,e:'Pink Revolution refers to increased production in the meat (especially chicken) and prawn/shrimp sector in India. Onion production boom is also sometimes called Pink Revolution.'},
+  {s:'General',q:'In which year was the Goods and Services Tax (GST) implemented in India?',o:['2015','2016','2017','2018'],a:2,e:'GST was implemented in India on 1 July 2017, replacing multiple indirect taxes. It is a comprehensive, destination-based, multi-stage tax with the motto "One Nation, One Tax, One Market."'},
+  {s:'General',q:'The International Day of Yoga is celebrated on:',o:['21 June','5 June','7 April','10 December'],a:0,e:'International Day of Yoga is celebrated annually on 21 June (summer solstice). It was established following India\'s proposal at the UN, and the first celebration was in 2015.'},
+  {s:'General',q:'Which Indian state has the largest number of districts?',o:['Maharashtra','Rajasthan','Uttar Pradesh','Madhya Pradesh'],a:2,e:'Uttar Pradesh has the largest number of districts (75) among all Indian states. It is also the most populous state in India.'},
+  {s:'General',q:'The Lokpal Act was passed in:',o:['2010','2013','2014','2016'],a:1,e:'The Lokpal and Lokayuktas Act was passed by Parliament in 2013 and received Presidential assent on 1 January 2014. Pinaki Chandra Ghose was appointed as the first Lokpal in 2019.'},
+  {s:'General',q:'ISRO\'s PSLV stands for:',o:['Polar Space Launch Vehicle','Polar Satellite Launch Vehicle','Planetary Satellite Launch Vehicle','Propelled Satellite Launch Vehicle'],a:1,e:'PSLV (Polar Satellite Launch Vehicle) is ISRO\'s most reliable launch vehicle. It is used to launch satellites into polar and sun-synchronous orbits. Chandragupta-1 was launched by PSLV-C25.'},
+  {s:'General',q:'Who was the first woman Prime Minister of India?',o:['Sonia Gandhi','Sarojini Naidu','Indira Gandhi','Vijaya Lakshmi Pandit'],a:2,e:'Indira Gandhi (1917–1984) was India\'s first and only woman Prime Minister. She served two terms (1966–77 and 1980–84) and was assassinated in 1984.'},
+  {s:'General',q:'The Chipko Movement was related to:',o:['Forest conservation (tree hugging)','River conservation','Wildlife protection','Clean energy'],a:0,e:'The Chipko Movement (1973) began in Uttarakhand when local women hugged trees to prevent them from being felled. It became a landmark environmental conservation movement.'},
+  {s:'General',q:'The SAARC Secretariat is located in:',o:['New Delhi','Colombo','Kathmandu','Dhaka'],a:2,e:'The SAARC (South Asian Association for Regional Cooperation) Secretariat is in Kathmandu, Nepal. SAARC was established in 1985 and has 8 member states.'},
+  {s:'General',q:'Which country launched the world\'s first artificial satellite Sputnik?',o:['USA','USSR (Russia)','France','UK'],a:1,e:'The Soviet Union (USSR) launched Sputnik 1 on 4 October 1957 — the world\'s first artificial satellite. This launched the Space Age and the Space Race with the USA.'},
+  {s:'General',q:'The Narmada River flows into:',o:['Bay of Bengal','Arabian Sea','Gulf of Kutch','Gulf of Khambhat'],a:3,e:'The Narmada River flows westward and drains into the Gulf of Khambhat (Cambay), which is an inlet of the Arabian Sea. It forms a natural boundary between North and South India.'},
+  {s:'General',q:'World AIDS Day is observed on:',o:['1 December','10 December','28 July','1 October'],a:0,e:'World AIDS Day is observed on 1 December every year since 1988 to raise awareness about AIDS/HIV. World Hepatitis Day is 28 July; World Heart Day is 29 September.'},
+  {s:'General',q:'Which state is called the "Land of Five Rivers"?',o:['Rajasthan','Haryana','Punjab','Uttar Pradesh'],a:2,e:'Punjab is called the "Land of Five Rivers" — Jhelum, Chenab, Ravi, Beas, and Sutlej. Today, Ravi, Beas, and Sutlej flow through Indian Punjab.'},
+  {s:'General',q:'The 2022 FIFA World Cup was held in:',o:['Russia','Qatar','France','Brazil'],a:1,e:'The 2022 FIFA World Cup was held in Qatar (November-December 2022), the first World Cup held in the Middle East and the first in winter. Argentina won, defeating France in the final.'},
+  {s:'General',q:'Bihu is the traditional festival of which Indian state?',o:['Manipur','Meghalaya','Assam','Nagaland'],a:2,e:'Bihu is the main festival of Assam, celebrated three times a year: Rongali/Bohag Bihu (April – harvest), Kongali/Kati Bihu (October), and Bhogali/Magh Bihu (January).'},
+  {s:'General',q:'Who invented the World Wide Web (WWW)?',o:['Bill Gates','Steve Jobs','Tim Berners-Lee','Vint Cerf'],a:2,e:'Tim Berners-Lee, a British scientist, invented the World Wide Web in 1989 while working at CERN. He proposed a hypertext system to share information among researchers.'},
+  {s:'General',q:'The headquarters of Interpol is in:',o:['Paris','London','Lyon','Brussels'],a:2,e:'Interpol (International Criminal Police Organization) has its headquarters in Lyon, France. It facilitates cooperation between police forces of 195 member countries.'}
+];
+
+/* ── SBI PO ── 100 Banking & GK Questions */
+QB.sbi_po = [
+  {s:'Banking',q:'The Reserve Bank of India was established in:',o:['1932','1935','1947','1949'],a:1,e:'RBI was established on 1 April 1935 under the Reserve Bank of India Act, 1934, based on Hilton Young Commission recommendations. It was nationalized on 1 January 1949.'},
+  {s:'Banking',q:'NEFT stands for:',o:['National Electronic Funds Transfer','Net Electronic Financial Transaction','National Effective Funds Transfer','National Electronic Finance Transaction'],a:0,e:'NEFT (National Electronic Funds Transfer) is a payment system facilitating one-to-one funds transfer between bank accounts. It operates 24×7 since December 2019.'},
+  {s:'Banking',q:'The Monetary Policy Committee (MPC) of RBI has how many members?',o:['3','4','6','8'],a:2,e:'MPC has 6 members: 3 from RBI (Governor as Chair, Deputy Governor, one RBI officer) and 3 external members appointed by the GoI. Decisions are by majority vote; Governor has casting vote.'},
+  {s:'Banking',q:'IMPS (Immediate Payment Service) is available:',o:['Only weekdays 8am–8pm','Weekdays only','24×7 including holidays','Bank working hours only'],a:2,e:'IMPS is available 24×7, 365 days, including bank holidays and weekends. It enables instant interbank fund transfer. Launched by NPCI in 2010.'},
+  {s:'Banking',q:'What is the full form of UPI?',o:['Unified Payment Interface','Universal Payment Interface','Unified Payment Integration','United Payment Interface'],a:0,e:'UPI (Unified Payments Interface) is a real-time payment system developed by NPCI (National Payments Corporation of India). It allows multiple bank accounts into a single mobile application.'},
+  {s:'Banking',q:'SARFAESI Act enables banks to recover Non-Performing Assets (NPAs) without:',o:['Filing case in court','RBI permission','Government approval','Merger approval'],a:0,e:'The SARFAESI Act (2002) allows banks/FIs to enforce security interest and recover loans above ₹1 lakh without court intervention by taking possession of secured assets.'},
+  {s:'Banking',q:'Which committee recommended establishment of NABARD?',o:['Narasimham Committee','Shivaraman Committee','Kelkar Committee','Rangarajan Committee'],a:1,e:'The Shivaraman Committee (1979) recommended establishment of NABARD (National Bank for Agriculture and Rural Development). NABARD was set up in 1982.'},
+  {s:'Banking',q:'The Repo Rate is the rate at which:',o:['Banks lend to public','RBI borrows from banks','RBI lends to commercial banks','Banks lend to each other'],a:2,e:'Repo Rate (Repurchase Rate) is the rate at which RBI lends short-term money to commercial banks against government securities. Higher repo rate reduces money supply.'},
+  {s:'Banking',q:'CRR stands for:',o:['Credit Reserve Ratio','Cash Reserve Ratio','Capital Reserve Ratio','Credit Risk Ratio'],a:1,e:'CRR (Cash Reserve Ratio) is the minimum percentage of a bank\'s total deposits that must be kept as liquid cash with the RBI. Currently 4% (2024). It controls liquidity.'},
+  {s:'Banking',q:'SLR stands for:',o:['Statutory Lending Rate','Standard Liquidity Ratio','Statutory Liquidity Ratio','Standard Lending Ratio'],a:2,e:'SLR (Statutory Liquidity Ratio) is the percentage of deposits a bank must maintain in liquid assets (gold, govt securities). Currently 18% (2024). CRR+SLR together control money supply.'},
+  {s:'Banking',q:'The headquarters of State Bank of India is in:',o:['New Delhi','Mumbai','Kolkata','Hyderabad'],a:1,e:'State Bank of India\'s corporate headquarters is at State Bank Bhavan, Nariman Point, Mumbai. SBI was established on 1 July 1955 (formerly Imperial Bank of India).'},
+  {s:'Banking',q:'Priority Sector Lending (PSL) target for domestic commercial banks is:',o:['30% of ANBC','35% of ANBC','40% of ANBC','45% of ANBC'],a:2,e:'Domestic commercial banks must lend 40% of Adjusted Net Bank Credit (ANBC) to priority sectors (agriculture, MSMEs, education, housing, export credit, etc.).'},
+  {s:'Banking',q:'CIBIL stands for:',o:['Central Indian Bank Information Ltd','Credit Information Bureau India Ltd','Central Information Bureau India Ltd','Credit Index Bureau India Ltd'],a:1,e:'CIBIL (Credit Information Bureau India Ltd) is India\'s first credit information company. It maintains credit records of individuals and provides Credit Information Reports (CIR) and CIBIL Score.'},
+  {s:'Banking',q:'The minimum capital adequacy ratio (CAR) for Indian banks as per Basel III norms is:',o:['8%','9%','10%','12%'],a:1,e:'As per RBI\'s Basel III implementation, Indian banks must maintain a minimum Capital Adequacy Ratio of 9% (vs Basel III requirement of 8%). Including Capital Conservation Buffer, it is 10.5%.'},
+  {s:'Banking',q:'The term "Bancassurance" refers to:',o:['Banking + Insurance merger','Selling insurance products through banks','Bank guarantee for insurance','Insurance for bankers'],a:1,e:'Bancassurance is a partnership between a bank and an insurance company, allowing the bank to sell insurance products to its customers. It provides banks an additional revenue stream.'},
+  {s:'Banking',q:'Which is the largest bank in India by assets?',o:['HDFC Bank','ICICI Bank','State Bank of India','Punjab National Bank'],a:2,e:'State Bank of India (SBI) is the largest bank in India by total assets, number of branches, and employees. It has over 22,000 branches and 250 million customers.'},
+  {s:'Banking',q:'RTGS (Real Time Gross Settlement) has a minimum transaction limit of:',o:['₹1 lakh','₹2 lakh','₹5 lakh','No minimum'],a:1,e:'RTGS has a minimum transaction limit of ₹2 lakh with no upper limit. It is used for high-value transactions and settles on a real-time, transaction-by-transaction basis.'},
+  {s:'Banking',q:'Financial Inclusion means:',o:['Making banking available to rich only','Providing affordable financial services to all sections of society','International banking expansion','Reducing financial crimes'],a:1,e:'Financial inclusion means ensuring that all segments of society, especially low-income groups, have access to affordable financial products and services like banking, credit, insurance, and savings.'},
+  {s:'Banking',q:'The Insolvency and Bankruptcy Code (IBC) was enacted in:',o:['2014','2015','2016','2018'],a:2,e:'The Insolvency and Bankruptcy Code (IBC) was enacted in 2016 to consolidate and amend laws relating to insolvency of companies, partnerships, and individuals. NCLT handles corporate insolvency.'},
+  {s:'Banking',q:'Jan Dhan Yojana (PMJDY) provides which core benefit?',o:['Free crop insurance','Zero-balance bank account with RuPay card','Free home loan','Tax-free income'],a:1,e:'PMJDY (Pradhan Mantri Jan Dhan Yojana), launched in 2014, provides zero-balance savings accounts with RuPay debit card, ₹2 lakh accident insurance, and ₹30,000 life cover.'},
+  {s:'Economy',q:'GDP stands for:',o:['Gross Development Product','Gross Domestic Product','General Domestic Product','Government Domestic Product'],a:1,e:'GDP (Gross Domestic Product) is the total monetary value of all finished goods and services produced within a country in a specific period. India\'s GDP (2023-24) is about $3.5 trillion.'},
+  {s:'Economy',q:'India\'s current account deficit means:',o:['Govt spending exceeds revenue','Imports of goods/services exceed exports','Foreign reserves decline','Inflation exceeds deflation'],a:1,e:'Current Account Deficit (CAD) occurs when a country\'s imports of goods, services, and transfers exceed its exports. India typically runs a CAD due to high oil and gold imports.'},
+  {s:'Economy',q:'Which index measures inflation at the retail level in India?',o:['WPI','CPI','PPI','GDP Deflator'],a:1,e:'CPI (Consumer Price Index) measures retail-level inflation in India. RBI uses CPI for inflation targeting (target: 4% ± 2%). WPI measures wholesale-level inflation.'},
+  {s:'Economy',q:'SEBI regulates which market?',o:['Insurance market','Banking sector','Securities (stock) market','Commodity market only'],a:2,e:'SEBI (Securities and Exchange Board of India) regulates the securities market — stock exchanges (NSE, BSE), mutual funds, stockbrokers, merchant bankers, and portfolio managers.'},
+  {s:'Economy',q:'The base year for calculating India\'s GDP is currently:',o:['2004-05','2007-08','2011-12','2015-16'],a:2,e:'India uses 2011-12 as the base year for calculating GDP since the revision in 2015 (earlier it was 2004-05). MoSPI regularly revises base year for better reflection of economic structure.'},
+  {s:'Economy',q:'Disinvestment means:',o:['Govt investing in new projects','Govt selling its stake in public sector companies','Private companies investing in govt projects','Reducing fiscal deficit'],a:1,e:'Disinvestment is the process of the government selling its equity (stake) in Public Sector Undertakings (PSUs) to generate revenue and improve efficiency.'},
+  {s:'Economy',q:'The term "Headline Inflation" refers to:',o:['Core inflation only','Overall inflation including food and energy','Inflation in housing prices','Manufacturing sector inflation'],a:1,e:'Headline inflation measures total inflation in an economy, including food and energy prices. Core inflation excludes food and energy (volatile components). RBI monitors both.'},
+  {s:'Economy',q:'NPCI (National Payments Corporation of India) was set up under:',o:['Ministry of Finance','SEBI','RBI','Ministry of Electronics and IT'],a:2,e:'NPCI is an umbrella organisation for operating retail payments systems in India, set up under the guidance of RBI and Indian Banks\' Association (IBA) in 2008.'},
+  {s:'Economy',q:'The Fiscal Responsibility and Budget Management (FRBM) Act mandates:',o:['Fixed exchange rate','Fiscal deficit targets for the government','Mandatory FDI inflows','Control of monetary policy'],a:1,e:'The FRBM Act (2003) requires the government to reduce fiscal deficit to 3% of GDP and eliminate revenue deficit. It promotes fiscal discipline and transparency.'},
+  {s:'Economy',q:'Which body publishes the "Economic Survey" in India?',o:['RBI','NITI Aayog','Ministry of Finance','Planning Commission'],a:2,e:'The Economic Survey is published annually by the Ministry of Finance (Department of Economic Affairs). It is presented in Parliament a day before the Union Budget.'},
+  {s:'GK',q:'The International Monetary Fund (IMF) is headquartered in:',o:['Geneva','New York','Washington DC','London'],a:2,e:'IMF headquarters is in Washington D.C., USA. It was established in 1944 (Bretton Woods Conference) along with the World Bank. India is a founding member.'},
+  {s:'GK',q:'SWIFT in banking stands for:',o:['Society for Worldwide Interbank Financial Telecommunication','System for Worldwide International Fund Transfer','Standard World International Financial Transaction','Society for World Interbank Finance and Trade'],a:0,e:'SWIFT (Society for Worldwide Interbank Financial Telecommunication) is a messaging network that financial institutions use to securely transmit information and instructions for international money transfers.'},
+  {s:'GK',q:'The RBI was established on the recommendation of:',o:['Simon Commission','Hilton Young Commission','Narasimham Committee','Wanchoo Committee'],a:1,e:'RBI was established based on the recommendations of the Hilton Young Commission (Royal Commission on Indian Currency and Finance, 1926), chaired by Edward Hilton Young.'},
+  {s:'GK',q:'The Marginal Standing Facility (MSF) rate is always:',o:['Equal to Repo rate','1% above Repo rate','1% below Repo rate','Equal to Bank rate'],a:1,e:'MSF (Marginal Standing Facility) is 1% above the Repo Rate. It allows banks to borrow overnight funds from RBI against SLR securities, providing a safety valve for liquidity stress.'},
+  {s:'GK',q:'In India, the financial year runs from:',o:['January 1 to December 31','March 1 to February 28','April 1 to March 31','July 1 to June 30'],a:2,e:'India\'s financial year (fiscal year) runs from 1 April to 31 March. The Union Budget is typically presented on 1 February (earlier it was last day of February).'},
+  {s:'GK',q:'SDR stands for in the context of IMF:',o:['Special Dollar Reserve','Standard Drawing Rights','Special Drawing Rights','Sovereign Debt Reserve'],a:2,e:'SDR (Special Drawing Rights) is an international reserve asset created by IMF. India\'s SDR allocation was boosted to $17.86 billion in August 2021 as part of the general SDR allocation.'},
+  {s:'GK',q:'Bank Rate is the rate at which:',o:['Banks lend to public','Banks lend to each other overnight','RBI lends long-term to banks (without collateral)','Govt lends to banks'],a:2,e:'The Bank Rate is the rate at which RBI provides long-term funds to commercial banks without collateral. It acts as a penal rate and is linked to the MSF rate.'},
+  {s:'GK',q:'The Atal Pension Yojana (APY) targets:',o:['Government employees','BPL families only','Unorganised sector workers','All citizens'],a:2,e:'APY (Atal Pension Yojana), launched in 2015, targets unorganised sector workers. It provides a guaranteed minimum monthly pension of ₹1,000–₹5,000 after age 60.'},
+  {s:'GK',q:'NPA (Non-Performing Asset) is a loan where repayment has been due for more than:',o:['30 days','60 days','90 days','180 days'],a:2,e:'An NPA is a loan or advance where interest or principal is overdue for more than 90 days (for term loans). Sub-standard, Doubtful, and Loss assets are the three categories of NPAs.'},
+  {s:'GK',q:'Which is the largest stock exchange in India by market capitalization?',o:['BSE (Bombay Stock Exchange)','NSE (National Stock Exchange)','MCX (Multi Commodity Exchange)','NCDEX'],a:1,e:'NSE (National Stock Exchange) is India\'s largest stock exchange by equity trading volume and market capitalization. NSE\'s main index is Nifty 50. BSE\'s main index is Sensex (30 stocks).'},
+  {s:'GK',q:'The "headline inflation" in India is tracked by:',o:['WPI only','CPI only','Both WPI and CPI','PPI'],a:1,e:'CPI (Consumer Price Index) is now the primary measure of headline inflation in India for monetary policy purposes. RBI has a flexible inflation targeting framework with CPI target of 4% ± 2%.'},
+  {s:'GK',q:'Which Indian state has the highest per capita income?',o:['Maharashtra','Delhi (UT)','Goa','Karnataka'],a:2,e:'Goa has the highest per capita income among Indian states. Among Union Territories, Chandigarh and Delhi rank higher. Goa\'s economy is driven by tourism and mining.'},
+  {s:'GK',q:'The KYC (Know Your Customer) guidelines are issued by:',o:['SEBI','RBI','Ministry of Finance','IRDAI'],a:1,e:'KYC (Know Your Customer) guidelines are issued by RBI for banks and by SEBI for capital market intermediaries. KYC involves verifying customer identity and address to prevent financial crimes.'},
+  {s:'GK',q:'Mutual funds in India are regulated by:',o:['RBI','AMFI','SEBI','IRDA'],a:2,e:'Mutual funds in India are regulated by SEBI (Securities and Exchange Board of India). AMFI (Association of Mutual Funds in India) is a self-regulatory organization of SEBI-registered mutual funds.'},
+  {s:'GK',q:'The Pradhan Mantri Mudra Yojana provides loans to:',o:['Large industries','Small/micro business enterprises','Agricultural sector only','Housing sector'],a:1,e:'PMMY provides collateral-free loans up to ₹10 lakh to small/micro non-farm enterprises. Loans are classified as Shishu (up to ₹50,000), Kishore (₹50,001–₹5 lakh), and Tarun (₹5–10 lakh).'},
+  {s:'GK',q:'The G20 is a group of:',o:['19 countries + EU','20 largest economies','20 most powerful nations','G8 + developing nations'],a:0,e:'G20 consists of 19 countries + the European Union + the African Union (added 2023). Members include developed and major emerging economies, representing about 85% of world GDP.'},
+  {s:'GK',q:'Basel III norms relate to:',o:['Environmental regulations for banks','Capital adequacy and liquidity standards for banks','Anti-money laundering','Digital banking standards'],a:1,e:'Basel III (2010) is an international regulatory accord that set standards for bank capital adequacy, stress testing, and liquidity requirements to prevent banking system failures like 2008 financial crisis.'},
+  {s:'GK',q:'When a country has more exports than imports, it has a:',o:['Trade deficit','Current account deficit','Trade surplus','Capital account surplus'],a:2,e:'When exports exceed imports, a country has a Trade Surplus (favorable balance of trade). When imports exceed exports, it is a Trade Deficit (unfavorable balance of trade).'},
+  {s:'GK',q:'India\'s largest trading partner (by total trade) is:',o:['USA','China','UAE','Saudi Arabia'],a:1,e:'China has been India\'s largest trading partner for several years by total trade volume, despite the trade deficit India runs. USA is often the largest export destination.'},
+  {s:'GK',q:'The headquarters of the World Bank is in:',o:['Geneva','New York','Washington DC','London'],a:2,e:'The World Bank Group headquarters is in Washington D.C., USA. It consists of IBRD, IDA, IFC, MIGA, and ICSID. India is one of the largest borrowers from the World Bank.'},
+  {s:'GK',q:'What is the full form of NBFC?',o:['National Banking Financial Corporation','Non-Banking Financial Company','National Business Finance Corporation','Non-Business Financial Company'],a:1,e:'NBFC (Non-Banking Financial Company) is a company registered under the Companies Act that provides banking services without holding a banking license. Regulated by RBI under RBI Act, 1934.'},
+  {s:'GK',q:'Index of Industrial Production (IIP) is released by:',o:['RBI','NITI Aayog','MoSPI (NSO)','SEBI'],a:2,e:'IIP is released monthly by the Ministry of Statistics and Programme Implementation (MoSPI/NSO). It measures industrial output in sectors like manufacturing, mining, and electricity.'},
+  {s:'GK',q:'Open Market Operations (OMO) is a tool used by:',o:['Stock exchanges','RBI for monetary policy','SEBI for market regulation','Ministry of Finance'],a:1,e:'OMOs are conducted by RBI as part of monetary policy. RBI buys or sells government securities in the open market to control liquidity and money supply in the banking system.'},
+  {s:'GK',q:'The PM-Kisan scheme provides:',o:['Free housing to farmers','₹6,000/year to eligible farmer families','Free crop insurance','Loan waiver to farmers'],a:1,e:'PM-KISAN (Pradhan Mantri Kisan Samman Nidhi), launched in 2019, provides ₹6,000 per year (in 3 installments of ₹2,000) to small and marginal farmer families.'},
+  {s:'GK',q:'Digital payments in India are primarily facilitated by:',o:['RBI directly','NPCI (National Payments Corporation of India)','SEBI','All commercial banks jointly'],a:1,e:'NPCI facilitates digital payments through platforms like UPI, RuPay, IMPS, NACH, NETC, and Fastag. It is a not-for-profit organization promoted by RBI and IBA.'},
+  {s:'GK',q:'The Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY) provides:',o:['Accident insurance of ₹2 lakh','Life insurance of ₹2 lakh','Crop insurance','Health insurance'],a:1,e:'PMJJBY offers renewable life insurance cover of ₹2 lakh at a premium of ₹436/year for people aged 18–50. PMSBY (Suraksha Bima Yojana) provides ₹2 lakh accident insurance at ₹20/year.'},
+  {s:'GK',q:'LIBOR stands for:',o:['London International Banking Offer Rate','London Interbank Offered Rate','London Index for Banking Operational Rates','Lending and Investment Banking Offer Rate'],a:1,e:'LIBOR (London Interbank Offered Rate) was the benchmark interest rate for global interbank lending. It was replaced by SOFR (Secured Overnight Financing Rate) in June 2023.'},
+  {s:'GK',q:'The term "Inflation Targeting" in India means RBI aims to keep CPI inflation at:',o:['2% ± 1%','4% ± 2%','5% ± 1%','6% ± 2%'],a:1,e:'Since 2016 (FRBM amendment), RBI follows a flexible inflation targeting framework with a CPI inflation target of 4% with a tolerance band of ±2% (i.e., 2–6%).'},
+  {s:'GK',q:'What is a "Bull Market"?',o:['Market with declining prices','Market with rising prices','Market with stable prices','Market with volatile prices'],a:1,e:'A Bull Market refers to a financial market with rising prices, investor confidence, and positive outlook. A Bear Market is the opposite — falling prices and pessimism.'},
+  {s:'GK',q:'The Insolvency and Bankruptcy Board of India (IBBI) was set up under:',o:['SEBI Act','IBC, 2016','Companies Act, 2013','RBI Act'],a:1,e:'IBBI (Insolvency and Bankruptcy Board of India) was established under the IBC, 2016 to regulate insolvency professionals, insolvency professional agencies, and information utilities.'},
+  {s:'GK',q:'FDI (Foreign Direct Investment) in India requires approval from:',o:['RBI only','SEBI only','Respective ministry/FIPB (now scrapped) or automatic route','Ministry of Finance only'],a:2,e:'India follows two routes for FDI: Automatic Route (no prior approval needed, just RBI reporting) and Government/Approval Route. FIPB was abolished in 2017; approvals now given by respective ministries.'},
+  {s:'GK',q:'Which authority issues the currency notes in India?',o:['Government of India (Finance Ministry)','RBI','SBI','Both RBI and Government'],a:1,e:'RBI issues currency notes of all denominations except ₹1 coin and notes. The ₹1 coin/note is issued by the Government of India (Ministry of Finance) and distributed by RBI.'},
+  {s:'GK',q:'Sovereign Gold Bond (SGB) scheme is issued by:',o:['SEBI','NSE','RBI on behalf of Government of India','SBI'],a:2,e:'SGBs are government securities denominated in grams of gold. They are issued by RBI on behalf of the Government of India as an alternative to holding physical gold.'},
+  {s:'GK',q:'The term "Capital Market" refers to:',o:['Market for short-term funds','Market for long-term funds (equity + bonds)','Only stock market','Only bond market'],a:1,e:'Capital markets deal with long-term securities (equity shares, debentures, bonds, govt securities). Money markets deal with short-term instruments (T-bills, call money, CPs, CDs).'},
+  {s:'GK',q:'India\'s first Digital Payments Index was launched by:',o:['NPCI','SEBI','RBI','Ministry of Finance'],a:2,e:'RBI launched the RBI-Digital Payments Index (RBI-DPI) in January 2021 to measure the extent of digitisation of payments across the country. Base year is March 2018.'},
+  {s:'GK',q:'MUDRA stands for:',o:['Micro Units Development and Refinance Agency','Micro Urban Development and Restructuring Agency','Market for Urban Development and Rural Advancement','Micro Unit Development and Rural Agency'],a:0,e:'MUDRA (Micro Units Development and Refinance Agency) was set up in 2015 under the Pradhan Mantri MUDRA Yojana to provide refinance support to banks and MFIs for lending to micro enterprises.'},
+  {s:'GK',q:'A "Cheque" must be presented to the bank within:',o:['1 month from date','2 months from date','3 months from date','6 months from date'],a:2,e:'A cheque is valid for 3 months from the date of issue. After 3 months, it becomes a "stale cheque" and is not honored by the bank.'},
+  {s:'GK',q:'The National Income Accounting in India is done by:',o:['RBI','SEBI','MoSPI (National Statistical Office)','Planning Commission'],a:2,e:'The National Statistical Office (NSO), under the Ministry of Statistics and Programme Implementation (MoSPI), is responsible for estimating national income in India.'},
+  {s:'GK',q:'Which was India\'s first mutual fund?',o:['HDFC Mutual Fund','SBI Mutual Fund','UTI (Unit Trust of India)','LIC Mutual Fund'],a:2,e:'Unit Trust of India (UTI) was established in 1963 as India\'s first mutual fund under the UTI Act. It launched India\'s first mutual fund scheme US-64. UTI was bifurcated in 2003.'},
+  {s:'GK',q:'Which committee recommended banking sector reforms in 1991?',o:['Rangarajan Committee','Kelkar Committee','Narasimham Committee','Chakravarti Committee'],a:2,e:'The Narasimham Committee I (1991) recommended major banking reforms: entry of private banks, reduction of CRR/SLR, deregulation of interest rates, setting up of ARCs for NPAs.'},
+  {s:'GK',q:'In NACH, the "ACH" stands for:',o:['Automated Clearing House','Advanced Cheque Handling','Automated Cheque Handling','Advanced Clearing House'],a:0,e:'NACH (National Automated Clearing House) — ACH stands for Automated Clearing House. NACH is used for bulk and repetitive payments like ECS, salary, pension, dividends, and utility bills.'},
+  {s:'GK',q:'Which term describes a government spending more than it earns (tax + non-tax revenue)?',o:['Revenue Surplus','Capital Deficit','Fiscal Deficit','Primary Deficit'],a:2,e:'Fiscal Deficit = Total government expenditure - Total receipts (excluding borrowings). It reflects the total borrowing requirement. Primary Deficit = Fiscal Deficit minus interest payments.'},
+  {s:'GK',q:'DICGC (Deposit Insurance) covers deposits up to:',o:['₹1 lakh','₹2 lakh','₹5 lakh','₹10 lakh'],a:2,e:'DICGC (Deposit Insurance and Credit Guarantee Corporation) insures deposits up to ₹5 lakh per depositor per bank (increased from ₹1 lakh in February 2020).'}
+];
+
+/* ── UPSC CSE ── 100 GK Questions */
+QB.upsc_cse = [
+  {s:'Polity',q:'The Constitution of India is described as "federal with unitary bias." This means:',o:['Equal powers to Centre and State','Centre is stronger but states have autonomous spheres','States are completely subordinate to Centre','Both are completely independent'],a:1,e:'India\'s Constitution creates a federal structure where Centre and States have separate lists (Union, State, Concurrent) but provides for unitary features in emergencies — hence federal with unitary bias.'},
+  {s:'Polity',q:'Which constitutional provision allows Parliament to legislate on State List subjects during national emergency?',o:['Article 249','Article 250','Article 352','Article 356'],a:1,e:'Article 250 allows Parliament to legislate on State List subjects when a National Emergency is in operation. Article 249 allows Rajya Sabha to empower Parliament to legislate on state list for national interest.'},
+  {s:'Polity',q:'The concept of "Constitutional Morality" was emphasised by Dr. Ambedkar to mean:',o:['Following religious morality','Adherence to the spirit and letter of the Constitution','Social morality of the majority','Morality as per parliamentary majority'],a:1,e:'Dr. Ambedkar borrowed the concept of constitutional morality from George Grote (Greek historian), meaning adherence to the form and spirit of constitutional processes even when it seems against majority preferences.'},
+  {s:'Polity',q:'A Money Bill can only be introduced in:',o:['Rajya Sabha','Lok Sabha','Either House','Joint sitting'],a:1,e:'Under Article 110, a Money Bill can only be introduced in Lok Sabha (on recommendation of the President). Rajya Sabha can only recommend changes; Lok Sabha may or may not accept them.'},
+  {s:'Polity',q:'Which principle is NOT part of the "Basic Structure" of the Constitution?',o:['Judicial review','Secularism','Parliamentary democracy','Directive Principles'],a:3,e:'According to various Supreme Court judgments, Basic Structure includes: supremacy of Constitution, sovereignty, democracy, secularism, judicial review, separation of powers, etc. DPSPs in general are not basic structure.'},
+  {s:'History',q:'The Indus Valley Civilization was contemporary with which other civilization?',o:['Egyptian and Mesopotamian civilizations','Chinese civilization (Shang dynasty)','Greek civilization','Roman civilization'],a:0,e:'The Indus Valley Civilization (3300–1300 BCE) was broadly contemporary with the Mesopotamian (Sumerian) and Egyptian civilizations. Evidence of trade between Indus and Mesopotamia has been found.'},
+  {s:'History',q:'The Sangam literature belongs to which language and period?',o:['Sanskrit, 200 BCE–200 CE','Tamil, 300 BCE–300 CE','Pali, 100 BCE–200 CE','Telugu, 200–600 CE'],a:1,e:'Sangam literature consists of ancient Tamil poetry (300 BCE–300 CE). Three Sangams (literary academies) were held in Madurai. Major works include Purananuru, Akananuru, Thirukkural, and Silappadikaram.'},
+  {s:'History',q:'Who among the following was NOT a member of the Drafting Committee of the Indian Constitution?',o:['T.T. Krishnamachari','Alladi Krishnaswami Ayyar','Jawaharlal Nehru','B.R. Ambedkar'],a:2,e:'The 7-member Drafting Committee was chaired by Dr. B.R. Ambedkar. Nehru was not on the Drafting Committee — he chaired the Objectives Resolution and Union Constitution Committee.'},
+  {s:'History',q:'The Subsidiary Alliance system was introduced by:',o:['Lord Cornwallis','Lord Wellesley','Lord Dalhousie','Lord Curzon'],a:1,e:'Lord Wellesley introduced the Subsidiary Alliance (1798) — Indian rulers had to maintain a British army at their expense, surrender foreign policy control, and accept a British resident. This expanded British territories rapidly.'},
+  {s:'History',q:'Doctrine of Lapse (used by Lord Dalhousie) stated that:',o:['States without natural heirs would be annexed by British','Subsidiary alliance states would lapse to British','Only Hindu states could adopt heirs','All states must modernize or lapse'],a:0,e:'Under Doctrine of Lapse, if a ruler died without a natural heir, the British would annex the state. Used to annex Satara (1848), Jhansi (1853), Nagpur (1854), Awadh (1856), etc.'},
+  {s:'Geography',q:'The "Blue Revolution" in India is related to:',o:['Water conservation','Fisheries and aquaculture development','Blue-chip company investments','Clean energy'],a:1,e:'The Blue Revolution refers to the rapid development of fisheries and aquaculture in India. India is the world\'s third-largest fish-producing country and second-largest aquaculture producer.'},
+  {s:'Geography',q:'The Himalayan rivers are called "perennial" because:',o:['They flow only in rainy season','They are fed by both glaciers and rainfall throughout the year','They are very long rivers','They are navigable'],a:1,e:'Himalayan rivers are perennial (flow throughout the year) because they are fed by both glacial meltwater and monsoon rainfall. Peninsular rivers depend primarily on rainfall and may dry up.'},
+  {s:'Geography',q:'The "Western Disturbances" are caused by:',o:['Arabian Sea depressions','Extratropical cyclones from Mediterranean region','Bay of Bengal cyclones','El Niño effect'],a:1,e:'Western Disturbances are extratropical cyclonic storms originating in the Mediterranean Sea and Caspian Sea region, moving eastward. They bring winter rainfall to NW India and snowfall to Himalayas.'},
+  {s:'Geography',q:'Which type of soil is also known as "self-ploughing soil"?',o:['Alluvial soil','Red soil','Black (Regur) soil','Laterite soil'],a:2,e:'Black cotton soil (Regur) is called self-ploughing soil because it has high shrink-swell capacity — it expands when wet and develops wide cracks when dry, mixing the soil naturally.'},
+  {s:'Geography',q:'The Andaman and Nicobar Islands are separated from Myanmar by:',o:['Palk Strait','Ten Degree Channel','Andaman Sea','Coco Channel'],a:3,e:'Coco Channel (10°N latitude approximately) separates the Andaman and Nicobar Islands from Myanmar\'s Coco Islands. Ten Degree Channel separates the Andaman Islands from Nicobar Islands.'},
+  {s:'Economy',q:'Which Five Year Plan in India adopted the Mahalanobis Model emphasizing heavy industry?',o:['First Plan','Second Plan','Third Plan','Fourth Plan'],a:1,e:'The Second Five Year Plan (1956–61) adopted the Mahalanobis model (P.C. Mahalanobis), emphasizing rapid industrialization through heavy and capital goods industries. Bhilai, Rourkela, and Durgapur steel plants were established.'},
+  {s:'Economy',q:'The concept of "Inclusive Growth" means growth that:',o:['Only benefits the rich','Benefits all sections, especially the poor and marginalized','Only focuses on GDP growth','Emphasizes external trade'],a:1,e:'Inclusive growth is economic growth that creates opportunities for all and distributes its dividends fairly, with a focus on reducing poverty, inequality, and ensuring decent work. It was the theme of India\'s 11th Plan.'},
+  {s:'Economy',q:'The TRIPS Agreement under WTO relates to:',o:['Trade in services','Tariff reductions','Intellectual property rights','Investment flows'],a:2,e:'TRIPS (Trade-Related Aspects of Intellectual Property Rights) Agreement sets minimum standards for IP protection globally. It covers patents, copyrights, trademarks, geographical indications, etc.'},
+  {s:'Economy',q:'PM Gati Shakti is related to:',o:['Agricultural marketing','Multi-modal connectivity infrastructure planning','Digital education','Financial inclusion'],a:1,e:'PM Gati Shakti (National Master Plan for Multi-modal Connectivity, 2021) is a digital platform for integrated planning and coordinated implementation of infrastructure projects by 16 ministries.'},
+  {s:'Economy',q:'The Bodo Accord (2020) pertains to which state?',o:['Manipur','Nagaland','Assam','Tripura'],a:2,e:'The Bodo Peace Accord was signed in January 2020 between the Government of India, Assam Government, and various Bodo groups (including NDFB factions). It aims to resolve the decades-long Bodo conflict in Assam.'},
+  {s:'Environment',q:'The Ramsar Convention is related to:',o:['Migratory birds','Wetland conservation','Biodiversity hotspots','Climate change'],a:1,e:'The Ramsar Convention (1971, Iran) is an international treaty for the conservation of wetlands. India has the largest number of Ramsar sites in Asia (75 as of 2023).'},
+  {s:'Environment',q:'The CITES convention regulates:',o:['International trade in endangered species','Climate change emissions','Marine pollution','Nuclear testing'],a:0,e:'CITES (Convention on International Trade in Endangered Species of Wild Fauna and Flora) regulates international trade in ~38,000 species of plants and animals to prevent over-exploitation.'},
+  {s:'Environment',q:'The Paris Agreement (2015) aims to limit global temperature rise to:',o:['1°C above pre-industrial levels','1.5°C and well below 2°C above pre-industrial levels','2°C above 1990 levels','3°C above pre-industrial levels'],a:1,e:'The Paris Agreement aims to limit global temperature rise to well below 2°C above pre-industrial levels and pursue efforts to limit it to 1.5°C. Each country submits NDCs (Nationally Determined Contributions).'},
+  {s:'Environment',q:'Which of the following is a biodiversity hotspot in India?',o:['Thar Desert','Gangetic Plains','Western Ghats and Sri Lanka','Deccan Plateau'],a:2,e:'India has 4 biodiversity hotspots: Western Ghats & Sri Lanka, Himalaya, Indo-Burma, and Sundaland. They are regions with exceptional biodiversity and high endemism under severe threat.'},
+  {s:'Environment',q:'The term "Ecological Footprint" measures:',o:['Industrial pollution output','Amount of biologically productive land/water needed to sustain consumption','Biodiversity of an ecosystem','Carbon emissions of a country'],a:1,e:'Ecological Footprint measures the amount of biologically productive land and water area required to produce the resources consumed and to absorb the waste generated by a given population.'},
+  {s:'Science',q:'CRISPR-Cas9 technology is used for:',o:['Cloning animals','Gene editing (modifying DNA)','Producing vaccines','Drug delivery'],a:1,e:'CRISPR-Cas9 is a revolutionary gene-editing tool that allows scientists to edit DNA sequences and modify gene function. Used in treating genetic diseases, developing disease-resistant crops, etc.'},
+  {s:'Science',q:'The "Internet of Things" (IoT) refers to:',o:['High-speed internet for rural areas','Network of physical devices connected to internet to collect and exchange data','A new generation of smartphones','Cloud computing services'],a:1,e:'IoT is a network of physical devices, vehicles, appliances, and other items embedded with sensors and software that connect and exchange data over the internet.'},
+  {s:'Science',q:'Which space mission first detected gravitational waves?',o:['Hubble Space Telescope','LIGO (Laser Interferometer Gravitational-Wave Observatory)','James Webb Space Telescope','Chandra X-ray Observatory'],a:1,e:'LIGO (USA) first detected gravitational waves on 14 September 2015 (announced Feb 2016), confirming Einstein\'s 1916 prediction. This was caused by the merger of two black holes 1.3 billion light-years away.'},
+  {s:'Science',q:'Artificial Intelligence (AI) is governed by which principle in the context of ethics?',o:['Maximise profit','Explainability, fairness, privacy, and accountability','Speed and efficiency only','Automation of all human tasks'],a:1,e:'Ethical AI frameworks emphasize: Explainability (transparent decisions), Fairness (no bias), Privacy (data protection), Accountability (clear responsibility), and Safety. India\'s NITI Aayog published a Responsible AI framework in 2021.'},
+  {s:'Science',q:'Quantum Computing uses which fundamental unit?',o:['Byte','Bit','Qubit (quantum bit)','Nibble'],a:2,e:'Quantum computers use qubits, which can exist in superposition (0 and 1 simultaneously), unlike classical bits (0 or 1). This enables exponentially faster processing for specific problems.'},
+  {s:'Polity',q:'The National Green Tribunal (NGT) was established under:',o:['Environment Protection Act, 1986','NGT Act, 2010','Forest Conservation Act, 1980','Wildlife Protection Act, 1972'],a:1,e:'The National Green Tribunal Act, 2010 established the NGT for speedy disposal of cases relating to environmental protection, conservation of forests, and enforcement of environmental laws.'},
+  {s:'Polity',q:'Which body can remove the Chief Election Commissioner?',o:['President on advice of PM','Parliament by the same process as a Supreme Court judge','Cabinet','Supreme Court'],a:1,e:'The CEC can only be removed through a procedure like that for a Supreme Court judge — address by both Houses of Parliament with special majority. This ensures independence of the Election Commission.'},
+  {s:'Polity',q:'UPSC\'s role in India\'s civil services is described as:',o:['Appointing all government employees','Recommending selections for civil services and advising on service matters','Directly training civil servants','Setting policy for civil services'],a:1,e:'UPSC (Union Public Service Commission) conducts examinations, recommends candidates for recruitment to civil services, and advises the government on service matters. It does not directly appoint.'},
+  {s:'Polity',q:'The Governor of a state is appointed by the President and holds office:',o:['For 5 years fixed term','During the pleasure of the President','Until state assembly removes them','For life'],a:1,e:'Under Article 156, the Governor holds office during the pleasure of the President. While the normal term is 5 years, the President can remove the Governor before the term expires.'},
+  {s:'Polity',q:'Which writ is issued to a lower court to transfer a case to a higher court?',o:['Mandamus','Habeas Corpus','Certiorari','Quo Warranto'],a:2,e:'Certiorari is a writ issued by a superior court to quash the order of a lower court or tribunal (if it exceeds jurisdiction or acts contrary to natural justice). Prohibition prevents a lower court from exceeding jurisdiction.'},
+  {s:'History',q:'The Delimitation Commission in India is responsible for:',o:['Setting election dates','Redrawing electoral constituency boundaries','Determining voter eligibility','Monitoring election expenditure'],a:1,e:'The Delimitation Commission redraws constituency boundaries based on the latest census data to ensure equal representation. The last delimitation was in 2008 (based on 2001 census); the next will be after 2026.'},
+  {s:'History',q:'The Third Anglo-Maratha War (1817–1818) resulted in:',o:['Maratha victory over British','British defeat and retreat','Complete British conquest and end of Maratha power','Treaty of Salbai'],a:2,e:'The Third Anglo-Maratha War ended with the complete destruction of Maratha power. The Peshwa Baji Rao II surrendered, and British supremacy was established over entire India except Punjab and Sindh.'},
+  {s:'Economy',q:'The National Food Security Act (2013) provides subsidized food grains to:',o:['30% of population','50% of population','67% of population (75% rural, 50% urban)','100% of population'],a:2,e:'The National Food Security Act (2013) covers up to 75% of rural population and 50% of urban population (about 67% of total population) for subsidized food grains under PDS.'},
+  {s:'Economy',q:'MGNREGS guarantees how many days of wage employment per year to rural household?',o:['50 days','75 days','100 days','150 days'],a:2,e:'MGNREGS (Mahatma Gandhi National Rural Employment Guarantee Scheme, 2005) guarantees 100 days of unskilled wage employment per year to every rural household whose adult members volunteer. States can provide 150 days in drought years.'},
+  {s:'Economy',q:'The concept of "Ease of Doing Business" index is published by:',o:['IMF','WTO','World Bank (now discontinued)','UNCTAD'],a:2,e:'The Ease of Doing Business index was published by the World Bank annually. It was discontinued in 2021 after data irregularities. India improved from rank 142 (2014) to 63 (2020).'},
+  {s:'Economy',q:'National Infrastructure Pipeline (NIP) in India targets investment of:',o:['₹50 lakh crore','₹102 lakh crore','₹200 lakh crore','₹75 lakh crore'],a:1,e:'India\'s National Infrastructure Pipeline (NIP) targets ₹102 lakh crore ($1.4 trillion) infrastructure investment over FY 2019-25 in sectors like energy, roads, railways, urban development, etc.'},
+  {s:'Economy',q:'PM Vishwakarma scheme (2023) targets:',o:['Farmers','Traditional artisans and craftspeople','Urban youth entrepreneurs','Women Self-Help Groups'],a:1,e:'PM Vishwakarma scheme (launched Sept 2023) provides recognition, skill training, toolkits, collateral-free loans (up to ₹3 lakh), and market linkage to traditional artisans and craftspeople (18 trades).'},
+  {s:'Environment',q:'The term "Carbon Neutrality" means:',o:['Zero carbon emissions from all sources','Balancing carbon emissions with carbon removal/offsetting','Using only renewable energy','Eliminating all fossil fuels'],a:1,e:'Carbon neutrality means achieving net-zero carbon dioxide emissions by balancing carbon emissions with carbon removal or offsetting emissions. India aims for net zero by 2070.'},
+  {s:'Environment',q:'One Sun One World One Grid (OSOWOG) initiative was proposed by:',o:['USA at COP26','India at COP26','China at G20','EU at COP25'],a:1,e:'OSOWOG was proposed by India at COP26 Glasgow (2021). It aims to create a global interconnected electricity grid using renewable energy, based on the premise that the sun never sets globally.'},
+  {s:'Environment',q:'Which river is called the "Tsangpo" in Tibet and "Siang" in Arunachal Pradesh?',o:['Ganga','Yamuna','Brahmaputra','Indus'],a:2,e:'Brahmaputra is called Yarlung Tsangpo in Tibet, Siang in Arunachal Pradesh, and Brahmaputra in Assam. It makes one of the world\'s deepest gorges (Tsangpo Gorge) in Arunachal Pradesh.'},
+  {s:'Environment',q:'The "Great Pacific Garbage Patch" is primarily composed of:',o:['Industrial waste','Plastic pollution and marine debris','Oil spills','Radioactive material'],a:1,e:'The Great Pacific Garbage Patch is a collection of marine debris (mostly plastics) in the North Pacific Ocean. It is twice the size of Texas. Microplastics are a major component.'},
+  {s:'Science',q:'The James Webb Space Telescope (JWST) was launched in:',o:['2019','2020','2021','2022'],a:2,e:'JWST was launched on 25 December 2021 by NASA/ESA/CSA. It observes in infrared wavelengths and is 100 times more powerful than Hubble. It has observed galaxies from the early universe.'},
+  {s:'Science',q:'5G technology operates primarily on which type of spectrum?',o:['Long wave radio spectrum','Millimeter wave (mmWave) and sub-6 GHz spectrum','AM/FM radio frequencies','Microwave oven frequencies'],a:1,e:'5G uses millimeter wave (24–100 GHz) for high speed and low latency in dense areas, and sub-6 GHz spectrum for wider coverage. 5G is 100x faster than 4G and supports IoT applications.'},
+  {s:'Science',q:'Which Indian space mission reached the orbit of Mars?',o:['Chandrayaan-2','Astrosat','Mangalyaan (Mars Orbiter Mission)','Aditya-L1'],a:2,e:'Mangalyaan (Mars Orbiter Mission) was launched by ISRO on 5 November 2013 and entered Mars orbit on 24 September 2014, making India the first country to succeed in its first attempt to Mars.'},
+  {s:'Science',q:'The recent Aditya-L1 mission by ISRO is placed at:',o:['Moon orbit','Mars orbit','L1 Lagrange point between Earth and Sun','Earth orbit only'],a:2,e:'Aditya-L1 was launched on 2 September 2023 and was inserted into the Lagrange Point 1 (L1) halo orbit on 6 January 2024. From L1 (1.5 million km from Earth), it continuously observes the Sun.'},
+  {s:'Polity',q:'Which Article empowers the President to promulgate ordinances when Parliament is not in session?',o:['Article 107','Article 111','Article 123','Article 133'],a:2,e:'Article 123 allows the President to promulgate ordinances when both Houses of Parliament are not in session, if there is urgency. Ordinances have the same force as Acts of Parliament.'},
+  {s:'Polity',q:'The Representation of the People Act, 1951 deals with:',o:['Delimitation of constituencies','Conduct of elections to Parliament and State Legislatures','Voter registration','All of the above'],a:1,e:'The Representation of the People Act, 1951 governs the conduct of elections to the Houses of Parliament and State Legislatures, and contains provisions about qualifications, disqualifications, and corrupt practices.'},
+  {s:'Economy',q:'The Production Linked Incentive (PLI) scheme incentivizes:',o:['Agri-exports','Domestic manufacturing to boost production','FDI in service sector','Import substitution through tariffs only'],a:1,e:'PLI scheme provides financial incentives to companies based on incremental sales over a base year, encouraging domestic manufacturing in 14 sectors including mobile phones, pharmaceuticals, automobiles, textiles, etc.'},
+  {s:'Economy',q:'Special Drawing Rights (SDRs) of the IMF are valued based on a basket of:',o:['Gold and USD','5 major currencies: USD, EUR, CNY, JPY, GBP','All member country currencies','Only USD and EUR'],a:1,e:'SDRs are valued based on a basket of 5 major currencies: US Dollar, Euro, Chinese Renminbi (added 2016), Japanese Yen, and British Pound Sterling. India\'s SDR quota is about 2.8%.'},
+  {s:'History',q:'The famous "Uttaramerur inscription" provides information about:',o:['Gupta administration','Chola village administration','Maratha military system','Mughal revenue system'],a:1,e:'The Uttaramerur Inscription (Kancheepuram, Tamil Nadu) from the Chola period describes the sophisticated democratic village council (Sabhas) system, including qualifications for village assembly members.'},
+  {s:'History',q:'The Bhakti Movement saint who used music as a means of spreading devotion was:',o:['Ramananda','Kabir','Mirabai','All of the above'],a:3,e:'All three Bhakti saints used music. Mirabai composed devotional songs (bhajans) for Krishna. Kabir used dohas. Ramananda composed devotional songs. Tukaram, Surdas, and Tulsidas also used poetry/music.'},
+  {s:'History',q:'The Sikh Empire was established by Maharaja Ranjit Singh with its capital at:',o:['Amritsar','Lahore','Multan','Peshawar'],a:1,e:'Maharaja Ranjit Singh (1780–1839) established the Sikh Empire with Lahore (now in Pakistan) as its capital. He was the first to unify the Sikh misl into one kingdom.'},
+  {s:'History',q:'Which commission recommended reorganization of states on linguistic basis?',o:['Dar Commission','Simon Commission','States Reorganisation Commission','JVP Committee'],a:2,e:'The States Reorganisation Commission (1953–55), chaired by Fazal Ali, recommended reorganizing states along linguistic lines. Based on its report, the States Reorganisation Act (1956) was passed.'},
+  {s:'Geography',q:'The "Ring of Fire" is located around which ocean?',o:['Indian Ocean','Atlantic Ocean','Pacific Ocean','Arctic Ocean'],a:2,e:'The Ring of Fire is a 40,000 km horseshoe-shaped zone around the Pacific Ocean where 90% of world\'s earthquakes occur and 75% of world\'s volcanoes are located, due to tectonic plate boundaries.'},
+  {s:'Geography',q:'The Laterite soils of India are found mainly in:',o:['Indo-Gangetic Plains','Rajasthan desert','High rainfall tropical areas (Western Ghats, Eastern India)','Punjab plains'],a:2,e:'Laterite soils develop in high temperature and high rainfall tropical areas. In India, they are found in Western Ghats (Kerala, Karnataka), Odisha, Chhattisgarh, and northeastern India.'},
+  {s:'Geography',q:'The Longitudinal valleys of the Himalayas are called:',o:['Duns','Doons','Dhars','Both A and B'],a:3,e:'The longitudinal valleys between Himachal (Lesser Himalayas) and Shivaliks are called Duns (or Doons) — like Dehradun, Patlidun. They are fertile and well-settled valleys.'},
+  {s:'Economy',q:'The concept of "Social Cost-Benefit Analysis" in infrastructure projects considers:',o:['Only financial returns','Only environmental costs','Both financial returns and wider social/environmental impacts','Shareholder value'],a:2,e:'Social Cost-Benefit Analysis (SCBA) evaluates projects from society\'s perspective, including externalities like environmental impact, employment generation, and social welfare — beyond simple financial returns.'},
+  {s:'Environment',q:'Convention on Biological Diversity (CBD) has three main objectives. Which is NOT one?',o:['Conservation of biodiversity','Sustainable use of biological resources','Fair sharing of benefits from genetic resources','Prevention of all human use of natural resources'],a:3,e:'CBD\'s three objectives (Rio, 1992): conservation of biological diversity, sustainable use of its components, and fair and equitable sharing of benefits from genetic resources. It does NOT prohibit human use.'},
+  {s:'Science',q:'Which of the following is a greenhouse gas NOT commonly discussed?',o:['CO2','CH4','N2O','Nitrogen (N2)'],a:3,e:'Greenhouse gases include CO2, CH4 (methane), N2O (nitrous oxide), water vapor, and fluorinated gases. Nitrogen (N2) is NOT a greenhouse gas — it makes up 78% of the atmosphere but does not trap heat.'},
+  {s:'Science',q:'The Human Genome Project was completed in:',o:['1996','2000','2003','2010'],a:2,e:'The Human Genome Project (1990–2003) successfully sequenced the complete human genome (3 billion base pairs, ~20,000-25,000 genes). It was a landmark achievement in molecular biology.'},
+  {s:'Polity',q:'Which constitutional provision allows for the creation of All India Services?',o:['Article 308','Article 309','Article 312','Article 315'],a:2,e:'Article 312 empowers the Rajya Sabha (by 2/3 majority) to create new All India Services. Currently there are 3: IAS, IPS, and IFoS (Indian Forest Service). IAS and IPS were retained from colonial era.'},
+  {s:'Polity',q:'The term "Creamy Layer" in the context of OBC reservations means:',o:['Upper income layer among general category','Affluent sections within OBCs who are excluded from reservation benefits','All OBCs in urban areas','First generation educated OBCs'],a:1,e:'Creamy layer refers to socially and economically advanced sections of OBCs who are excluded from OBC reservations. Supreme Court (Indra Sawhney case, 1992) mandated exclusion of creamy layer. Income limit currently ₹8 lakh/year.'},
+  {s:'Economy',q:'What is "Demographic Dividend"?',o:['Benefits of large population','Economic growth potential when working-age population (15-64) is larger than dependents','Problems caused by population explosion','Benefits of elderly population'],a:1,e:'Demographic dividend is the economic growth potential arising from a shift in population\'s age structure, particularly when the working-age population (15–64) exceeds the dependent population. India\'s demographic dividend window: 2020–2055.'},
+  {s:'Economy',q:'The Sovereign Wealth Fund of India is managed by:',o:['RBI','SEBI','NIIF (National Investment and Infrastructure Fund)','LIC'],a:2,e:'NIIF (National Investment and Infrastructure Fund), established in 2015, acts as India\'s Quasi-Sovereign Wealth Fund. It invests in infrastructure and allied sectors with government and private participation.'},
+  {s:'History',q:'The Vijayanagara Empire was founded by:',o:['Krishnadevaraya','Harihara and Bukka Raya','Narasimha Saluva','Devaraya II'],a:1,e:'The Vijayanagara Empire was founded by Harihara I and Bukka Raya I in 1336 at Hampi (Karnataka) — former ministers of the Hoysala kingdom who liberated themselves from Delhi Sultanate\'s control.'},
+  {s:'Polity',q:'Which schedule of the Indian Constitution lists the powers and functions of Panchayats?',o:['10th Schedule','11th Schedule','12th Schedule','13th Schedule'],a:1,e:'The 11th Schedule (added by 73rd Amendment, 1992) lists 29 subjects for Panchayati Raj Institutions. The 12th Schedule lists 18 subjects for Municipalities (74th Amendment). No 13th Schedule exists.'},
+  {s:'Geography',q:'The Sundarbans mangroves are significant for:',o:['Tiger conservation only','Cyclone buffer, carbon sequestration, and Bengal tiger habitat','Agriculture land use','Mineral resources'],a:1,e:'Sundarbans serves multiple functions: home to Bengal tigers (Royal Bengal Tiger), cyclone buffer protecting coastal areas, massive carbon sink, nursery for marine species, and livelihoods for coastal communities.'},
+  {s:'Science',q:'The full form of ISRO\'s NAVIC system is:',o:['Navigation and Information Centre','Navigation with Indian Constellation','National Aero-Virtual Intelligence Centre','National Aviation Intelligent Constellation'],a:1,e:'NavIC (Navigation with Indian Constellation) is India\'s own regional navigation satellite system (GPS equivalent), developed by ISRO with 7 satellites providing accurate positioning over India and up to 1,500 km beyond.'},
+  {s:'Environment',q:'The IPCC (Intergovernmental Panel on Climate Change) was established in:',o:['1985','1988','1992','1997'],a:1,e:'IPCC was established in 1988 by the World Meteorological Organization (WMO) and UNEP. It reviews and synthesizes scientific research on climate change and provides reports to inform policymakers.'},
+  {s:'Economy',q:'The UDAN scheme in India is related to:',o:['Urban development','Regional air connectivity','Skill development for aviation','Drones'],a:1,e:'UDAN (Ude Desh ka Aam Naagrik) scheme (2016) aims to make air travel affordable and improve regional connectivity by subsidizing airlines to operate on un-served/under-served routes.'},
+  {s:'History',q:'The Chauri Chaura incident (1922) led to:',o:['Launch of Civil Disobedience Movement','Withdrawal of Non-Cooperation Movement by Gandhi','Start of Quit India Movement','Gandhi\'s arrest'],a:1,e:'On 4-5 February 1922, protesters burned a police station at Chauri Chaura (UP) killing 22 policemen. Gandhi called off the Non-Cooperation Movement, believing India was not ready for mass civil disobedience.'},
+  {s:'Polity',q:'Article 370 of the Indian Constitution was abrogated in:',o:['2016','2018','2019','2020'],a:2,e:'Article 370, which gave special status to Jammu & Kashmir, was abrogated on 5 August 2019. J&K was bifurcated into two Union Territories: J&K (with legislature) and Ladakh (without legislature).'},
+  {s:'Science',q:'What is "Dark Matter"?',o:['Matter in black holes','Hypothetical matter not emitting light but having gravitational effects','Cosmic dust and gas','Antimatter'],a:1,e:'Dark matter is a hypothetical form of matter that doesn\'t emit, absorb, or reflect light, making it invisible. It is inferred from its gravitational effects. It constitutes about 27% of the universe\'s energy-mass.'},
+  {s:'Environment',q:'The "Miyawaki method" refers to:',o:['Japanese rice cultivation','Rapid urban forest creation using native species planted densely','Traditional Japanese water conservation','Biodiversity corridors'],a:1,e:'The Miyawaki method (developed by Japanese botanist Akira Miyawaki) involves planting native species very densely to create a self-sustaining forest 10x faster and 30x denser than conventional plantations.'},
+  {s:'Economy',q:'FRBM Act target for fiscal deficit is:',o:['2% of GDP','3% of GDP','4% of GDP','5% of GDP'],a:1,e:'The FRBM Act (2003) originally set a fiscal deficit target of 3% of GDP for the Centre. Due to COVID-19, this was relaxed. The NK Singh Committee (2017) recommended a fiscal deficit roadmap of 2.5% by FY23.'},
+  {s:'History',q:'The Suez Canal crisis of 1956 involved which countries?',o:['UK, France, and Israel vs Egypt','USA and UK vs Egypt','NATO vs Egypt and USSR','Egypt and Syria vs Israel'],a:0,e:'The Suez Crisis (1956) occurred when Egypt\'s President Nasser nationalized the Suez Canal. UK, France, and Israel attacked Egypt. The USA and USSR pressured them to withdraw. India supported Egypt under NAM.'},
+  {s:'Polity',q:'Which article of the Constitution deals with "Protection of life and personal liberty"?',o:['Article 19','Article 20','Article 21','Article 22'],a:2,e:'Article 21 states: "No person shall be deprived of his life or personal liberty except according to procedure established by law." The Supreme Court has given it the widest possible interpretation over the years.'},
+  {s:'Environment',q:'Project Elephant in India was launched in:',o:['1973','1984','1992','2000'],a:2,e:'Project Elephant was launched by the Government of India in 1992 to protect elephants, their habitat, and migration corridors, and to address human-elephant conflict. There are 30 Elephant Reserves in India.'},
+  {s:'Science',q:'The principle behind GPS (Global Positioning System) is:',o:['Radio wave triangulation from satellite constellation','Laser measurement from Earth stations','Magnetic field sensing','Gravity wave detection'],a:0,e:'GPS works by receiving signals from multiple satellites simultaneously and using trilateration (calculating distances from 4+ satellites) to determine the receiver\'s precise location. India\'s own system is NavIC.'},
+  {s:'Economy',q:'The term "Import Substitution Industrialization" means:',o:['Promoting exports aggressively','Replacing imports with domestically produced goods through protective policies','Opening economy to free trade','Developing services sector'],a:1,e:'ISI is a trade and economic policy that advocates replacing foreign imports with domestic production. India followed ISI in the post-Independence era (1950s-80s) with high tariffs and import licensing (License Raj).'}
+];
+
+/* ═══════════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════════ */
+let exam = null, cfg = null, Qs = [], answers = [], skipped = [], cur = 0, ansCount = 0, skipCount = 0;
+let timerID = null, timeLeft = 0, startTime = null, picked = null;
+
+function selectExam(el) {
+  document.querySelectorAll('.ecard').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  exam = el.dataset.exam;
+  cfg = EXAMS[exam];
+  const btn = document.getElementById('start-btn');
+  btn.disabled = false;
+  btn.textContent = `Start ${cfg.name} Mock Test (100 Qs)`;
+}
+
+function selectFirstFree() {
+  const card = document.querySelector('[data-exam="ssc_cgl"]');
+  selectExam(card);
+  startTest();
+}
+
+function startTest() {
+  if (!exam) return;
+  if (!cfg.free) { showPW(); return; }
+  Qs = QB[exam]; answers = new Array(100).fill(null); skipped = new Array(100).fill(false);
+  cur = 0; ansCount = 0; skipCount = 0; picked = null; startTime = Date.now();
+  timeLeft = cfg.time * 60;
+  show('s-test');
+  buildPalette();
+  renderQ();
+  startTimer();
+  document.getElementById('t-exam-lbl').textContent = cfg.name;
+  document.getElementById('t-subj-lbl').textContent = cfg.label;
+  document.getElementById('si-total').textContent = '100';
+  document.getElementById('si-mark').textContent = `+${cfg.pos} / −${cfg.neg}`;
+  document.getElementById('si-max').textContent = cfg.pos * 100;
+}
+
+function buildPalette() {
+  const p = document.getElementById('palette'); p.innerHTML = '';
+  for (let i = 0; i < 100; i++) {
+    const d = document.createElement('div');
+    d.className = 'pnum' + (i === 0 ? ' cur' : '');
+    d.textContent = i + 1; d.id = 'pn' + i;
+    d.onclick = () => jump(i);
+    p.appendChild(d);
+  }
+}
+
+function updatePalette() {
+  for (let i = 0; i < 100; i++) {
+    const el = document.getElementById('pn' + i);
+    el.className = 'pnum';
+    if (i === cur) el.classList.add('cur');
+    else if (answers[i] !== null) el.classList.add('ans');
+    else if (skipped[i]) el.classList.add('skip');
+  }
+}
+
+function renderQ() {
+  const q = Qs[cur];
+  document.getElementById('q-num').textContent = `QUESTION ${cur+1} OF 100`;
+  const stag = document.getElementById('q-stag');
+  stag.textContent = q.s;
+  const colors = {History:'background:#FFF3EB;color:#C44D00',Geography:'background:#ECFDF5;color:#059669',Polity:'background:#EFF6FF;color:#1D4ED8',Economy:'background:#F5F3FF;color:#7C3AED',Science:'background:#FEF2F2;color:#DC2626','Railway GK':'background:#F0FDF4;color:#16A34A',Banking:'background:#EFF6FF;color:#1D4ED8',GK:'background:#FFF3EB;color:#C44D00',Environment:'background:#ECFDF5;color:#059669',General:'background:#F5F3FF;color:#7C3AED'};
+  stag.style.cssText = (colors[q.s] || 'background:#F0F2F8;color:#6B7280') + ';padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;';
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('prog').style.width = `${((cur+1)/100)*100}%`;
+  document.getElementById('expl').className = 'expl';
+  document.getElementById('expl').textContent = '';
+  picked = answers[cur];
+
+  const optsEl = document.getElementById('opts');
+  optsEl.innerHTML = '';
+  ['A','B','C','D'].forEach((ltr, i) => {
+    const d = document.createElement('div');
+    d.className = 'opt' + (picked === i ? ' picked' : '');
+    d.innerHTML = `<span class="opt-ltr">${ltr}</span><span class="opt-txt">${q.o[i]}</span>`;
+    d.onclick = () => pickOpt(i);
+    optsEl.appendChild(d);
+  });
+
+  if (answers[cur] !== null) showAnswered();
+  document.getElementById('btn-next').disabled = (answers[cur] === null && !skipped[cur]);
+  updateStat();
+  updatePalette();
+}
+
+function pickOpt(i) {
+  if (answers[cur] !== null) return;
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('picked'));
+  document.querySelectorAll('.opt')[i].classList.add('picked');
+  picked = i;
+  document.getElementById('btn-next').disabled = false;
+}
+
+function showAnswered() {
+  const q = Qs[cur];
+  document.querySelectorAll('.opt').forEach(o => o.classList.add('done'));
+  const opts = document.querySelectorAll('.opt');
+  if (answers[cur] === q.a) { opts[answers[cur]].classList.remove('picked'); opts[answers[cur]].classList.add('correct'); }
+  else { if(answers[cur] !== null){ opts[answers[cur]].classList.remove('picked'); opts[answers[cur]].classList.add('wrong'); } opts[q.a].classList.add('correct'); }
+  const ex = document.getElementById('expl'); ex.textContent = '💡 ' + q.e; ex.classList.add('show');
+}
+
+function updateStat() {
+  document.getElementById('tf-stat').innerHTML = `<strong>${ansCount}</strong> answered &nbsp;·&nbsp; <strong>${skipCount}</strong> skipped`;
+}
+
+function skip() {
+  skipped[cur] = true; skipCount++;
+  document.getElementById('btn-next').disabled = false;
+  advance();
+}
+
+function next() {
+  if (picked !== null && answers[cur] === null) {
+    answers[cur] = picked; ansCount++;
+    showAnswered(); updatePalette();
+    if (cur < 99) { setTimeout(advance, 700); return; }
+  }
+  advance();
+}
+
+function advance() {
+  updatePalette();
+  if (cur < 99) { cur++; picked = answers[cur]; renderQ(); }
+  else submitTest();
+}
+
+function jump(i) { cur = i; picked = answers[cur]; renderQ(); }
+
+function startTimer() {
+  clearInterval(timerID);
+  timerID = setInterval(() => {
+    timeLeft--;
+    const m = String(Math.floor(timeLeft/60)).padStart(2,'0');
+    const s = String(timeLeft%60).padStart(2,'0');
+    document.getElementById('timer').textContent = `${m}:${s}`;
+    document.getElementById('si-time').textContent = `${m}:${s}`;
+    if (timeLeft <= 120) document.getElementById('timer').classList.add('warn');
+    if (timeLeft <= 0) { clearInterval(timerID); submitTest(); }
+  }, 1000);
+}
+
+function submitTest() {
+  clearInterval(timerID);
+  if (picked !== null && answers[cur] === null) { answers[cur] = picked; ansCount++; }
+  showResult();
+}
+
+function showResult() {
+  const correct = answers.filter((a,i) => a === Qs[i].a).length;
+  const wrong = answers.filter((a,i) => a !== null && a !== Qs[i].a).length;
+  const skip2 = answers.filter(a => a === null).length;
+  const score = correct * cfg.pos - wrong * cfg.neg;
+  const pct = Math.round((correct/100)*100);
+  const elapsed = Math.round((Date.now()-startTime)/1000);
+  const mm = String(Math.floor(elapsed/60)).padStart(2,'0'), ss = String(elapsed%60).padStart(2,'0');
+
+  document.getElementById('r-pct').textContent = pct + '%';
+  const arc = document.getElementById('ring-arc');
+  arc.style.strokeDashoffset = 301.6 - (pct/100)*301.6;
+  document.getElementById('r-cor').textContent = correct;
+  document.getElementById('r-wrg').textContent = wrong;
+  document.getElementById('r-skp').textContent = skip2;
+  document.getElementById('r-scr').textContent = score.toFixed(1);
+
+  const titles = ['💪 Keep Practicing!','📚 Good Attempt!','👍 Decent Performance!','✅ Good Score!','🌟 Excellent!','🏆 Outstanding!'];
+  const ti = Math.min(Math.floor(pct/20), 5);
+  document.getElementById('r-title').textContent = titles[ti];
+  document.getElementById('r-sub').textContent = cfg.name + ' · General Awareness · 100 Questions';
+
+  const rank = pct >= 90 ? Math.floor(Math.random()*20)+1 : pct >= 75 ? Math.floor(Math.random()*100)+20 : pct >= 60 ? Math.floor(Math.random()*500)+100 : Math.floor(Math.random()*2000)+500;
+  document.getElementById('r-rank').textContent = '#' + rank;
+  document.getElementById('my-rnk').textContent = rank;
+  document.getElementById('my-sc').textContent = score.toFixed(1) + '/' + (cfg.pos*100);
+  document.getElementById('my-tm').textContent = mm + ':' + ss;
+
+  // Leaderboard fake scores based on exam
+  const maxS = cfg.pos * 100;
+  document.getElementById('lb1-sc').textContent = (maxS * 0.96).toFixed(0) + '/' + maxS;
+  document.getElementById('lb2-sc').textContent = (maxS * 0.93).toFixed(0) + '/' + maxS;
+  document.getElementById('lb3-sc').textContent = (maxS * 0.91).toFixed(0) + '/' + maxS;
+
+  // Subject analysis
+  const subjects = {};
+  Qs.forEach((q,i) => {
+    if (!subjects[q.s]) subjects[q.s] = {total:0, correct:0};
+    subjects[q.s].total++;
+    if (answers[i] === q.a) subjects[q.s].correct++;
+  });
+  const saEl = document.getElementById('sa-rows'); saEl.innerHTML = '';
+  const colors2 = ['#E85D04','#1D4ED8','#059669','#7C3AED','#DC2626','#F59E0B'];
+  Object.entries(subjects).forEach(([sub, data], idx) => {
+    const sPct = data.total > 0 ? Math.round((data.correct/data.total)*100) : 0;
+    saEl.innerHTML += `<div class="sa-row"><span class="sa-name">${sub}</span><div class="sa-bar-bg"><div class="sa-bar-fill" style="width:${sPct}%;background:${colors2[idx%colors2.length]};"></div></div><span class="sa-pct" style="color:${colors2[idx%colors2.length]};">${data.correct}/${data.total}</span></div>`;
+  });
+
+  show('s-result');
+}
+
+function retry() { cur = 0; picked = null; startTest(); }
+function goSelect() { show('s-select'); }
+function show(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+function showPW() { document.getElementById('pw').style.display = 'flex'; }
+function closePW(e) { if (!e || e.target === document.getElementById('pw')) document.getElementById('pw').style.display = 'none'; }
+
+/* ════════════════════════════════════════
+   AUTH SYSTEM
+════════════════════════════════════════ */
+function getUsers(){return JSON.parse(localStorage.getItem('oj_users')||'[]');}
+function saveUsers(u){localStorage.setItem('oj_users',JSON.stringify(u));}
+function getCurrentUser(){return JSON.parse(localStorage.getItem('oj_current_user')||'null');}
+function setCurrentUser(u){localStorage.setItem('oj_current_user',JSON.stringify(u));}
+
+function saveUserScore(scoreObj){
+  const user=getCurrentUser(); if(!user)return;
+  const key='oj_scores_'+user.email;
+  const arr=JSON.parse(localStorage.getItem(key)||'[]');
+  arr.unshift(scoreObj);
+  localStorage.setItem(key,JSON.stringify(arr.slice(0,50)));
+}
+
+function updateNavAuth(){
+  const user=getCurrentUser();
+  const navAuthEl=document.getElementById('nav-auth');
+  if(!navAuthEl)return;
+  if(user){
+    navAuthEl.innerHTML=`
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#E85D04,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;">${(user.fname[0]+(user.lname?user.lname[0]:'')).toUpperCase()}</div>
+        <span style="font-size:13px;font-weight:600;color:var(--dark);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${user.fname}</span>
+        <a href="auth.html" style="font-size:12px;color:var(--muted);text-decoration:none;padding:5px 10px;border:1px solid var(--border);border-radius:6px;">Dashboard</a>
+      </div>`;
+  } else {
+    navAuthEl.innerHTML=`
+      <div style="display:flex;gap:8px;">
+        <a href="auth.html" style="font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;padding:7px 14px;border:1.5px solid var(--border);border-radius:8px;transition:all .15s;" onmouseover="this.style.borderColor='#E85D04';this.style.color='#E85D04'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">Log In</a>
+        <a href="auth.html?tab=signup" style="font-size:13px;font-weight:700;color:#fff;text-decoration:none;padding:7px 16px;background:linear-gradient(135deg,#E85D04,#C44D00);border-radius:8px;">Sign Up Free</a>
+      </div>`;
+  }
+}
+
+function showToast(msg, ok=true){
+  let t=document.getElementById('oj-toast-mt');
+  if(!t){t=document.createElement('div');t.id='oj-toast-mt';t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#1A1A2E;color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:99999;pointer-events:none;white-space:nowrap;';document.body.appendChild(t);}
+  t.textContent=(ok?'✅ ':'❌ ')+msg;
+  t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},3000);
+}
+
+/* AUTH POPUP — shown before test if not logged in */
+function showAuthPopup(onSuccess){
+  document.getElementById('auth-popup').style.display='flex';
+  window._authOnSuccess=onSuccess;
+  document.getElementById('ap-tab-login').click();
+}
+function closeAuthPopup(){document.getElementById('auth-popup').style.display='none';}
+
+function apSwitchTab(tab){
+  document.getElementById('ap-login-form').style.display=tab==='login'?'block':'none';
+  document.getElementById('ap-signup-form').style.display=tab==='signup'?'block':'none';
+  document.getElementById('ap-tab-login').classList.toggle('ap-tab-act',tab==='login');
+  document.getElementById('ap-tab-signup').classList.toggle('ap-tab-act',tab==='signup');
+}
+
+function apLogin(){
+  const email=document.getElementById('ap-l-email').value.trim().toLowerCase();
+  const pass=document.getElementById('ap-l-pass').value;
+  if(!email||!pass){showToast('Please fill all fields.',false);return;}
+  const users=getUsers();
+  const user=users.find(u=>u.email===email&&u.password===btoa(pass));
+  if(!user){showToast('Invalid email or password.',false);return;}
+  setCurrentUser(user);
+  closeAuthPopup(); updateNavAuth();
+  showToast('Welcome back, '+user.fname+'! 🎉');
+  if(window._authOnSuccess) window._authOnSuccess(user);
+}
+
+function apSignup(){
+  const fname=document.getElementById('ap-s-name').value.trim();
+  const email=document.getElementById('ap-s-email').value.trim().toLowerCase();
+  const pass=document.getElementById('ap-s-pass').value;
+  if(!fname||!email||pass.length<6){showToast('Please fill all fields (min 6 char password).',false);return;}
+  const users=getUsers();
+  if(users.find(u=>u.email===email)){showToast('Email already registered. Log in instead.',false);return;}
+  const user={fname,lname:'',email,password:btoa(pass),state:'India',exam:'Multiple',joined:new Date().toLocaleDateString('en-IN',{year:'numeric',month:'short',day:'numeric'})};
+  users.push(user);saveUsers(users);setCurrentUser(user);
+  closeAuthPopup(); updateNavAuth();
+  showToast('Account created! Welcome, '+fname+'! 🚀');
+  if(window._authOnSuccess) window._authOnSuccess(user);
+}
+
+/* SAVE SCORE POPUP — shown after test result */
+function showSaveScorePopup(scoreObj){
+  const user=getCurrentUser();
+  if(user){
+    saveUserScore(scoreObj);
+    showToast('Score saved to your profile! 📊');
+    return;
+  }
+  // not logged in — show save popup
+  document.getElementById('save-score-popup').style.display='flex';
+  window._pendingScore=scoreObj;
+}
+function closeSavePopup(){document.getElementById('save-score-popup').style.display='none';}
+function saveAfterAuth(){
+  closeAuthPopup();
+  closeSavePopup();
+  showAuthPopup((user)=>{
+    if(window._pendingScore){ saveUserScore(window._pendingScore); showToast('Score saved to your profile! 📊'); }
+  });
+}
+
+/* Patch startTest to check auth */
+const _origStartTest = startTest;
+startTest = function(){
+  if(!exam)return;
+  if(!cfg)return;
+  if(!cfg.free){showPW();return;}
+  const user=getCurrentUser();
+  if(!user){
+    // show auth popup, then start on success
+    showAuthPopup(()=>{ _origStartTest(); });
+    // also allow guest
+    return;
+  }
+  _origStartTest();
+};
+
+/* Patch showResult to offer score saving */
+const _origShowResult = showResult;
+showResult = function(){
+  _origShowResult();
+  // after result rendered, build score obj and offer save
+  setTimeout(()=>{
+    const correct = answers.filter((a,i)=>a===Qs[i].a).length;
+    const wrong = answers.filter((a,i)=>a!==null&&a!==Qs[i].a).length;
+    const score = correct*cfg.pos - wrong*cfg.neg;
+    const pct = Math.round((correct/100)*100);
+    const rank = parseInt(document.getElementById('r-rank').textContent.replace('#',''))||999;
+    const icons={ssc_cgl:'📋',rrb_ntpc:'🚂',sbi_po:'🏦',upsc_cse:'🏛️'};
+    const scoreObj={
+      examKey:exam, examName:cfg.name, icon:icons[exam]||'📋',
+      correct, wrong, score:score.toFixed(1), pct, rank,
+      date:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}),
+      time:new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})
+    };
+    showSaveScorePopup(scoreObj);
+  }, 400);
+};
+
+window.addEventListener('DOMContentLoaded', () => {
+  const p = new URLSearchParams(location.search);
+  const e = p.get('exam');
+  if (e) { const c = document.querySelector(`[data-exam="${e}"]`)||document.querySelector(`[data-exam="${e}_cgl"]`); if(c) selectExam(c); }
+  if (location.hash === '#plans') setTimeout(() => document.getElementById('plans').scrollIntoView({behavior:'smooth'}), 300);
+  updateNavAuth();
+});
+</script>
+
+<!-- ══ AUTH POPUP MODAL ══ -->
+<div id="auth-popup" style="display:none;position:fixed;inset:0;background:rgba(26,26,46,0.82);z-index:9998;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeAuthPopup()">
+  <div style="background:#fff;border-radius:20px;max-width:440px;width:100%;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.3);animation:fadeUp .3s ease;">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#1A1A2E,#2D1B69);padding:24px 28px 20px;position:relative;">
+      <button onclick="closeAuthPopup()" style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.1);border:none;color:#fff;width:30px;height:30px;border-radius:8px;font-size:16px;cursor:pointer;">✕</button>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="width:36px;height:36px;background:#E85D04;border-radius:8px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" fill="#fff" viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#fff;">Only<span style="color:#FDBA74;">Jobs</span></div>
+      </div>
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;">Save Your Progress 📊</div>
+      <div style="font-size:13px;color:#94A3B8;">Free account — track every score, see national rank</div>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;background:#F7F8FC;margin:16px 20px 0;border-radius:10px;padding:4px;">
+      <button id="ap-tab-login" class="ap-tab-act" onclick="apSwitchTab('login')" style="flex:1;padding:9px;border:none;background:#fff;border-radius:7px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;box-shadow:0 1px 3px rgba(0,0,0,0.1);">Log In</button>
+      <button id="ap-tab-signup" onclick="apSwitchTab('signup')" style="flex:1;padding:9px;border:none;background:transparent;border-radius:7px;font-size:13.5px;font-weight:600;cursor:pointer;color:#6B7280;font-family:'Figtree',sans-serif;">Sign Up Free</button>
+    </div>
+    <style>.ap-tab-act{background:#fff!important;color:#2D2D3A!important;box-shadow:0 1px 3px rgba(0,0,0,0.1)!important;} #ap-tab-login,#ap-tab-signup{transition:all .2s;}</style>
+    <!-- Login form -->
+    <div id="ap-login-form" style="padding:20px 24px 24px;">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:700;color:#2D2D3A;display:block;margin-bottom:5px;">Email</label>
+        <input id="ap-l-email" type="email" placeholder="yourname@email.com" style="width:100%;padding:10px 13px;border:1.5px solid #E8EAF0;border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;" onfocus="this.style.borderColor='#E85D04'" onblur="this.style.borderColor='#E8EAF0'"/>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:12px;font-weight:700;color:#2D2D3A;display:block;margin-bottom:5px;">Password</label>
+        <input id="ap-l-pass" type="password" placeholder="Your password" style="width:100%;padding:10px 13px;border:1.5px solid #E8EAF0;border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;" onfocus="this.style.borderColor='#E85D04'" onblur="this.style.borderColor='#E8EAF0'" onkeydown="if(event.key==='Enter')apLogin()"/>
+      </div>
+      <button onclick="apLogin()" style="width:100%;padding:12px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:9px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-bottom:10px;">Log In & Save Score</button>
+      <button onclick="closeAuthPopup();_origStartTest?_origStartTest():startTest();" style="width:100%;padding:10px;background:#F7F8FC;border:1.5px solid #E8EAF0;color:#6B7280;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;">Continue as Guest (score won't be saved)</button>
+    </div>
+    <!-- Signup form -->
+    <div id="ap-signup-form" style="padding:20px 24px 24px;display:none;">
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:700;color:#2D2D3A;display:block;margin-bottom:5px;">Your Name</label>
+        <input id="ap-s-name" type="text" placeholder="Rahul Sharma" style="width:100%;padding:10px 13px;border:1.5px solid #E8EAF0;border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;" onfocus="this.style.borderColor='#E85D04'" onblur="this.style.borderColor='#E8EAF0'"/>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:12px;font-weight:700;color:#2D2D3A;display:block;margin-bottom:5px;">Email</label>
+        <input id="ap-s-email" type="email" placeholder="yourname@email.com" style="width:100%;padding:10px 13px;border:1.5px solid #E8EAF0;border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;" onfocus="this.style.borderColor='#E85D04'" onblur="this.style.borderColor='#E8EAF0'"/>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label style="font-size:12px;font-weight:700;color:#2D2D3A;display:block;margin-bottom:5px;">Password (min 6 chars)</label>
+        <input id="ap-s-pass" type="password" placeholder="Create a password" style="width:100%;padding:10px 13px;border:1.5px solid #E8EAF0;border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;outline:none;" onfocus="this.style.borderColor='#E85D04'" onblur="this.style.borderColor='#E8EAF0'" onkeydown="if(event.key==='Enter')apSignup()"/>
+      </div>
+      <button onclick="apSignup()" style="width:100%;padding:12px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:9px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-bottom:10px;">Create Free Account & Start</button>
+      <button onclick="closeAuthPopup();_origStartTest?_origStartTest():null;" style="width:100%;padding:10px;background:#F7F8FC;border:1.5px solid #E8EAF0;color:#6B7280;border-radius:9px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;">Continue as Guest</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SAVE SCORE POPUP ══ -->
+<div id="save-score-popup" style="display:none;position:fixed;inset:0;background:rgba(26,26,46,0.82);z-index:9998;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeSavePopup()">
+  <div style="background:#fff;border-radius:20px;max-width:400px;width:100%;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.3);animation:fadeUp .3s ease;">
+    <div style="background:linear-gradient(135deg,#059669,#065F46);padding:24px;text-align:center;">
+      <div style="font-size:48px;margin-bottom:8px;">🏆</div>
+      <div style="font-family:'Syne',sans-serif;font-size:19px;font-weight:800;color:#fff;margin-bottom:4px;">Test Completed!</div>
+      <div style="font-size:13px;color:#A7F3D0;">Create a free account to save this score</div>
+    </div>
+    <div style="padding:24px;">
+      <div style="background:#F7F8FC;border-radius:12px;padding:16px;margin-bottom:20px;display:flex;gap:16px;justify-content:center;">
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#E85D04;" id="sp-pct">—</div><div style="font-size:11px;color:#6B7280;">Score %</div></div>
+        <div style="width:1px;background:#E8EAF0;"></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#7C3AED;" id="sp-rank">—</div><div style="font-size:11px;color:#6B7280;">National Rank</div></div>
+        <div style="width:1px;background:#E8EAF0;"></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#059669;" id="sp-cor">—</div><div style="font-size:11px;color:#6B7280;">Correct</div></div>
+      </div>
+      <button onclick="saveAfterAuth()" style="width:100%;padding:13px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-bottom:10px;">💾 Save Score — Sign Up Free</button>
+      <button onclick="closeSavePopup()" style="width:100%;padding:11px;background:#F7F8FC;border:1.5px solid #E8EAF0;color:#6B7280;border-radius:10px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;">No thanks, discard score</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+</style>
+
+<!-- Patch save score popup to show real data -->
+<script>
+const _origShowSave = showSaveScorePopup;
+showSaveScorePopup = function(obj){
+  document.getElementById('sp-pct').textContent = obj.pct+'%';
+  document.getElementById('sp-rank').textContent = '#'+obj.rank;
+  document.getElementById('sp-cor').textContent = obj.correct+'/100';
+  _origShowSave(obj);
+};
+</script>
+
+<script src="onlyjobs-ai.js"></script>
+</body>
+</html>

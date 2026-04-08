@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Job Details - OnlyJobs</title>
+<link rel="manifest" href="/onlyjob/manifest.json"/>
+<meta name="theme-color" content="#E85D04"/>
+<link rel="apple-touch-icon" href="/onlyjob/icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--bg:#fff;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--bl:#1D4ED8;--pu:#7C3AED;--rd:#DC2626;}
+html{scroll-behavior:smooth;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;line-height:1.6;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.nav-links{display:flex;gap:2px;margin-left:10px;}
+.nav-links a{font-size:13px;font-weight:500;color:var(--mu);text-decoration:none;padding:5px 10px;border-radius:6px;white-space:nowrap;}
+.nav-links a:hover{background:var(--al);color:var(--ad);}
+.bc{max-width:1280px;margin:0 auto;padding:12px 20px 0;font-size:12.5px;color:var(--mu);}
+.bc a{color:var(--ac);text-decoration:none;}
+
+/* Post Container Styles */
+.post-container {
+    max-width: 1000px;
+    margin: 20px auto 40px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border: 1px solid var(--bd);
+}
+.post-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dk);
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--bd);
+    padding-bottom: 15px;
+}
+
+/* Comprehensive Scraped HTML Styling */
+#post-content {
+    line-height: 1.8;
+    color: var(--tx);
+    font-size: 15.5px;
+}
+#post-content table {
+    width: 100% !important;
+    max-width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 14px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+#post-content table, #post-content th, #post-content td {
+    border: 1px solid var(--bd);
+}
+#post-content th, #post-content td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+}
+#post-content th {
+    background: var(--b2);
+    font-weight: 700;
+    color: var(--dk);
+}
+#post-content tr:nth-child(even) {
+    background-color: #FAFAFA;
+}
+#post-content h1, #post-content h2, #post-content h3, #post-content h4 {
+    font-family: 'Syne', sans-serif;
+    color: var(--dk);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+#post-content h1 { font-size: 26px; border-bottom: 2px solid var(--ac); padding-bottom: 8px; }
+#post-content h2 { font-size: 22px; color: var(--ac); }
+#post-content h3 { font-size: 18px; }
+
+#post-content p {
+    margin-bottom: 16px;
+}
+#post-content ul, #post-content ol {
+    margin-bottom: 20px;
+    padding-left: 25px;
+}
+#post-content li {
+    margin-bottom: 8px;
+}
+#post-content a {
+    color: var(--bl);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+#post-content a:hover {
+    color: var(--ac);
+    text-decoration: underline;
+}
+#post-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+.loading {
+    text-align: center;
+    padding: 50px;
+    color: var(--mu);
+    font-size: 16px;
+}
+
+footer{background:var(--dk);color:#64748B;padding:16px 20px; margin-top: 40px;}
+.ft-in{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="latestjobs.html">Latest Jobs</a>
+      <a href="results.html">Results</a>
+      <a href="admitcard.html">Admit Card</a>
+    </div>
+  </div>
+</header>
+
+<div class="bc"><a href="index.html">Home</a> &rsaquo; <span style="color:#2D2D3A;font-weight:600;" id="bc-title">Job Details</span></div>
+
+<div class="post-container">
+    <div id="post-title" class="post-title" style="display: none;">Job Details</div>
+    <div id="post-content">
+        <div class="loading">Loading job details...</div>
+    </div>
+</div>
+
+<footer><div class="ft-in"><span>2026 OnlyJobs &middot; All information is aggregated for educational purposes.</span></div></footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+    const requestedCategory = params.get('cat');
+    
+    if (!postId) {
+        document.getElementById('post-content').innerHTML = '<div class="loading">No Job ID provided.</div>';
+        return;
+    }
+
+    fetch('data.json')
+        .then(res => res.json())
+        .then(data => {
+            // Search all categories for the post ID
+            let foundPost = null;
+            const categories = ['results', 'admit_cards', 'latest_jobs', 'answer_keys'];
+            const searchOrder = requestedCategory && categories.includes(requestedCategory)
+                ? [requestedCategory].concat(categories.filter(cat => cat !== requestedCategory))
+                : categories;
+            
+            for (const cat of searchOrder) {
+                if (data[cat]) {
+                    const post = data[cat].find(p => p.id === postId);
+                    if (post) {
+                        foundPost = post;
+                        break;
+                    }
+                }
+            }
+            
+            if (foundPost) {
+                document.title = foundPost.title + " - OnlyJobs";
+                document.getElementById('bc-title').textContent = foundPost.title;
+                
+                document.getElementById('post-title').textContent = foundPost.title;
+                document.getElementById('post-title').style.display = 'block';
+                
+                if (foundPost.content_html) {
+                    document.getElementById('post-content').innerHTML = foundPost.content_html;
+                } else {
+                    document.getElementById('post-content').innerHTML = '<div class="loading">No detailed info available for this post. <br><br> <a href="' + foundPost.original_url + '" target="_blank">View Orignal Source</a></div>';
+                }
+            } else {
+                document.getElementById('post-content').innerHTML = '<div class="loading">Job post not found.</div>';
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching data:', err);
+            document.getElementById('post-content').innerHTML = '<div class="loading">Error loading job details. Please try again later.</div>';
+        });
+});
+</script>
+</body>
+</html>

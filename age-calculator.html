@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Age Calculator 2026 - OnlyJobs | Exact Age & Exam Eligibility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;--rl:#FEF2F2;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;min-height:100vh;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+
+.wrap{max-width:900px;margin:0 auto;padding:24px 20px 50px;}
+.page-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--dk);margin-bottom:4px;}
+.page-sub{font-size:14px;color:var(--mu);margin-bottom:24px;}
+
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:24px;margin-bottom:20px;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dk);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+
+.field{margin-bottom:16px;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--tx);margin-bottom:6px;}
+input,select{width:100%;padding:11px 14px;border:1.5px solid var(--bd);border-radius:8px;font-size:14px;font-family:'Figtree',sans-serif;color:var(--dk);outline:none;transition:border-color .15s;}
+input:focus,select:focus{border-color:var(--ac);}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:500px){.row{grid-template-columns:1fr;}}
+
+.calc-btn{width:100%;padding:14px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;margin-top:6px;}
+.calc-btn:hover{opacity:.9;}
+
+/* RESULT */
+.result-box{display:none;background:linear-gradient(135deg,#1A1A2E,#2D2D5E);border-radius:12px;padding:24px;margin-top:20px;color:#fff;}
+.result-box.show{display:block;}
+.result-main{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#FDBA74;margin-bottom:8px;text-align:center;}
+.result-sub{font-size:14px;color:#94A3B8;text-align:center;margin-bottom:20px;}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:500px){.result-grid{grid-template-columns:1fr 1fr;}}
+.result-stat{background:rgba(255,255,255,.07);border-radius:10px;padding:14px;text-align:center;}
+.rs-n{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#FDBA74;}
+.rs-l{font-size:11px;color:#64748B;margin-top:3px;}
+.result-detail{background:rgba(255,255,255,.05);border-radius:10px;padding:16px;}
+.rd-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;}
+.rd-row:last-child{border-bottom:none;}
+.rd-label{color:#64748B;}
+.rd-val{color:#CBD5E1;font-weight:600;}
+
+/* ELIGIBILITY TABLE */
+.elig-table{width:100%;border-collapse:collapse;font-size:13px;}
+.elig-table th{background:var(--b3);padding:10px 12px;text-align:left;font-weight:700;color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.3px;}
+.elig-table td{padding:10px 12px;border-bottom:1px solid var(--bd);}
+.elig-table tr:last-child td{border-bottom:none;}
+.elig-eligible{color:var(--gn);font-weight:700;}
+.elig-not{color:var(--rd);font-weight:700;}
+.elig-check{background:var(--gl);color:var(--gn);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;}
+.elig-no{background:var(--rl);color:var(--rd);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="page-title">🎂 Age Calculator</div>
+  <div class="page-sub">Calculate exact age and check eligibility for all government exams</div>
+
+  <div class="card">
+    <div class="card-title">📅 Enter Your Date of Birth</div>
+    <div class="row">
+      <div class="field">
+        <label>Date of Birth</label>
+        <input type="date" id="dob" max="2010-01-01"/>
+      </div>
+      <div class="field">
+        <label>Calculate Age As On Date</label>
+        <input type="date" id="asOn" value="2026-01-01"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Category (for eligibility check)</label>
+      <select id="category">
+        <option value="general">General / EWS</option>
+        <option value="obc">OBC (Non-Creamy Layer)</option>
+        <option value="sc">SC / ST</option>
+        <option value="pwd">PwD (Persons with Disability)</option>
+        <option value="exsm">Ex-Servicemen</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calculateAge()">Calculate Age & Check Eligibility</button>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-main" id="mainAge"></div>
+      <div class="result-sub" id="subAge"></div>
+      <div class="result-grid" id="resultGrid"></div>
+      <div class="result-detail" id="resultDetail"></div>
+    </div>
+  </div>
+
+  <div class="card" id="eligCard" style="display:none;">
+    <div class="card-title">✅ Exam Eligibility Status</div>
+    <table class="elig-table" id="eligTable">
+      <thead><tr><th>Exam</th><th>Age Limit</th><th>Your Age</th><th>Status</th></tr></thead>
+      <tbody id="eligBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">ℹ️ Age Relaxation Rules 2026</div>
+    <table class="elig-table">
+      <thead><tr><th>Category</th><th>Relaxation</th></tr></thead>
+      <tbody>
+        <tr><td>OBC (Non-Creamy Layer)</td><td>+3 years</td></tr>
+        <tr><td>SC / ST</td><td>+5 years</td></tr>
+        <tr><td>PwD (General)</td><td>+10 years</td></tr>
+        <tr><td>PwD (OBC)</td><td>+13 years</td></tr>
+        <tr><td>PwD (SC/ST)</td><td>+15 years</td></tr>
+        <tr><td>Ex-Servicemen (General)</td><td>+3 years</td></tr>
+        <tr><td>Ex-Servicemen (OBC)</td><td>+6 years</td></tr>
+        <tr><td>Ex-Servicemen (SC/ST)</td><td>+8 years</td></tr>
+        <tr><td>J&K Domicile</td><td>+5 years</td></tr>
+        <tr><td>Widows / Divorced Women</td><td>Up to 35 years (Gen), 38 (OBC), 40 (SC/ST)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+var EXAMS = [
+  {name:'UPSC CSE (IAS)',min:21,maxGen:32,maxObc:35,maxScSt:37,maxPwd:42},
+  {name:'SSC CGL',min:18,maxGen:32,maxObc:35,maxScSt:37,maxPwd:42},
+  {name:'SSC CHSL',min:18,maxGen:27,maxObc:30,maxScSt:32,maxPwd:37},
+  {name:'SSC MTS',min:18,maxGen:27,maxObc:30,maxScSt:32,maxPwd:37},
+  {name:'SSC GD Constable',min:18,maxGen:23,maxObc:26,maxScSt:28,maxPwd:33},
+  {name:'RRB NTPC Graduate',min:18,maxGen:33,maxObc:36,maxScSt:38,maxPwd:43},
+  {name:'RRB ALP',min:18,maxGen:28,maxObc:31,maxScSt:33,maxPwd:38},
+  {name:'RRB Group D',min:18,maxGen:36,maxObc:39,maxScSt:41,maxPwd:46},
+  {name:'SBI PO',min:21,maxGen:30,maxObc:33,maxScSt:35,maxPwd:40},
+  {name:'IBPS PO',min:20,maxGen:30,maxObc:33,maxScSt:35,maxPwd:40},
+  {name:'NDA Exam',min:16.5,maxGen:19.5,maxObc:19.5,maxScSt:19.5,maxPwd:19.5},
+  {name:'UPSC CDS',min:19,maxGen:25,maxObc:25,maxScSt:25,maxPwd:25},
+  {name:'Army Agniveer',min:17.5,maxGen:23,maxObc:23,maxScSt:23,maxPwd:23},
+];
+
+function calculateAge(){
+  var dob = document.getElementById('dob').value;
+  var asOn = document.getElementById('asOn').value;
+  var cat = document.getElementById('category').value;
+
+  if(!dob){alert('Please enter your date of birth!');return;}
+  if(!asOn){alert('Please enter the as-on date!');return;}
+
+  var dobDate = new Date(dob);
+  var asOnDate = new Date(asOn);
+
+  if(dobDate >= asOnDate){alert('Date of birth must be before the as-on date!');return;}
+
+  var years = asOnDate.getFullYear() - dobDate.getFullYear();
+  var months = asOnDate.getMonth() - dobDate.getMonth();
+  var days = asOnDate.getDate() - dobDate.getDate();
+
+  if(days < 0){
+    months--;
+    var prevMonth = new Date(asOnDate.getFullYear(), asOnDate.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if(months < 0){ years--; months += 12; }
+
+  var totalDays = Math.floor((asOnDate - dobDate) / (1000*60*60*24));
+  var totalMonths = years * 12 + months;
+  var totalWeeks = Math.floor(totalDays / 7);
+  var nextBd = new Date(asOnDate.getFullYear(), dobDate.getMonth(), dobDate.getDate());
+  if(nextBd <= asOnDate) nextBd.setFullYear(nextBd.getFullYear()+1);
+  var daysToNext = Math.floor((nextBd - asOnDate)/(1000*60*60*24));
+  var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var dobDay = dayNames[dobDate.getDay()];
+
+  // Show result
+  var rb = document.getElementById('resultBox');
+  rb.classList.add('show');
+  document.getElementById('mainAge').textContent = years + ' Years ' + months + ' Months ' + days + ' Days';
+  document.getElementById('subAge').textContent = 'As on ' + asOnDate.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'});
+
+  document.getElementById('resultGrid').innerHTML =
+    '<div class="result-stat"><div class="rs-n">'+totalDays.toLocaleString('en-IN')+'</div><div class="rs-l">Total Days</div></div>'+
+    '<div class="result-stat"><div class="rs-n">'+totalWeeks.toLocaleString('en-IN')+'</div><div class="rs-l">Total Weeks</div></div>'+
+    '<div class="result-stat"><div class="rs-n">'+totalMonths+'</div><div class="rs-l">Total Months</div></div>';
+
+  document.getElementById('resultDetail').innerHTML =
+    '<div class="rd-row"><span class="rd-label">Date of Birth</span><span class="rd-val">'+dobDate.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'})+' ('+dobDay+')</span></div>'+
+    '<div class="rd-row"><span class="rd-label">Next Birthday</span><span class="rd-val">In '+daysToNext+' days</span></div>'+
+    '<div class="rd-row"><span class="rd-label">Total Hours Lived</span><span class="rd-val">'+(totalDays*24).toLocaleString('en-IN')+'</span></div>'+
+    '<div class="rd-row"><span class="rd-label">Total Minutes Lived</span><span class="rd-val">'+(totalDays*24*60).toLocaleString('en-IN')+'</span></div>';
+
+  // Eligibility
+  var relaxation = {general:0, obc:3, sc:5, scst:5, pwd:10, exsm:3};
+  var relax = cat==='obc'?3:cat==='sc'?5:cat==='pwd'?10:cat==='exsm'?3:0;
+  var ageDecimal = years + months/12 + days/365;
+
+  var rows = '';
+  EXAMS.forEach(function(exam){
+    var maxAge = cat==='obc'?exam.maxObc:cat==='sc'||cat==='scst'?exam.maxScSt:cat==='pwd'?exam.maxPwd:exam.maxGen;
+    var eligible = ageDecimal >= exam.min && ageDecimal <= maxAge;
+    rows += '<tr>'+
+      '<td style="font-weight:600;">'+exam.name+'</td>'+
+      '<td>'+exam.min+' – '+maxAge+' yrs</td>'+
+      '<td>'+years+'.'+months+' yrs</td>'+
+      '<td><span class="'+(eligible?'elig-check':'elig-no')+'">'+(eligible?'✅ Eligible':'❌ Not Eligible')+'</span></td>'+
+      '</tr>';
+  });
+  document.getElementById('eligBody').innerHTML = rows;
+  document.getElementById('eligCard').style.display = 'block';
+  document.getElementById('eligCard').scrollIntoView({behavior:'smooth',block:'start'});
+}
+</script>
+</body>
+</html>

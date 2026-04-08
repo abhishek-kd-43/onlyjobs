@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shadi Biodata Maker - OnlyJobs | Free Marriage Biodata PDF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--ac:#E85D04;--al:#FFF3EB;--ad:#C44D00;--dk:#1A1A2E;--tx:#2D2D3A;--mu:#6B7280;--bd:#E8EAF0;--b2:#F7F8FC;--b3:#F0F2F8;--gn:#059669;--gl:#ECFDF5;--bl:#1D4ED8;--bll:#EFF6FF;--pu:#7C3AED;--pl:#F5F3FF;--rd:#DC2626;}
+body{font-family:'Figtree',sans-serif;color:var(--tx);background:var(--b3);font-size:15px;}
+header{background:#fff;border-bottom:1.5px solid var(--bd);position:sticky;top:0;z-index:100;}
+.nav{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:12px;height:60px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.logo-ic{width:34px;height:34px;background:var(--ac);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.logo-ic svg{width:18px;height:18px;fill:#fff;}
+.logo-tx{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--dk);}
+.logo-tx span{color:var(--ac);}
+.back{margin-left:auto;font-size:13px;color:var(--mu);text-decoration:none;font-weight:600;}
+.back:hover{color:var(--ac);}
+
+/* LAYOUT */
+.main{max-width:1200px;margin:0 auto;padding:24px 20px 50px;display:grid;grid-template-columns:1fr 420px;gap:20px;}
+@media(max-width:900px){.main{grid-template-columns:1fr;}}
+
+/* FORM */
+.card{background:#fff;border:1.5px solid var(--bd);border-radius:12px;padding:22px;margin-bottom:16px;}
+.card-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--dk);margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:1.5px solid var(--b3);padding-bottom:12px;}
+.field{margin-bottom:13px;}
+label{display:block;font-size:12px;font-weight:700;color:var(--tx);margin-bottom:5px;}
+input,select,textarea{width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:8px;font-size:13.5px;font-family:'Figtree',sans-serif;color:var(--dk);outline:none;transition:border-color .15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--ac);}
+textarea{resize:vertical;min-height:70px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+@media(max-width:500px){.row2,.row3{grid-template-columns:1fr;}}
+
+/* TEMPLATES */
+.tmpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px;}
+.tmpl-card{border:2.5px solid var(--bd);border-radius:10px;padding:10px;cursor:pointer;transition:all .15s;text-align:center;}
+.tmpl-card:hover{border-color:var(--ac);}
+.tmpl-card.on{border-color:var(--ac);background:var(--al);}
+.tmpl-preview{height:70px;border-radius:6px;margin-bottom:7px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.tmpl-name{font-size:12px;font-weight:700;color:var(--dk);}
+
+/* PHOTO UPLOAD */
+.photo-upload{border:2px dashed var(--bd);border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:var(--b2);}
+.photo-upload:hover{border-color:var(--ac);background:var(--al);}
+.photo-upload input{display:none;}
+#photoPreview{width:100px;height:120px;object-fit:cover;border-radius:8px;border:2px solid var(--bd);margin:8px auto;display:none;}
+
+/* PREVIEW PANEL */
+.preview-panel{position:sticky;top:80px;}
+.preview-box{background:#fff;border:1.5px solid var(--bd);border-radius:12px;overflow:hidden;}
+.preview-header{background:var(--b3);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;}
+.preview-label{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.4px;}
+.preview-body{padding:0;min-height:560px;overflow:hidden;}
+#previewFrame{width:100%;height:560px;border:none;background:#fff;}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;margin-top:6px;}
+.btn-primary{flex:1;padding:13px;background:linear-gradient(135deg,#E85D04,#C44D00);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-primary:hover{opacity:.9;}
+.btn-sec{padding:13px 18px;background:#fff;border:1.5px solid var(--bd);color:var(--tx);border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Figtree',sans-serif;}
+.btn-sec:hover{border-color:var(--ac);color:var(--ac);}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-ic"><svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9 8H7v-2h4v2zm6-4H7v-2h10v2z"/><path d="M16 1H8C6.9 1 6 1.9 6 3v3h12V3c0-1.1-.9-2-2-2z"/></svg></div>
+      <span class="logo-tx">Only<span>Jobs</span></span>
+    </a>
+    <a href="tools.html" class="back">← Back to Tools</a>
+  </div>
+</header>
+
+<div class="main">
+  <!-- FORM SIDE -->
+  <div>
+    <!-- Template -->
+    <div class="card">
+      <div class="card-title">🎨 Choose Template</div>
+      <div class="tmpl-grid">
+        <div class="tmpl-card on" onclick="setTemplate('classic',this)">
+          <div class="tmpl-preview" style="background:linear-gradient(135deg,#FFF3EB,#FDDCBA);">🏛️</div>
+          <div class="tmpl-name">Classic</div>
+        </div>
+        <div class="tmpl-card" onclick="setTemplate('royal',this)">
+          <div class="tmpl-preview" style="background:linear-gradient(135deg,#1A1A2E,#2D2D5E);">👑</div>
+          <div class="tmpl-name">Royal</div>
+        </div>
+        <div class="tmpl-card" onclick="setTemplate('modern',this)">
+          <div class="tmpl-preview" style="background:linear-gradient(135deg,#ECFDF5,#A7F3D0);">🌿</div>
+          <div class="tmpl-name">Modern</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Photo -->
+    <div class="card">
+      <div class="card-title">📸 Profile Photo</div>
+      <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+        <input type="file" id="photoInput" accept="image/*" onchange="loadPhoto(this)"/>
+        <img id="photoPreview" alt="Photo"/>
+        <div style="font-size:13px;font-weight:600;color:var(--dk);" id="photoTxt">Click to upload photo</div>
+        <div style="font-size:11px;color:var(--mu);">JPG or PNG · Passport size preferred</div>
+      </div>
+    </div>
+
+    <!-- Personal Info -->
+    <div class="card">
+      <div class="card-title">👤 Personal Information</div>
+      <div class="row2">
+        <div class="field"><label>Full Name *</label><input id="fullName" placeholder="Rahul Kumar Sharma" oninput="livePreview()"/></div>
+        <div class="field"><label>Date of Birth *</label><input type="date" id="dob" oninput="livePreview()"/></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Time of Birth</label><input id="tob" placeholder="08:30 AM" oninput="livePreview()"/></div>
+        <div class="field"><label>Place of Birth</label><input id="pob" placeholder="Lucknow, UP" oninput="livePreview()"/></div>
+        <div class="field"><label>Height</label><input id="height" placeholder="5 ft 8 in" oninput="livePreview()"/></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Weight</label><input id="weight" placeholder="68 kg" oninput="livePreview()"/></div>
+        <div class="field"><label>Complexion</label>
+          <select id="complexion" onchange="livePreview()">
+            <option value="">Select</option>
+            <option>Fair</option><option>Wheatish</option><option>Wheatish Brown</option><option>Dark</option>
+          </select>
+        </div>
+        <div class="field"><label>Blood Group</label>
+          <select id="blood" onchange="livePreview()">
+            <option value="">Select</option>
+            <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option><option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Marital Status</label>
+          <select id="marital" onchange="livePreview()">
+            <option>Unmarried</option><option>Divorced</option><option>Widowed</option><option>Awaiting Divorce</option>
+          </select>
+        </div>
+        <div class="field"><label>Religion</label>
+          <select id="religion" onchange="livePreview()">
+            <option value="">Select</option>
+            <option>Hindu</option><option>Muslim</option><option>Sikh</option><option>Christian</option>
+            <option>Jain</option><option>Buddhist</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Caste</label><input id="caste" placeholder="Brahmin" oninput="livePreview()"/></div>
+        <div class="field"><label>Sub-Caste</label><input id="subcaste" placeholder="Optional" oninput="livePreview()"/></div>
+        <div class="field"><label>Gotra</label><input id="gotra" placeholder="Optional" oninput="livePreview()"/></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Manglik</label>
+          <select id="manglik" onchange="livePreview()">
+            <option value="">Not Specified</option>
+            <option>Yes</option><option>No</option><option>Partial Manglik</option>
+          </select>
+        </div>
+        <div class="field"><label>Rashi (Zodiac)</label><input id="rashi" placeholder="Mesh (Aries)" oninput="livePreview()"/></div>
+      </div>
+    </div>
+
+    <!-- Education & Career -->
+    <div class="card">
+      <div class="card-title">🎓 Education & Career</div>
+      <div class="row2">
+        <div class="field"><label>Education</label><input id="edu" placeholder="B.Tech / MBA / B.A." oninput="livePreview()"/></div>
+        <div class="field"><label>College / University</label><input id="college" placeholder="IIT Delhi / DU" oninput="livePreview()"/></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Occupation</label>
+          <select id="occ" onchange="livePreview()">
+            <option value="">Select</option>
+            <option>Government Job</option><option>Private Job</option><option>Business</option>
+            <option>Self Employed</option><option>Doctor</option><option>Engineer</option>
+            <option>Lawyer</option><option>Teacher/Professor</option><option>Defence Services</option>
+            <option>IAS/IPS/IFS</option><option>Bank Employee</option><option>Not Working</option>
+          </select>
+        </div>
+        <div class="field"><label>Job / Business Details</label><input id="jobDetail" placeholder="Software Engineer at TCS" oninput="livePreview()"/></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Annual Income</label><input id="income" placeholder="5-7 LPA" oninput="livePreview()"/></div>
+        <div class="field"><label>Working City</label><input id="workCity" placeholder="Mumbai" oninput="livePreview()"/></div>
+      </div>
+    </div>
+
+    <!-- Family -->
+    <div class="card">
+      <div class="card-title">👨‍👩‍👧‍👦 Family Details</div>
+      <div class="row2">
+        <div class="field"><label>Father's Name</label><input id="fatherName" placeholder="Rajesh Kumar Sharma" oninput="livePreview()"/></div>
+        <div class="field"><label>Father's Occupation</label><input id="fatherOcc" placeholder="Retired Teacher" oninput="livePreview()"/></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Mother's Name</label><input id="motherName" placeholder="Sunita Devi" oninput="livePreview()"/></div>
+        <div class="field"><label>Mother's Occupation</label><input id="motherOcc" placeholder="Housewife" oninput="livePreview()"/></div>
+      </div>
+      <div class="row3">
+        <div class="field"><label>Brothers</label><input id="brothers" placeholder="1 (Married)" oninput="livePreview()"/></div>
+        <div class="field"><label>Sisters</label><input id="sisters" placeholder="1 (Unmarried)" oninput="livePreview()"/></div>
+        <div class="field"><label>Family Type</label>
+          <select id="familyType" onchange="livePreview()">
+            <option value="">Select</option><option>Joint Family</option><option>Nuclear Family</option>
+          </select>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Native Place</label><input id="native" placeholder="Varanasi, UP" oninput="livePreview()"/></div>
+        <div class="field"><label>Family Status</label>
+          <select id="familyStatus" onchange="livePreview()">
+            <option value="">Select</option><option>Upper Middle Class</option><option>Middle Class</option>
+            <option>Rich / Affluent</option><option>Service Class</option><option>Business Class</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="card">
+      <div class="card-title">📞 Contact & Address</div>
+      <div class="row2">
+        <div class="field"><label>Mobile Number</label><input id="mobile" placeholder="+91 98765 43210" oninput="livePreview()"/></div>
+        <div class="field"><label>Email</label><input id="email" placeholder="rahul@email.com" oninput="livePreview()"/></div>
+      </div>
+      <div class="field"><label>Current Address</label><textarea id="address" rows="2" placeholder="House No. 45, Civil Lines, Lucknow - 226001" oninput="livePreview()"></textarea></div>
+    </div>
+
+    <!-- Partner Preferences -->
+    <div class="card">
+      <div class="card-title">💑 Partner Preferences</div>
+      <div class="row2">
+        <div class="field"><label>Preferred Age Range</label><input id="prefAge" placeholder="24-28 years" oninput="livePreview()"/></div>
+        <div class="field"><label>Preferred Height</label><input id="prefHeight" placeholder="5 ft 2 in - 5 ft 6 in" oninput="livePreview()"/></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Preferred Education</label><input id="prefEdu" placeholder="Graduate or above" oninput="livePreview()"/></div>
+        <div class="field"><label>Caste Preference</label><input id="prefCaste" placeholder="Same caste preferred" oninput="livePreview()"/></div>
+      </div>
+      <div class="field"><label>Other Preferences</label><textarea id="prefOther" rows="2" placeholder="Working girl preferred. Open to all professions." oninput="livePreview()"></textarea></div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="downloadPDF()">⬇️ Download PDF</button>
+      <button class="btn-sec" onclick="livePreview()">🔄 Refresh Preview</button>
+    </div>
+  </div>
+
+  <!-- PREVIEW SIDE -->
+  <div class="preview-panel">
+    <div class="preview-box">
+      <div class="preview-header">
+        <span class="preview-label">Live Preview</span>
+        <span style="font-size:11px;color:var(--mu);">Updates as you type</span>
+      </div>
+      <div class="preview-body">
+        <iframe id="previewFrame" title="Biodata Preview"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentTemplate = 'classic';
+var photoDataUrl = null;
+
+var TEMPLATES = {
+  classic: {
+    headerBg: '#C44D00', headerText: '#fff',
+    labelColor: '#C44D00', border: '#FDDCBA',
+    sectionBg: '#FFF8F4', accent: '#E85D04'
+  },
+  royal: {
+    headerBg: '#1A1A2E', headerText: '#FDBA74',
+    labelColor: '#1A1A2E', border: '#C7D2FE',
+    sectionBg: '#F0F2F8', accent: '#7C3AED'
+  },
+  modern: {
+    headerBg: '#059669', headerText: '#fff',
+    labelColor: '#059669', border: '#A7F3D0',
+    sectionBg: '#F0FDF4', accent: '#047857'
+  }
+};
+
+function setTemplate(t, btn) {
+  currentTemplate = t;
+  document.querySelectorAll('.tmpl-card').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  livePreview();
+}
+
+function loadPhoto(input) {
+  if (!input.files || !input.files[0]) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    photoDataUrl = e.target.result;
+    var prev = document.getElementById('photoPreview');
+    prev.src = photoDataUrl;
+    prev.style.display = 'block';
+    document.getElementById('photoTxt').textContent = 'Photo uploaded ✓';
+    livePreview();
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+function g(id) { return document.getElementById(id).value; }
+
+function calcAge(dob) {
+  if (!dob) return '';
+  var d = new Date(dob), now = new Date();
+  var age = now.getFullYear() - d.getFullYear();
+  if (now.getMonth() < d.getMonth() || (now.getMonth()===d.getMonth() && now.getDate()<d.getDate())) age--;
+  return age + ' years';
+}
+
+function formatDob(dob) {
+  if (!dob) return '';
+  return new Date(dob).toLocaleDateString('en-IN', {day:'2-digit',month:'long',year:'numeric'});
+}
+
+function row(label, value) {
+  if (!value) return '';
+  return '<tr><td style="padding:6px 10px;font-weight:700;color:'+TEMPLATES[currentTemplate].labelColor+';font-size:12.5px;width:40%;vertical-align:top;">'+label+'</td><td style="padding:6px 10px;font-size:12.5px;color:#2D2D3A;">'+value+'</td></tr>';
+}
+
+function section(title, rows) {
+  var t = TEMPLATES[currentTemplate];
+  return '<div style="margin-bottom:14px;">'
+       + '<div style="background:'+t.sectionBg+';border-left:4px solid '+t.accent+';padding:8px 14px;font-family:Georgia,serif;font-size:13px;font-weight:700;color:'+t.labelColor+';margin-bottom:6px;">'+title+'</div>'
+       + '<table style="width:100%;border-collapse:collapse;">'+rows+'</table></div>';
+}
+
+function buildHTML() {
+  var t = TEMPLATES[currentTemplate];
+  var name = g('fullName') || 'Your Name';
+  var dob = g('dob');
+  var age = calcAge(dob);
+  var photoHtml = photoDataUrl
+    ? '<img src="'+photoDataUrl+'" style="width:100px;height:120px;object-fit:cover;border-radius:6px;border:3px solid rgba(255,255,255,0.5);"/>'
+    : '<div style="width:100px;height:120px;background:rgba(255,255,255,0.2);border-radius:6px;border:2px dashed rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;font-size:30px;">👤</div>';
+
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"/>'
+    + '<style>body{margin:0;padding:0;font-family:Georgia,serif;background:#fff;}'
+    + 'table{width:100%;border-collapse:collapse;}'
+    + 'tr:nth-child(even){background:rgba(0,0,0,0.02);}'
+    + '@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}'
+    + '</style></head><body>'
+    + '<div style="max-width:700px;margin:0 auto;background:#fff;border:2px solid '+t.border+';border-radius:12px;overflow:hidden;">'
+    // HEADER
+    + '<div style="background:'+t.headerBg+';padding:24px 28px;display:flex;align-items:center;justify-content:space-between;">'
+    + '<div style="flex:1;">'
+    + '<div style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.6);margin-bottom:4px;">VIVAH BIODATA / MARRIAGE PROFILE</div>'
+    + '<div style="font-family:Georgia,serif;font-size:28px;font-weight:700;color:'+t.headerText+';margin-bottom:3px;">'+name+'</div>'
+    + (age ? '<div style="font-size:13px;color:rgba(255,255,255,0.75);">Age: '+age+' &nbsp;|&nbsp; '+(g('religion')||'')+(g('caste')?' &nbsp;|&nbsp; '+g('caste'):'')+'</div>' : '')
+    + '</div>'
+    + photoHtml
+    + '</div>'
+    // BODY
+    + '<div style="padding:16px 20px;">'
+    + section('PERSONAL INFORMATION',
+        row('Date of Birth', formatDob(dob) + (age?' (Age: '+age+')':''))
+      + row('Time of Birth', g('tob'))
+      + row('Place of Birth', g('pob'))
+      + row('Height', g('height'))
+      + row('Weight', g('weight'))
+      + row('Complexion', g('complexion'))
+      + row('Blood Group', g('blood'))
+      + row('Marital Status', g('marital'))
+      + row('Religion', g('religion'))
+      + row('Caste / Sub-Caste', [g('caste'),g('subcaste')].filter(Boolean).join(' / '))
+      + row('Gotra', g('gotra'))
+      + row('Rashi', g('rashi'))
+      + row('Manglik', g('manglik'))
+    )
+    + section('EDUCATION & CAREER',
+        row('Education', g('edu'))
+      + row('College / University', g('college'))
+      + row('Occupation', g('occ'))
+      + row('Designation / Details', g('jobDetail'))
+      + row('Annual Income', g('income'))
+      + row('Working City', g('workCity'))
+    )
+    + section('FAMILY DETAILS',
+        row('Father\'s Name', g('fatherName'))
+      + row('Father\'s Occupation', g('fatherOcc'))
+      + row('Mother\'s Name', g('motherName'))
+      + row('Mother\'s Occupation', g('motherOcc'))
+      + row('Brothers', g('brothers'))
+      + row('Sisters', g('sisters'))
+      + row('Family Type', g('familyType'))
+      + row('Family Status', g('familyStatus'))
+      + row('Native Place', g('native'))
+    )
+    + section('CONTACT INFORMATION',
+        row('Mobile', g('mobile'))
+      + row('Email', g('email'))
+      + row('Address', g('address'))
+    )
+    + (g('prefAge')||g('prefHeight')||g('prefEdu') ? section('PARTNER PREFERENCES',
+        row('Preferred Age', g('prefAge'))
+      + row('Preferred Height', g('prefHeight'))
+      + row('Preferred Education', g('prefEdu'))
+      + row('Caste Preference', g('prefCaste'))
+      + row('Other Preferences', g('prefOther'))
+    ) : '')
+    + '<div style="text-align:center;margin-top:16px;padding:12px;border-top:1px solid '+t.border+';font-size:11px;color:#94A3B8;">Created with OnlyJobs Free Biodata Maker · onlyjobs.in</div>'
+    + '</div></div></body></html>';
+}
+
+function livePreview() {
+  var frame = document.getElementById('previewFrame');
+  var html = buildHTML();
+  var blob = new Blob([html], {type:'text/html'});
+  var url = URL.createObjectURL(blob);
+  frame.src = url;
+}
+
+function downloadPDF() {
+  var name = g('fullName') || 'Biodata';
+  var html = buildHTML();
+  var win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 800);
+}
+
+window.addEventListener('DOMContentLoaded', livePreview);
+</script>
+</body>
+</html>

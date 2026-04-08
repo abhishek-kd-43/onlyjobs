@@ -1,0 +1,232 @@
+{
+  "states": [
+    {
+      "name": "All India",
+      "type": "central",
+      "portal_url": "https://www.upsc.gov.in/",
+      "aliases": ["all india", "nationwide", "pan india", "across india"]
+    },
+    {
+      "name": "Central Govt",
+      "type": "central",
+      "portal_url": "https://www.upsc.gov.in/",
+      "aliases": ["central govt", "central government", "government of india"]
+    },
+    {
+      "name": "Andhra Pradesh",
+      "type": "state",
+      "portal_url": "https://psc.ap.gov.in/",
+      "aliases": ["andhra pradesh", "appsc"]
+    },
+    {
+      "name": "Arunachal Pradesh",
+      "type": "state",
+      "portal_url": "https://appsc.gov.in/",
+      "aliases": ["arunachal pradesh"]
+    },
+    {
+      "name": "Assam",
+      "type": "state",
+      "portal_url": "https://apsc.nic.in/",
+      "aliases": ["assam", "assam public service commission"]
+    },
+    {
+      "name": "Bihar",
+      "type": "state",
+      "portal_url": "https://bpsc.bihar.gov.in/",
+      "aliases": ["bihar", "bpsc", "btsc", "csbc", "bceceb", "ofss bihar"]
+    },
+    {
+      "name": "Chhattisgarh",
+      "type": "state",
+      "portal_url": "https://psc.cg.gov.in/",
+      "aliases": ["chhattisgarh", "cgpsc", "cg vyapam"]
+    },
+    {
+      "name": "Goa",
+      "type": "state",
+      "portal_url": "https://gpsc.goa.gov.in/",
+      "aliases": ["goa"]
+    },
+    {
+      "name": "Gujarat",
+      "type": "state",
+      "portal_url": "https://gpsc.gujarat.gov.in/",
+      "aliases": ["gujarat", "gpsc gujarat", "gsssb"]
+    },
+    {
+      "name": "Haryana",
+      "type": "state",
+      "portal_url": "https://hpsc.gov.in/",
+      "aliases": ["haryana", "hssc", "hpsc"]
+    },
+    {
+      "name": "Himachal Pradesh",
+      "type": "state",
+      "portal_url": "https://hppsc.hp.gov.in/",
+      "aliases": ["himachal pradesh", "hppsc"]
+    },
+    {
+      "name": "Jharkhand",
+      "type": "state",
+      "portal_url": "https://www.jpsc.gov.in/",
+      "aliases": ["jharkhand", "jpsc", "jssc"]
+    },
+    {
+      "name": "Karnataka",
+      "type": "state",
+      "portal_url": "https://kpsc.kar.nic.in/",
+      "aliases": ["karnataka", "kpsc", "kea"]
+    },
+    {
+      "name": "Kerala",
+      "type": "state",
+      "portal_url": "https://www.keralapsc.gov.in/",
+      "aliases": ["kerala", "kerala psc"]
+    },
+    {
+      "name": "Madhya Pradesh",
+      "type": "state",
+      "portal_url": "https://mppsc.mp.gov.in/",
+      "aliases": ["madhya pradesh", "mppsc", "mpesb", "esb mp"]
+    },
+    {
+      "name": "Maharashtra",
+      "type": "state",
+      "portal_url": "https://mpsc.gov.in/",
+      "aliases": ["maharashtra", "mpsc maharashtra"]
+    },
+    {
+      "name": "Manipur",
+      "type": "state",
+      "portal_url": "https://mpscmanipur.gov.in/",
+      "aliases": ["manipur"]
+    },
+    {
+      "name": "Meghalaya",
+      "type": "state",
+      "portal_url": "https://mpsc.nic.in/",
+      "aliases": ["meghalaya"]
+    },
+    {
+      "name": "Mizoram",
+      "type": "state",
+      "portal_url": "https://mpsc.mizoram.gov.in/",
+      "aliases": ["mizoram"]
+    },
+    {
+      "name": "Nagaland",
+      "type": "state",
+      "portal_url": "https://npsc.nagaland.gov.in/",
+      "aliases": ["nagaland"]
+    },
+    {
+      "name": "Odisha",
+      "type": "state",
+      "portal_url": "https://www.opsc.gov.in/",
+      "aliases": ["odisha", "orissa", "opsc"]
+    },
+    {
+      "name": "Punjab",
+      "type": "state",
+      "portal_url": "https://www.ppsc.gov.in/",
+      "aliases": ["punjab", "ppsc", "pspcl"]
+    },
+    {
+      "name": "Rajasthan",
+      "type": "state",
+      "portal_url": "https://rpsc.rajasthan.gov.in/",
+      "aliases": ["rajasthan", "rpsc"]
+    },
+    {
+      "name": "Sikkim",
+      "type": "state",
+      "portal_url": "https://spsc.sikkim.gov.in/",
+      "aliases": ["sikkim"]
+    },
+    {
+      "name": "Tamil Nadu",
+      "type": "state",
+      "portal_url": "https://www.tnpsc.gov.in/",
+      "aliases": ["tamil nadu", "tnpsc"]
+    },
+    {
+      "name": "Telangana",
+      "type": "state",
+      "portal_url": "https://www.tgpsc.gov.in/",
+      "aliases": ["telangana", "tgpsc", "tspsc"]
+    },
+    {
+      "name": "Tripura",
+      "type": "state",
+      "portal_url": "https://tpsc.tripura.gov.in/",
+      "aliases": ["tripura", "tripura public service commission"]
+    },
+    {
+      "name": "Uttar Pradesh",
+      "type": "state",
+      "portal_url": "https://uppsc.up.nic.in/",
+      "aliases": ["uttar pradesh", "uppsc", "upsssc", "uptet", "upsrtc", "up scholarship"]
+    },
+    {
+      "name": "Uttarakhand",
+      "type": "state",
+      "portal_url": "https://psc.uk.gov.in/",
+      "aliases": ["uttarakhand", "ukpsc"]
+    },
+    {
+      "name": "West Bengal",
+      "type": "state",
+      "portal_url": "https://psc.wb.gov.in/",
+      "aliases": ["west bengal", "wbpsc"]
+    },
+    {
+      "name": "Andaman and Nicobar Islands",
+      "type": "ut",
+      "portal_url": "https://erecruitment.andaman.gov.in/",
+      "aliases": ["andaman and nicobar", "andaman nicobar", "a&n islands"]
+    },
+    {
+      "name": "Chandigarh",
+      "type": "ut",
+      "portal_url": "https://chandigarh.gov.in/",
+      "aliases": ["chandigarh"]
+    },
+    {
+      "name": "Dadra and Nagar Haveli and Daman and Diu",
+      "type": "ut",
+      "portal_url": "https://ddd.gov.in/",
+      "aliases": ["dadra and nagar haveli and daman and diu", "daman and diu", "dadra and nagar haveli"]
+    },
+    {
+      "name": "Delhi",
+      "type": "ut",
+      "portal_url": "https://dsssb.delhi.gov.in/",
+      "aliases": ["delhi", "dsssb", "nct delhi"]
+    },
+    {
+      "name": "Jammu and Kashmir",
+      "type": "ut",
+      "portal_url": "https://jkpsc.nic.in/",
+      "aliases": ["jammu and kashmir", "j&k", "jkpsc"]
+    },
+    {
+      "name": "Ladakh",
+      "type": "ut",
+      "portal_url": "https://ladakh.nic.in/notice_category/recruitment/",
+      "aliases": ["ladakh"]
+    },
+    {
+      "name": "Lakshadweep",
+      "type": "ut",
+      "portal_url": "https://lakshadweep.gov.in/",
+      "aliases": ["lakshadweep"]
+    },
+    {
+      "name": "Puducherry",
+      "type": "ut",
+      "portal_url": "https://recruitment.py.gov.in/",
+      "aliases": ["puducherry", "pondicherry"]
+    }
+  ]
+}
