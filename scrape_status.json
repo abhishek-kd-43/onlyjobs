@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "started_at": "2026-04-08T14:37:03+00:00",
+  "finished_at": "2026-04-08T14:38:24+00:00",
+  "duration_seconds": 81.14,
+  "counts": {
+    "results": 15,
+    "admit_cards": 10,
+    "latest_jobs": 16,
+    "answer_keys": 14
+  },
+  "sources": [
+    "sarkariresult",
+    "freejobalert",
+    "sarkariexam"
+  ],
+  "error": null
+}
